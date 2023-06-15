@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CollectableObject : MonoBehaviour
+{
+    [SerializeField] private int pointsPerCollection = 1;
+    private bool isCollected = false;
+
+    private CollectableObjectVisual objectVisual;
+
+    private void Awake()
+    {
+        objectVisual = GetComponent<CollectableObjectVisual>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    { 
+        PlayerController player;
+        if (!isCollected)
+        {
+            if (collision.gameObject.TryGetComponent<PlayerController>(out player))
+            {
+                isCollected = true;
+
+                player.AddPoints(pointsPerCollection);
+
+                objectVisual.ChangeAnimationState(CollectableObjectVisual.CollectableObjectAnimations.Collected);
+            }
+        }
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(this.gameObject);
+    }
+}
