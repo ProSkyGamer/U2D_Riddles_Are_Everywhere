@@ -71,6 +71,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangePlayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""8228499d-5b42-4408-9383-726da31fcc52"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""68dfca7e-12b0-499f-9ff3-471d9596fa02"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +168,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""ReturnToCheckpoint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ef0005b-5101-46a3-b9d9-77b4ab7fadbb"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangePlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""468169fa-b93a-4b2e-83e9-1e2e157f85ce"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -163,6 +203,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_AllBindings_Interact = m_AllBindings.FindAction("Interact", throwIfNotFound: true);
         m_AllBindings_TestingKey = m_AllBindings.FindAction("TestingKey", throwIfNotFound: true);
         m_AllBindings_ReturnToCheckpoint = m_AllBindings.FindAction("ReturnToCheckpoint", throwIfNotFound: true);
+        m_AllBindings_ChangePlayer = m_AllBindings.FindAction("ChangePlayer", throwIfNotFound: true);
+        m_AllBindings_PauseGame = m_AllBindings.FindAction("PauseGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +271,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_AllBindings_Interact;
     private readonly InputAction m_AllBindings_TestingKey;
     private readonly InputAction m_AllBindings_ReturnToCheckpoint;
+    private readonly InputAction m_AllBindings_ChangePlayer;
+    private readonly InputAction m_AllBindings_PauseGame;
     public struct AllBindingsActions
     {
         private @GameInput m_Wrapper;
@@ -238,6 +282,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_AllBindings_Interact;
         public InputAction @TestingKey => m_Wrapper.m_AllBindings_TestingKey;
         public InputAction @ReturnToCheckpoint => m_Wrapper.m_AllBindings_ReturnToCheckpoint;
+        public InputAction @ChangePlayer => m_Wrapper.m_AllBindings_ChangePlayer;
+        public InputAction @PauseGame => m_Wrapper.m_AllBindings_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_AllBindings; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -262,6 +308,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @ReturnToCheckpoint.started += instance.OnReturnToCheckpoint;
             @ReturnToCheckpoint.performed += instance.OnReturnToCheckpoint;
             @ReturnToCheckpoint.canceled += instance.OnReturnToCheckpoint;
+            @ChangePlayer.started += instance.OnChangePlayer;
+            @ChangePlayer.performed += instance.OnChangePlayer;
+            @ChangePlayer.canceled += instance.OnChangePlayer;
+            @PauseGame.started += instance.OnPauseGame;
+            @PauseGame.performed += instance.OnPauseGame;
+            @PauseGame.canceled += instance.OnPauseGame;
         }
 
         private void UnregisterCallbacks(IAllBindingsActions instance)
@@ -281,6 +333,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @ReturnToCheckpoint.started -= instance.OnReturnToCheckpoint;
             @ReturnToCheckpoint.performed -= instance.OnReturnToCheckpoint;
             @ReturnToCheckpoint.canceled -= instance.OnReturnToCheckpoint;
+            @ChangePlayer.started -= instance.OnChangePlayer;
+            @ChangePlayer.performed -= instance.OnChangePlayer;
+            @ChangePlayer.canceled -= instance.OnChangePlayer;
+            @PauseGame.started -= instance.OnPauseGame;
+            @PauseGame.performed -= instance.OnPauseGame;
+            @PauseGame.canceled -= instance.OnPauseGame;
         }
 
         public void RemoveCallbacks(IAllBindingsActions instance)
@@ -305,5 +363,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnTestingKey(InputAction.CallbackContext context);
         void OnReturnToCheckpoint(InputAction.CallbackContext context);
+        void OnChangePlayer(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
 }

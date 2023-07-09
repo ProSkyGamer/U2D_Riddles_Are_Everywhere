@@ -23,7 +23,7 @@ public class CollectableObject : MonoBehaviour
             {
                 isCollected = true;
 
-                player.AddPoints(pointsPerCollection);
+                PointsCollectedController.Instance.AddPoints(pointsPerCollection);
 
                 objectVisual.ChangeAnimationState(CollectableObjectVisual.CollectableObjectAnimations.Collected);
             }

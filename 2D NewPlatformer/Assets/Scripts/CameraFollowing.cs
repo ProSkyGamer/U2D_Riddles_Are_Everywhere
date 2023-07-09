@@ -15,6 +15,7 @@ public class CameraFollowing : MonoBehaviour
     private PlayerController playerToEnableMovement;
 
     private float followingTimer;
+    private bool isFirstUpdate = true;
 
     private void Awake()
     {
@@ -24,12 +25,16 @@ public class CameraFollowing : MonoBehaviour
             Instance = this;
 
         currentFollowingObject = followingPlayer;
-
-        transform.position = currentFollowingObject.position + new Vector3(0, 0, transform.position.z);
     }
 
     private void Update()
     {
+        if (isFirstUpdate)
+        {
+            transform.position = currentFollowingObject.position + new Vector3(0, 0, transform.position.z);
+            isFirstUpdate = false;
+        }
+
         if (isFollowing && currentFollowingObject != null)
         {
             Vector3 startPosition = transform.position;
@@ -69,5 +74,10 @@ public class CameraFollowing : MonoBehaviour
         currentFollowingObject = changeTo;
         followingTimer = timeToFollow;
         playerToEnableMovement = enableMovementTo;
+    }
+
+    public void ChangeFollowingPlayer(Transform newFollowingPlayerTransform)
+    {
+        followingPlayer = newFollowingPlayerTransform;
     }
 }

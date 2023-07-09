@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class InteractableItem : MonoBehaviour
 {
     [Header("Base Settings")]
     [SerializeField] protected LayerMask playerLayer;
     [SerializeField] protected string buttonText = "Interact";
-    
+
     [SerializeField] protected float interactableHeight = 1f;
     protected PlayerController interactedPlayer;
+
+    [Header("Additional Player Interaction Settings")]
+    [SerializeField] private PlayerSO[] notInteractablePlayers;
 
     protected bool isInteractable = true;
     protected bool isHasButtonOnInterface = false;
@@ -54,12 +59,19 @@ public class InteractableItem : MonoBehaviour
 
     public virtual void OnInteract()
     {
-        isInteractable = false;
-        isHasButtonOnInterface = false;
-
-        if (isChangeCameraFollowingObjectOnInteract)
+        if (IsPlayerCanInteract(PlayerChangeController.Instance.GetCurrentPlayerSO()))
         {
-            ChangeFollowingObject();
+            isInteractable = false;
+            isHasButtonOnInterface = false;
+
+            if (isChangeCameraFollowingObjectOnInteract)
+            {
+                ChangeFollowingObject();
+            }
+        }
+        else
+        {
+            Debug.Log("This Player Can't Interact With This Item");
         }
     }
 
@@ -88,4 +100,14 @@ public class InteractableItem : MonoBehaviour
         isHasButtonOnInterface = false;
     }
 
+    protected bool IsPlayerCanInteract(PlayerSO playerSO)
+    {
+        for (int i = 0; i < notInteractablePlayers.Length; i++)
+        {
+            if (notInteractablePlayers[i] == playerSO)
+                return false;
+        }
+
+        return true;
+    }
 }

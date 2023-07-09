@@ -11,6 +11,7 @@ public class CheckpointVisual : MonoBehaviour
         On,
         Iddle,
     }
+
     private const string CHECKPOINT_STATE_VISUAL = "State";
 
     private Animator animator;

@@ -2,42 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerGravity))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private LayerMask terrainLayer;
 
-    private Rigidbody2D playerRB;
-    private BoxCollider2D playerCollision;
+    private PlayerGravity playerGravity;
+
+    private float slowDownScale = 1f;
 
     private void Awake()
     {
-        playerRB = GetComponent<Rigidbody2D>();
-        playerCollision = GetComponent<BoxCollider2D>();
+        playerGravity = GetComponent<PlayerGravity>();
     }
 
     public void Move(Vector3 toMoveVector)
     {
-        transform.position += toMoveVector;
+        transform.position += toMoveVector * slowDownScale;
     }
 
-    public void Jump(Vector3 jumpForceVector)
+    public void Jump(float yJumpForce)
     {
-        playerRB.velocity = jumpForceVector;
+        playerGravity.SetYInGravityVector(yJumpForce);
+    }
+
+    public void ChangeSlowDownMovement(float slowDown)
+    {
+        slowDownScale = slowDown;
+    }
+
+    public void ChangeSlowDownGravity(float slowDown)
+    {
+        playerGravity.ChangeGravitySlowDown(slowDown);
     }
 
     public bool IsGrounded()
     {
-        return Physics2D.BoxCast(playerCollision.bounds.center, playerCollision.bounds.size, 0f, Vector2.down, .02f, terrainLayer);
+        return playerGravity.IsGrounded();
     }
 
     public bool IsAscending()
     {
-        return playerRB.velocity.y > .1f;
+        return playerGravity.GetGravityVector().y > .1f;
     }
 
     public bool IsDescending()
     {
-        return playerRB.velocity.y < -.1f;
+        return playerGravity.GetGravityVector().y < -.1f;
     }
 }

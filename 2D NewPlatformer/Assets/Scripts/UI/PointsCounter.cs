@@ -14,10 +14,10 @@ public class PointsCounter : MonoBehaviour
 
     private void Start()
     {
-        PlayerController.OnPointsCollectedChange += PlayerController_OnPointsCollectedChange;
+        PointsCollectedController.Instance.OnPointsCollectedChange += PointsCollectedController_OnPointsCollectedChange; ;
     }
 
-    private void PlayerController_OnPointsCollectedChange(object sender, PlayerController.OnPointsCollectedChangeEventArgs e)
+    private void PointsCollectedController_OnPointsCollectedChange(object sender, PointsCollectedController.OnPointsCollectedChangeEventArgs e)
     {
         pointsValueText.text = e.currentPoints.ToString();
     }

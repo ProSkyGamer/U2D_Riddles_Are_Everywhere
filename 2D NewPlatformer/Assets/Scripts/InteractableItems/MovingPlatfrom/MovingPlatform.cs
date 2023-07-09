@@ -24,7 +24,7 @@ public class MovingPlatform : InteractableItem
     protected override void Awake()
     {
         base.Awake();
-        
+
         movingPlatformVisual = GetComponent<MovingPlatformVisual>();
     }
 
@@ -32,17 +32,23 @@ public class MovingPlatform : InteractableItem
     {
         base.OnInteract();
 
-        currentMovingDestination++;
-        if (currentMovingDestination >= allDestinationTransforms.Length)
-            currentMovingDestination = 0;
+        if (IsPlayerCanInteract(PlayerChangeController.Instance.GetCurrentPlayerSO()))
+        {
+            currentMovingDestination++;
+            if (currentMovingDestination >= allDestinationTransforms.Length)
+                currentMovingDestination = 0;
 
-        StartMoveTo(allDestinationTransforms[currentMovingDestination].position);
+            StartMoveTo(allDestinationTransforms[currentMovingDestination].position);
+        }
     }
 
     protected override void Update()
     {
         if (isInteractable)
         {
+            if (movingPlatformVisual.GetCurrentAnimationState() != MovingPlatformVisual.AnimationStates.InteractableStanding)
+                movingPlatformVisual.ChangeMovingPlatformAnimationState(MovingPlatformVisual.AnimationStates.InteractableStanding);
+
             Vector3 castPosition = transform.position + new Vector3(0f, interactableHeight / 2, 0f);
             Vector2 castCubeLenght = new Vector2(collision.size.x, interactableHeight);
             float cubeRotation = 0f;
@@ -62,6 +68,10 @@ public class MovingPlatform : InteractableItem
             if (isHasButtonOnInterface)
                 RemoveInteractButtonFromInterafce();
         }
+        else
+            if (movingPlatformVisual.GetCurrentAnimationState() != MovingPlatformVisual.AnimationStates.NotInteractable &&
+                movingPlatformVisual.GetCurrentAnimationState() != MovingPlatformVisual.AnimationStates.InteractableMoving)
+                movingPlatformVisual.ChangeMovingPlatformAnimationState(MovingPlatformVisual.AnimationStates.NotInteractable);
 
         if (isMoving)
         {
@@ -80,7 +90,7 @@ public class MovingPlatform : InteractableItem
                 isInteractable = true;
 
                 transform.position = destinationLocation;
-                movingPlatformVisual.ChangeMovingPlatformAnimationState(isMoving);
+                movingPlatformVisual.ChangeMovingPlatformAnimationState(MovingPlatformVisual.AnimationStates.InteractableStanding);
 
                 OnPlatformArrivalToDestination?.Invoke(this, EventArgs.Empty);
             }
@@ -110,7 +120,7 @@ public class MovingPlatform : InteractableItem
     {
         if (!isMoving)
         {
-            for(int i = 0; i < allDestinationTransforms.Length; i++)
+            for (int i = 0; i < allDestinationTransforms.Length; i++)
             {
                 if (destinationPoint == allDestinationTransforms[i].position)
                     currentMovingDestination = i;
@@ -121,7 +131,7 @@ public class MovingPlatform : InteractableItem
 
             movingTimer = timeToMoveBetwenDestinations;
             isMoving = true;
-            movingPlatformVisual.ChangeMovingPlatformAnimationState(isMoving);
+            movingPlatformVisual.ChangeMovingPlatformAnimationState(MovingPlatformVisual.AnimationStates.InteractableMoving);
         }
     }
 

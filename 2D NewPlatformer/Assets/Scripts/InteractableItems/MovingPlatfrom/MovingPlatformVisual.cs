@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class MovingPlatformVisual : MonoBehaviour
 {
+    public enum AnimationStates
+    {
+        InteractableStanding,
+        InteractableMoving,
+        NotInteractable,
+    }
+
+    private AnimationStates currentState = AnimationStates.InteractableStanding;
+
     private const string MOVING_PLATFORM_ANIMATOR = "State";
 
     private Animator animator;
@@ -13,8 +22,14 @@ public class MovingPlatformVisual : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void ChangeMovingPlatformAnimationState(bool isMoving)
+    public void ChangeMovingPlatformAnimationState(AnimationStates animationStates)
     {
-        animator.SetBool(MOVING_PLATFORM_ANIMATOR, isMoving);
+        currentState = animationStates;
+        animator.SetInteger(MOVING_PLATFORM_ANIMATOR, (int)currentState);
+    }
+
+    public AnimationStates GetCurrentAnimationState()
+    {
+        return currentState;
     }
 }

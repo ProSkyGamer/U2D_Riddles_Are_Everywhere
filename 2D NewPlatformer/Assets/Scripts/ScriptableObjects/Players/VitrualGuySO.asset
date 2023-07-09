@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f45460b03cc28841a287a314109e392, type: 3}
+  m_Name: VitrualGuySO
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 5537620728963062580, guid: e56cbfb2b094a41479d11ac521b74910, type: 3}
+  playerSprite: {fileID: -6367560908665664636, guid: 40de9a8703e2e5a47882b0b86451c741, type: 3}
+  playerName: Virtual Guy
+  playerDescriptionText: "\u041E\u0431\u043B\u0430\u0434\u0430\u0435\u0442 \u0443\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u043D\u044B\u043C
+    \u0437\u0430\u043F\u0430\u0441\u043E\u043C \u0445\u043F"

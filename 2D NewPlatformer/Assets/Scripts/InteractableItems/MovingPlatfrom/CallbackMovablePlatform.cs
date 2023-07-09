@@ -43,35 +43,38 @@ public class CallbackMovablePlatform : InteractableItem
 
     public override void OnInteract()
     {
-        for (int i = 0; i < movingPlatformsToCallbackArray.Length; i++)
+        if (IsPlayerCanInteract(PlayerChangeController.Instance.GetCurrentPlayerSO()))
         {
-            if (!movingPlatformsToCallbackArray[i].IsMoving() &&
-                movingPlatformsToCallbackArray[i].transform.position != callbackPointsArray[i].position)
+            for (int i = 0; i < movingPlatformsToCallbackArray.Length; i++)
             {
-                AddMovingPlatformWaitingForDeparture(movingPlatformsToCallbackArray[i], callbackPointsArray[i]);
+                if (!movingPlatformsToCallbackArray[i].IsMoving() &&
+                    movingPlatformsToCallbackArray[i].transform.position != callbackPointsArray[i].position)
+                {
+                    AddMovingPlatformWaitingForDeparture(movingPlatformsToCallbackArray[i], callbackPointsArray[i]);
+                }
             }
-        }
 
-        movingPlatformsWaitingForArrival = movingPlatformsWaitingList.Count;
+            movingPlatformsWaitingForArrival = movingPlatformsWaitingList.Count;
 
-        if (isChangeCameraFollowingObjectOnInteract)
-        {
-            if (movingPlatformsWaitingList.Count > 1)
-                CameraFollowing.Instance.OnCameraChangeFollower += CameraFollower_OnCameraChangeFollower;
-
-            StartPlatfromMoveTo(movingPlatformsWaitingList[0], movingPlatformWaitingCallbackPointList[0].position);
-        }
-        else
-        {
-            for(int i = 0; i < movingPlatformsWaitingList.Count; i++)
+            if (isChangeCameraFollowingObjectOnInteract)
             {
-                StartPlatfromMoveTo(movingPlatformsWaitingList[i], movingPlatformWaitingCallbackPointList[i].position);
-            }
-            movingPlatformsWaitingList.Clear();
-            movingPlatformWaitingCallbackPointList.Clear();
-        }
+                if (movingPlatformsWaitingList.Count > 1)
+                    CameraFollowing.Instance.OnCameraChangeFollower += CameraFollower_OnCameraChangeFollower;
 
-        callbackMovingPlatformVisual.ChangeCallbackMovingPlatformAnimationState();
+                StartPlatfromMoveTo(movingPlatformsWaitingList[0], movingPlatformWaitingCallbackPointList[0].position);
+            }
+            else
+            {
+                for (int i = 0; i < movingPlatformsWaitingList.Count; i++)
+                {
+                    StartPlatfromMoveTo(movingPlatformsWaitingList[i], movingPlatformWaitingCallbackPointList[i].position);
+                }
+                movingPlatformsWaitingList.Clear();
+                movingPlatformWaitingCallbackPointList.Clear();
+            }
+
+            callbackMovingPlatformVisual.ChangeCallbackMovingPlatformAnimationState();
+        }
 
         base.OnInteract();
     }

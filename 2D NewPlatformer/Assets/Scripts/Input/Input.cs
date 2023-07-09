@@ -11,6 +11,8 @@ public class Input : MonoBehaviour
     public event EventHandler OnInteractAction;
     public event EventHandler OnTestingKeyAction;
     public event EventHandler OnReturnToCheckpointKeyAction;
+    public event EventHandler OnChangePlayerAction;
+    public event EventHandler OnPauseGameAction;
 
     private GameInput gameInput;
 
@@ -30,7 +32,19 @@ public class Input : MonoBehaviour
         gameInput.AllBindings.Interact.performed += Interact_performed;
         gameInput.AllBindings.TestingKey.performed += TestingKey_performed;
         gameInput.AllBindings.ReturnToCheckpoint.performed += ReturnToCheckpoint_performed;
+        gameInput.AllBindings.ChangePlayer.performed += ChangePlayer_performed;
+        gameInput.AllBindings.PauseGame.performed += PauseGame_performed;
 
+    }
+
+    private void PauseGame_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnPauseGameAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void ChangePlayer_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnChangePlayerAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void ReturnToCheckpoint_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -52,6 +66,10 @@ public class Input : MonoBehaviour
     {
         gameInput.AllBindings.Jump.performed -= Jump_performed;
         gameInput.AllBindings.Interact.performed -= Interact_performed;
+        gameInput.AllBindings.TestingKey.performed -= TestingKey_performed;
+        gameInput.AllBindings.ReturnToCheckpoint.performed -= ReturnToCheckpoint_performed;
+        gameInput.AllBindings.ChangePlayer.performed -= ChangePlayer_performed;
+        gameInput.AllBindings.PauseGame.performed -= PauseGame_performed;
 
         gameInput.Dispose();
     }

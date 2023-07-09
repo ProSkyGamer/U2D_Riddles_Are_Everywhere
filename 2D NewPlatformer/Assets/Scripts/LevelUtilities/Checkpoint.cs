@@ -6,6 +6,7 @@ using UnityEngine;
 public class Checkpoint : InteractableItem
 {
     [SerializeField] private int waypointPriority = 0;
+    private bool isWasPlacedAutomaticaly = false;
     private CheckpointVisual checkpointVisual;
 
     protected override void Awake()
@@ -23,7 +24,7 @@ public class Checkpoint : InteractableItem
 
     private void CheckpointController_OnCurrentCheckpointChange(object sender, System.EventArgs e)
     {
-        if(CheckpointsController.Instance.GetCurrentCheckpoint() == this)
+        if (CheckpointsController.Instance.GetCurrentCheckpoint() == this)
             checkpointVisual.ChangeCheckpointVisualState(CheckpointVisual.CheckpointVisualStates.On);
         else
             checkpointVisual.ChangeCheckpointVisualState(CheckpointVisual.CheckpointVisualStates.Off);
@@ -45,12 +46,15 @@ public class Checkpoint : InteractableItem
                 if (raycastHit)
                     if (raycastHit.rigidbody.gameObject.TryGetComponent<PlayerController>(out interactedPlayer))
                     {
-                        if (!CheckpointsController.Instance.TryChangeCheckpoint(this))
+                        if (!isWasPlacedAutomaticaly)
                         {
-                            if (!isHasButtonOnInterface)
-                                AddInteractButtonToInterafce();
+                            if (!CheckpointsController.Instance.TryChangeCheckpoint(this))
+                            {
+                                if (!isHasButtonOnInterface)
+                                    AddInteractButtonToInterafce();
+                            }
                         }
-                            return;
+                        return;
                     }
 
                 if (isHasButtonOnInterface)
@@ -58,7 +62,7 @@ public class Checkpoint : InteractableItem
             }
         }
     }
-    
+
     public override void OnInteract()
     {
         base.OnInteract();
