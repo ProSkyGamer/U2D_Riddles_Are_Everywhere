@@ -94,9 +94,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1297870705347556800}
   - component: {fileID: 1667924780606347482}
+  - component: {fileID: 5224305755102622043}
   - component: {fileID: 4747863482990757883}
   - component: {fileID: 1794427331126998594}
-  - component: {fileID: 5224305755102622043}
+  - component: {fileID: 2098578590824049681}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -141,39 +142,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4747863482990757883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5704806042980816309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faaf0e32bcfdd0c4792861e667b5d55c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1794427331126998594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5704806042980816309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67ebd3946ed1c043b760eb794ec3391, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  buttonText: "\u0427\u0435\u043A\u043F\u043E\u0438\u043D\u0442"
-  interactableHeight: 1
-  collision: {fileID: 5224305755102622043}
-  isChangeCameraFollowingObjectOnInteract: 0
-  cameraChangeDuration: 0.5
-  waypointPriority: 1
 --- !u!61 &5224305755102622043
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -219,3 +187,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.5}
   m_EdgeRadius: 0
+--- !u!114 &4747863482990757883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704806042980816309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faaf0e32bcfdd0c4792861e667b5d55c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1794427331126998594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704806042980816309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67ebd3946ed1c043b760eb794ec3391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInteractable: 1
+  isChangeCameraFollowingObjectOnInteract: 0
+  cameraChangeDuration: 0.5
+  checkpointPriority: 0
+--- !u!114 &2098578590824049681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704806042980816309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e050d84172651e34a87b140f38ad4c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactCastForm: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  buttonText: Interact
+  interactableHeight: 1
+  notInteractablePlayers: []
+  collision: {fileID: 5224305755102622043}

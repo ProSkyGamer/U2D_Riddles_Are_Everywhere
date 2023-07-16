@@ -191,7 +191,10 @@ MonoBehaviour:
   gravityScale: 1
   terrainLayer:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 64
+  additinalTerrainsLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &8134942173433110936
 GameObject:
   m_ObjectHideFlags: 0
