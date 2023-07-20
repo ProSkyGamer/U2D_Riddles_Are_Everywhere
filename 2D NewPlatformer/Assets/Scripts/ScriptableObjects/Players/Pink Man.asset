@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5537620728963062580, guid: dd70a04dbc3962340b38ac5029c32ed9, type: 3}
   playerSprite: {fileID: -6367560908665664636, guid: d348dff3819df794186a80cb95777629, type: 3}
-  playerName: Pink Man
-  playerDescriptionText: Some description man
+  playerName: {fileID: 11400000, guid: 6918ea8f7bd151a4f9a2f1b0964c12fd, type: 2}
+  playerDescriptionText: {fileID: 11400000, guid: 70d2032ae4367cf488fb13bfc0aa6e57, type: 2}

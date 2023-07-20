@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ChangeLeverStateVisual))]
 public class ChangeMovingPlatformState : InteractableItem
 {
     public override event EventHandler OnAllInteractionsFinished;

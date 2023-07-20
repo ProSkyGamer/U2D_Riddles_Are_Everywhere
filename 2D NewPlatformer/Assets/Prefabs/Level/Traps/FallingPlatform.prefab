@@ -167,6 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformCollision: {fileID: 1798659921043270159}
   timeBeforeFalling: 1.5
+  notInteractablePlayerSOArray:
+  - {fileID: 11400000, guid: 2f2f7040cbd44c44299a4fdabdf3ac4a, type: 2}
   fallingDistance: 8
   fallingTime: 2
 --- !u!61 &1798659921043270159

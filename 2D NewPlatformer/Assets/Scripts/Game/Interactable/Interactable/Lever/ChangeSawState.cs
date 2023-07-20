@@ -61,7 +61,7 @@ public class ChangeSawState : InteractableItem
 
     private IEnumerator WaitForChangeSawState()
     {
-        yield return new WaitForSeconds(cameraChangeDuration / 2);
+        yield return new WaitForSeconds(cameraChangeDuration / 3);
         sawTrapToChangeStateArray[sawTrapToChangeIndex].ChangeSawTrapState(
             !sawTrapToChangeStateArray[sawTrapToChangeIndex].GetSawTrapCurrentState());
     }

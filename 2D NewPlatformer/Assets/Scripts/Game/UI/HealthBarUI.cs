@@ -12,9 +12,21 @@ public class HealthBarUI : MonoBehaviour
     private void Start()
     {
         PlayerController.OnPlayerHealthChange += PlayerController_OnPlayerHealthChange;
+        PlayerChangeController.Instance.OnPlayerChange += PlayerChangeController_OnPlayerChange;
 
         fullHealthPrefab.gameObject.SetActive(false);
         emptyHealthPrefab.gameObject.SetActive(false);
+
+        ChangeHealth(PlayerChangeController.Instance.GetCurrentPlayerController().GetCurrentHearts(),
+            PlayerChangeController.Instance.GetCurrentPlayerController().GetMaxHearts() -
+            PlayerChangeController.Instance.GetCurrentPlayerController().GetCurrentHearts());
+    }
+
+    private void PlayerChangeController_OnPlayerChange(object sender, System.EventArgs e)
+    {
+        ChangeHealth(PlayerChangeController.Instance.GetCurrentPlayerController().GetCurrentHearts(),
+            PlayerChangeController.Instance.GetCurrentPlayerController().GetMaxHearts() -
+            PlayerChangeController.Instance.GetCurrentPlayerController().GetCurrentHearts());
     }
 
     private void PlayerController_OnPlayerHealthChange(object sender, PlayerController.OnPlayerHealthChangeEventArgs e)

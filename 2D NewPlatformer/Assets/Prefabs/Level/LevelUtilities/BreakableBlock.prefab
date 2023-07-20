@@ -206,7 +206,7 @@ Transform:
   - {fileID: 3136942837757108130}
   - {fileID: 2324415209966937888}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6972314817767142316
 BoxCollider2D:
@@ -345,9 +345,9 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  buttonText: Store
-  interactableHeight: 1
-  isInteractDistanceShow: 1
+  buttonTextTranslationsSO: {fileID: 11400000, guid: 1d1820bf2724fab4e85f8d45d98e26aa, type: 2}
+  interactableHeight: 4
+  isInteractDistanceShow: 0
   notInteractablePlayers: []
   collision: {fileID: 6972314817767142316}
 --- !u!1 &8996612088073705603

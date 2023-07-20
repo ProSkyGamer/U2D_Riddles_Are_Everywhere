@@ -8,6 +8,7 @@ public class SelectedPlayerCard : MonoBehaviour
 {
     [SerializeField] private Image selectedPlayerImage;
     [SerializeField] private TextMeshProUGUI selectedPlayerDescriptionText;
+    private TextTranslationUI selectedPlayerDescriptionTranslationText;
     [SerializeField] private Button chooseSelectedPlayerButton;
     private PlayerSO currentSelectedPlayerCard = null;
 
@@ -17,6 +18,8 @@ public class SelectedPlayerCard : MonoBehaviour
         {
             PlayerChangeController.Instance.ChangePlayer(currentSelectedPlayerCard);
         });
+
+        selectedPlayerDescriptionTranslationText = selectedPlayerDescriptionText.gameObject.GetComponent<TextTranslationUI>();
     }
 
     public void TryChangeSelectedPlayerCard(PlayerSO player)
@@ -26,32 +29,21 @@ public class SelectedPlayerCard : MonoBehaviour
             currentSelectedPlayerCard = player;
 
             selectedPlayerImage.sprite = player.playerSprite;
-            selectedPlayerDescriptionText.text = player.playerDescriptionText;
+            selectedPlayerDescriptionText.text = TextTranslationManager.GetTextFromTextTranslationSOByLanguage(
+                TextTranslationManager.GetCurrentLanguage(), player.playerDescriptionText);
+            selectedPlayerDescriptionTranslationText.ChangeTextTranslationSO(player.playerDescriptionText);
 
-            //Блокировка кнопки выбора персонажа (если не куплен/уже выбран)
-            if(PlayerChangeController.Instance.GetCurrentPlayerSO() != player)
+            if(PlayerChangeController.Instance.GetCurrentPlayerSO() != player && (
+                ChangePlayerInterface.Instance.GetAlwaysAvailiblePlayers().Contains(player) ||
+                ShopManager.IsCurrentPlayerBought(player)))
             {
-                if (PlayerChangeController.Instance.IsChangeRecharged())
+                if (PlayerChangeController.Instance.IsCanChangePlayer())
                     chooseSelectedPlayerButton.interactable = true;
                 else
-                {
                     chooseSelectedPlayerButton.interactable = false;
-                    PlayerChangeController.Instance.OnPLayerRechargeDone += PlayerChangeController_OnPLayerRechargeDone;
-                }
             }
             else
-            {
                 chooseSelectedPlayerButton.interactable = false;
-            }
         }
-    }
-
-    private void PlayerChangeController_OnPLayerRechargeDone(object sender, System.EventArgs e)
-    {
-        PlayerChangeController playerChangeController = (PlayerChangeController)sender;
-
-        chooseSelectedPlayerButton.interactable = true;
-
-        playerChangeController.OnPLayerRechargeDone -= PlayerChangeController_OnPLayerRechargeDone;
     }
 }

@@ -8,7 +8,7 @@ public class ChangePlayerInterface : MonoBehaviour
 {
     public static ChangePlayerInterface Instance { get; private set; }
 
-    //[SerializeField] private AllPlayersSO allPlayersSO;
+    [SerializeField] private List<PlayerSO> alwaysAvailiblePlayers = new();
     [SerializeField] private Transform playerCardPrefab;
     [SerializeField] private Transform allPlayerCardsGrid;
     [SerializeField] SelectedPlayerCard selectedPlayerCard;
@@ -37,8 +37,12 @@ public class ChangePlayerInterface : MonoBehaviour
             {
                 selectedPlayerCard.TryChangeSelectedPlayerCard(playerSO);
             });
-            playerCard.GetComponentInChildren<TextMeshProUGUI>().text = playerSO.playerName;
+            playerCard.GetComponentInChildren<TextMeshProUGUI>().text = TextTranslationManager.GetTextFromTextTranslationSOByLanguage(
+                TextTranslationManager.GetCurrentLanguage(), playerSO.playerName);
             playerCard.GetComponentsInChildren<Image>()[1].sprite = playerSO.playerSprite;
+
+            if (!ShopManager.IsCurrentPlayerBought(playerSO) && !alwaysAvailiblePlayers.Contains(playerSO))
+                playerCardButton.interactable = false;
         }
 
         playerCardPrefab.gameObject.SetActive(false);
@@ -89,5 +93,10 @@ public class ChangePlayerInterface : MonoBehaviour
             Hide();
             Time.timeScale = 1f;
         }
+    }
+
+    public List<PlayerSO> GetAlwaysAvailiblePlayers()
+    {
+        return alwaysAvailiblePlayers;
     }
 }

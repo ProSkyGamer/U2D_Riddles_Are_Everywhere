@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b4c9b2189a04f45a285174a2d832a7, type: 3}
+  m_Name: 3BreakableBlock
+  m_EditorClassIdentifier: 
+  guideType: 0
+  guideImage: {fileID: 21300000, guid: 952af2969374830408d35c8ab26029c7, type: 3}
+  guideTextTranslations: {fileID: 11400000, guid: f28b31e45cb0a9e4686f8a54e59f15f0, type: 2}

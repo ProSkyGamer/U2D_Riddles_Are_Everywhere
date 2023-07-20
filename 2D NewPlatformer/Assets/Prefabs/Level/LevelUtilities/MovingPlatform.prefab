@@ -155,7 +155,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  buttonText: Start Moving
+  buttonTextTranslationsSO: {fileID: 11400000, guid: 9e7bdd373c975044b96bcd13a346c72c, type: 2}
   interactableHeight: 1
   isInteractDistanceShow: 1
   notInteractablePlayers:

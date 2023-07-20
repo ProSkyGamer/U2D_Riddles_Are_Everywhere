@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,9 @@ public static class UnitySceneManager
 {
     public enum Scenes
     {
-        GameScene,
+        MainMenu,
+        Level0,
+        Level1,
     }
 
     public static void LoadScene(Scenes sceneToLoad)

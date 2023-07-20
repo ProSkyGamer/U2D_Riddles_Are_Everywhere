@@ -231,7 +231,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  buttonText: Interact
+  buttonTextTranslationsSO: {fileID: 11400000, guid: 74ff093045cd37c499d3354950f38e37, type: 2}
   interactableHeight: 1
+  isInteractDistanceShow: 1
   notInteractablePlayers: []
   collision: {fileID: 5224305755102622043}

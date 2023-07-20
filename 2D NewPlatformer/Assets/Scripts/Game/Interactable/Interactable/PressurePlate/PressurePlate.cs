@@ -42,32 +42,32 @@ public class PressurePlate : MonoBehaviour
                 offset + new Vector3(collision.size.x / 2, 0f, 0f);
             Vector3 leftCastPosition = transform.position + (Vector3)collision.
                 offset + new Vector3(-collision.size.x / 2, 0f, 0f);
-            float castDistance = 0.1f;
+            float castDistance = 0.2f;
 
             MovableHead rightCollidedHead;
             MovableHead leftCollidedHead;
-            RaycastHit2D leftRaycast = Physics2D.Raycast(leftCastPosition, Vector2.up, castDistance);
-            RaycastHit2D rightRaycast = Physics2D.Raycast(rightCastPosition, Vector2.up, castDistance);
-            if (leftRaycast && rightRaycast && leftRaycast.collider.gameObject.
-                TryGetComponent<MovableHead>(out leftCollidedHead) && rightRaycast.
+            RaycastHit2D[] leftRaycast = Physics2D.RaycastAll(leftCastPosition, Vector2.up, castDistance);
+            RaycastHit2D[] rightRaycast = Physics2D.RaycastAll(rightCastPosition, Vector2.up, castDistance);
+            for(int i = 0; i < leftRaycast.Length && i < rightRaycast.Length; i++)
+            {
+                if (leftRaycast[i] && rightRaycast[i] && leftRaycast[i].collider.gameObject.
+                TryGetComponent<MovableHead>(out leftCollidedHead) && rightRaycast[i].
                 collider.gameObject.TryGetComponent<MovableHead>(out rightCollidedHead))
-            {
-                if (!isInteracted)
-                    if (rightCollidedHead == leftCollidedHead)
-                    {
-                        standingHead = leftCollidedHead;
-                        OnInteract();
-                        isInteracted = true;
-                    }
-            }
-            else
-            {
-                if (isInteracted)
                 {
-                    OnInteract();
-                    isInteracted = false;
-                    standingHead = null;
+                    if (!isInteracted)
+                        if (rightCollidedHead == leftCollidedHead)
+                        {
+                            standingHead = leftCollidedHead;
+                            OnInteract();
+                            isInteracted = true;
+                        }
+                    return;
                 }
+            }
+            if (isInteracted)
+            {
+                OnInteract();
+                isInteracted = false;
             }
         }
     }

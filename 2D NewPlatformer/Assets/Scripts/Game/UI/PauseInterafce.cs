@@ -8,6 +8,8 @@ public class PauseInterafce : MonoBehaviour
     public static PauseInterafce Instance { get; private set; }
 
     [SerializeField] private Button unpauseButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button mainMenuButton;
 
     private void Awake()
     {
@@ -20,6 +22,16 @@ public class PauseInterafce : MonoBehaviour
         {
             GameStageManager.ChangeGameStage(GameStageManager.GameStages.Playing);
         });
+        settingsButton.onClick.AddListener(() =>
+        {
+            SettingsInterface.Instance.Show();
+            Hide();
+        });
+        mainMenuButton.onClick.AddListener(() =>
+        {
+            Time.timeScale = 1f;
+            UnitySceneManager.LoadScene(UnitySceneManager.Scenes.MainMenu);
+        });
     }
 
     private void Start()
@@ -31,6 +43,17 @@ public class PauseInterafce : MonoBehaviour
 
     private void Input_OnPauseGameAction(object sender, System.EventArgs e)
     {
+        if (GuideInterface.Instance.IsShown() || WinInterface.Instance.IsShown() ||
+            DeathInterface.Instance.IsShown())
+            return;
+
+        if (SettingsInterface.Instance.IsShown())
+        {
+            Show();
+            SettingsInterface.Instance.Hide();
+            return;
+        }
+
         switch (GameStageManager.GetCurrentStage())
         {
             case GameStageManager.GameStages.MainMenu:
@@ -47,7 +70,7 @@ public class PauseInterafce : MonoBehaviour
         }
     }
 
-    private void Show()
+    public void Show()
     {
         gameObject.SetActive(true);
     }

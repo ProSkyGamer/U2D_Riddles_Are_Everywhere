@@ -9,7 +9,7 @@ public class PlayerGravity : MonoBehaviour
     private float slowDownScale = 1f;
 
     private Vector3 gravityVector;
-    private BoxCollider2D playerCollision;
+    [SerializeField] private BoxCollider2D playerCollision;
 
     [SerializeField] private LayerMask terrainLayer;
     [SerializeField] private LayerMask additinalTerrainsLayer;
@@ -28,7 +28,10 @@ public class PlayerGravity : MonoBehaviour
     {
         if (!IsGrounded() || gravityVector.y > 0)
         {
-            transform.position += gravityVector * gravityScale * Time.deltaTime * slowDownScale;
+            if(gravityVector.y > 0)
+                transform.position += gravityVector * Time.deltaTime * slowDownScale;
+            else
+                transform.position += gravityVector * gravityScale * Time.deltaTime * slowDownScale;
 
             if (gravityVector.y > gravityConst)
             {
@@ -51,8 +54,8 @@ public class PlayerGravity : MonoBehaviour
 
     public bool IsGrounded()
     {
-        Vector2 castPosition = playerCollision.bounds.center;
-        Vector2 vectorCastSize = playerCollision.bounds.size;
+        Vector2 castPosition = transform.position + (Vector3)playerCollision.offset + new Vector3(0f, -playerCollision.bounds.size.y * 4.5f / 10, 0f) ;
+        Vector2 vectorCastSize =  new Vector2(playerCollision.bounds.size.x * 0.5f, playerCollision.bounds.size.y / 10);   
         float angleRotation = 0f;
         Vector2 castDirection = Vector2.down;
         float additionalCastRange = .02f;
@@ -81,5 +84,13 @@ public class PlayerGravity : MonoBehaviour
     public Vector3 GetGravityVector()
     {
         return gravityVector;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Vector2 castPosition = transform.position + (Vector3)playerCollision.offset + new Vector3(0f, -playerCollision.bounds.size.y * 4.5f / 10, 0f);
+        Vector2 vectorCastSize = new Vector2(playerCollision.bounds.size.x * 0.5f, playerCollision.bounds.size.y / 10);
+        Gizmos.DrawCube(castPosition, vectorCastSize);
     }
 }

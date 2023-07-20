@@ -97,7 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHearts: 5
-  speed: 4
+  deathYLocation: -16
+  runSpeed: 4
+  isCanSprint: 0
+  sprintSpeed: 4.75
   jumpForce: 7
   additionalJumps: 1
   timeBetwenBacksToCheckpoint: 5

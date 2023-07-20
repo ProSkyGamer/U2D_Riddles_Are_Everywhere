@@ -6,15 +6,15 @@ using UnityEngine;
 public class PlayerChangeController : MonoBehaviour
 {
     [SerializeField] private AllPlayersSO allPlayersSO;
-    [SerializeField] private float timeBetwenChangingPlayer = 5f;
-    private float timerBetwenChangingPlayer;
 
     public static PlayerChangeController Instance { get; private set; }
-    public event EventHandler OnPLayerRechargeDone;
 
     [SerializeField] private PlayerSO currentPlayer;
     private List<int> playerLives = new List<int>();
     [SerializeField] private Transform currentPlayerTransfrom;
+    private PlayerController currentPlayerController;
+
+    public event EventHandler OnPlayerChange;
 
     private void Awake()
     {
@@ -28,6 +28,8 @@ public class PlayerChangeController : MonoBehaviour
             playerLives.Add(allPlayersSO.allPlayersSO[i].playerPrefab.gameObject.
                 GetComponentInChildren<PlayerController>().GetMaxHearts());
         }
+
+        currentPlayerController = currentPlayerTransfrom.GetComponent<PlayerController>();
     }
 
     private void Start()
@@ -44,19 +46,14 @@ public class PlayerChangeController : MonoBehaviour
         }
     }
 
-    private void Update()
+    public bool IsCanChangePlayer()
     {
-        if (!IsChangeRecharged())
-        {
-            timerBetwenChangingPlayer -= Time.deltaTime;
-            if (IsChangeRecharged())
-                OnPLayerRechargeDone?.Invoke(this, EventArgs.Empty);
-        }
+        return currentPlayerController.IsCanTeleportToCheckpoint();
     }
 
     public void ChangePlayer(PlayerSO playerToChange)
     {
-        if (IsChangeRecharged())
+        if (currentPlayerController.IsCanTeleportToCheckpoint())
         {
             if (currentPlayer != playerToChange)
             {
@@ -65,15 +62,16 @@ public class PlayerChangeController : MonoBehaviour
                 Destroy(currentPlayerTransfrom?.gameObject);
 
                 currentPlayerTransfrom = Instantiate(playerToChange.playerPrefab);
+                currentPlayerController = currentPlayerTransfrom.GetComponent<PlayerController>();
                 for (int i = 0; i < allPlayersSO.allPlayersSO.Length; i++)
                 {
                     if (currentPlayer == allPlayersSO.allPlayersSO[i])
-                        currentPlayerTransfrom.GetComponent<PlayerController>().ChangeCurrentHearts(playerLives[i]);
+                        currentPlayerController.ChangeCurrentHearts(playerLives[i]);
                 }
-                currentPlayerTransfrom.position = CheckpointsController.Instance.GetCurrentCheckpoint().gameObject.transform.position;
+                currentPlayerController.TeleportToCurrentCheckpoint();
                 CameraFollowing.Instance.ChangeFollowingPlayer(currentPlayerTransfrom);
 
-                timerBetwenChangingPlayer = timeBetwenChangingPlayer;
+                OnPlayerChange?.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -83,13 +81,13 @@ public class PlayerChangeController : MonoBehaviour
         return currentPlayer; 
     }
 
-    public bool IsChangeRecharged()
-    {
-        return timerBetwenChangingPlayer <= 0f;
-    }
-
     public AllPlayersSO GetAllPlayersSO()
     {
         return allPlayersSO;
+    }
+
+    public PlayerController GetCurrentPlayerController()
+    {
+        return currentPlayerController;
     }
 }

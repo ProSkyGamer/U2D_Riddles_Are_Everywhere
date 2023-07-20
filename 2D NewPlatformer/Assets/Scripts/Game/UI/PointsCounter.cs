@@ -19,6 +19,6 @@ public class PointsCounter : MonoBehaviour
 
     private void PointsCollectedController_OnPointsCollectedChange(object sender, PointsCollectedController.OnPointsCollectedChangeEventArgs e)
     {
-        pointsValueText.text = e.currentPoints.ToString();
+        pointsValueText.text = e.currentPoints.ToString() + "/" + e.needePoints.ToString();
     }
 }

@@ -13,7 +13,7 @@ public class AddInteractButtonUI : MonoBehaviour
 
     [Header("Base Settings")]
     [SerializeField] protected LayerMask playerLayer;
-    [SerializeField] protected string buttonText = "Interact";
+    [SerializeField] protected TextTranslationsSO buttonTextTranslationsSO;
 
     [SerializeField] protected float interactableHeight = 1f;
     protected PlayerController interactedPlayer;
@@ -23,6 +23,7 @@ public class AddInteractButtonUI : MonoBehaviour
     [SerializeField] protected PlayerSO[] notInteractablePlayers;
 
     protected bool isHasButtonOnInterface = false;
+    private bool isAllInteractionsFinished = true;
 
     //DELETE
     [Header("Temporary")]
@@ -42,7 +43,7 @@ public class AddInteractButtonUI : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (IsAnySourceInteractable())
+        if (IsAnySourceInteractable() && isAllInteractionsFinished)
         {
             switch (interactCastForm)
             {
@@ -115,7 +116,7 @@ public class AddInteractButtonUI : MonoBehaviour
 
     protected void AddInteractButtonToInterafce()
     {
-        InteractInterface.Instance.AddButtonInteractToScreen(this, buttonText);
+        InteractInterface.Instance.AddButtonInteractToScreen(this, buttonTextTranslationsSO);
         isHasButtonOnInterface = true;
     }
 
@@ -127,28 +128,42 @@ public class AddInteractButtonUI : MonoBehaviour
 
     public virtual void OnInteract()
     {
-        onInteractVisual.OnInteractChangeAnimationState();
-        for(int i = 0; i < interactableItems.Count; i++)
+        RemoveInteractButtonFromInterafce();
+        if (IsPlayerCanInteract(PlayerChangeController.Instance.GetCurrentPlayerSO()))
         {
-            if (interactableItems[i].IsCanInteract())
+            isAllInteractionsFinished = false;
+
+            onInteractVisual.OnInteractChangeAnimationState();
+            for (int i = 0; i < interactableItems.Count; i++)
             {
-                interactableItems[i].OnInteract(interactedPlayer);
-                if (interactableItems[i].GetIsChangeCameraOnInteract())
+                if (interactableItems[i].IsCanInteract())
                 {
-                    interactableItems[i].OnAllInteractionsFinished += InteractableItem_OnAllInteractionsFinished;
-                    lastInteractedItemIndex = i;
-                    break;
+                    interactableItems[i].OnInteract(interactedPlayer);
+                    if (interactableItems[i].GetIsChangeCameraOnInteract())
+                    {
+                        interactableItems[i].OnAllInteractionsFinished += InteractableItem_OnAllInteractionsFinished;
+                        lastInteractedItemIndex = i;
+                        return;
+                    }
                 }
             }
-        }
 
-        RemoveInteractButtonFromInterafce();
+            isAllInteractionsFinished = true;
+        }
+        else
+        {
+            if (TextTranslationManager.GetCurrentLanguage() == TextTranslationManager.Languages.English)
+                NottificationsUI.Instance.AddNotification("This player can't interact!");
+            else
+                NottificationsUI.Instance.AddNotification("Этот игрок не может взаимодейстовать!");
+        }
     }
 
     protected virtual void InteractableItem_OnAllInteractionsFinished(object sender, System.EventArgs e)
     {
         InteractableItem item = sender as InteractableItem;
         item.OnAllInteractionsFinished -= InteractableItem_OnAllInteractionsFinished;
+
         for (int i = lastInteractedItemIndex + 1; i < interactableItems.Count; i++)
         {
             if (interactableItems[i].IsCanInteract())
@@ -158,10 +173,11 @@ public class AddInteractButtonUI : MonoBehaviour
                 {
                     interactableItems[i].OnAllInteractionsFinished += InteractableItem_OnAllInteractionsFinished;
                     lastInteractedItemIndex = i;
-                    break;
+                    return;
                 }
             }
         }
+        isAllInteractionsFinished = true;
     }
 
     protected bool IsPlayerCanInteract(PlayerSO playerSO)

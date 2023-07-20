@@ -13,6 +13,7 @@ public class CameraFollowing : MonoBehaviour
     private Transform currentFollowingObject;
     [SerializeField] private bool isFollowing = true;
     private PlayerController playerToEnableMovement;
+    [SerializeField] private float minYLocation = -14f;
 
     private float followingTimer;
     private bool isFirstUpdate = true;
@@ -45,6 +46,9 @@ public class CameraFollowing : MonoBehaviour
                 percentValue = 0.15f;
             else
                 percentValue = 0.05f;
+
+            if (endPosition.y < minYLocation)
+                endPosition.y = minYLocation;
 
             transform.position = Vector3.Lerp(startPosition, endPosition, percentValue);
 

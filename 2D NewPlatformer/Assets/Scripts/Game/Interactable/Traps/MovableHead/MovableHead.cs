@@ -41,6 +41,19 @@ public class MovableHead : BaseTrap
         StartCoroutine(CheckAvailibleDirections());
     }
 
+    private void Start()
+    {
+        Input.Instance.OnTestingKeyAction += Instance_OnTestingKeyAction;
+    }
+
+    private void Instance_OnTestingKeyAction(object sender, System.EventArgs e)
+    {
+        foreach(var direction in availibleDirections)
+        {
+            print(direction);
+        }
+    }
+
     protected override void Update()
     {
         if (isCanDamage)
@@ -79,7 +92,7 @@ public class MovableHead : BaseTrap
             float interactableHeight = 0f;
 
             Vector3 baseCastPosition = transform.position + (Vector3)collision.offset;
-            Vector2 leftRightCastCubeLenght = new Vector2(collision.size.x / 2, collision.size.y);
+            Vector2 leftRightCastCubeLenght = new Vector2(collision.size.x / 4, collision.size.y);
 
             Vector3 leftCastPosition = baseCastPosition + new Vector3(-collision.size.x / 2 - leftRightCastCubeLenght.x / 2, 0f, 0f);
 

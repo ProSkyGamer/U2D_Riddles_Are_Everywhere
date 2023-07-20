@@ -14,7 +14,7 @@ public class SawTrap : BaseTrap
         base.Awake();
         sawTrapVisual = GetComponent<SawTrapVisual>();
 
-        sawTrapVisual.ChangeSawStateVisual(isTurnedOn);
+        ChangeSawTrapState(isTurnedOn);
     }
 
     public void ChangeSawTrapState(bool state)

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b4c9b2189a04f45a285174a2d832a7, type: 3}
+  m_Name: 2CollectableItemGuidesSO
+  m_EditorClassIdentifier: 
+  guideType: 0
+  guideImage: {fileID: 21300000, guid: 3dc4a23d6c68f18499f55b7bccf3eee7, type: 3}
+  guideTextTranslations: {fileID: 11400000, guid: 2d2185698ee7dab4e8401157c008504d, type: 2}

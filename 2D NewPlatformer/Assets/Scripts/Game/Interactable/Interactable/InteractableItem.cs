@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
-[RequireComponent(typeof(AddInteractButtonUI))]
 public class InteractableItem : MonoBehaviour
 {
     public virtual event EventHandler OnAllInteractionsFinished;

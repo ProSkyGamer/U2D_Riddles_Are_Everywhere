@@ -7,5 +7,6 @@ public static class ReserStaticData
     public static void ResetStaticData()
     {
         PlayerController.ResetStaticData();
+        TextTranslationManager.ResetStaticData();
     }
 }

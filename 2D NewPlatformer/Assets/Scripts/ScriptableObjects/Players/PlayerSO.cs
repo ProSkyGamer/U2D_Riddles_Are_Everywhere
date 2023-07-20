@@ -7,6 +7,6 @@ public class PlayerSO : ScriptableObject
 {
     public Transform playerPrefab;
     public Sprite playerSprite;
-    public string playerName;
-    public string playerDescriptionText;
+    public TextTranslationsSO playerName;
+    public TextTranslationsSO playerDescriptionText;
 }
