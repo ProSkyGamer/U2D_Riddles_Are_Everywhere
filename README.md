@@ -8,22 +8,20 @@
 
 Цель игры: собрать как можно большее количество очков, и дойти до финиша
 
-![image](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/37ba1d59-2375-42a5-bd00-2f4b2bc99cc8)
+![1](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/6adf89a3-0487-4a70-9682-3f68c4fe3738)
 
-![image](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/fbd37025-d724-4aaf-9611-6d309513d4b0)
+![2](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/4a9163ec-faf9-492f-803b-9e216dbaf096)
 
-![image](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/dd9da986-5193-4abf-ad09-9072a3a951e2)
+![3](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/7f18b636-b348-40f6-a557-14151359f8a4)
 
-![image](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/87a3aab9-1478-467d-95a2-bad7bb09577a)
+![4](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/e22ecd14-9437-4ef8-8580-e20eff62718c)
 
-![image](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/5679256e-5122-493b-9873-d337b51126b8)
+![5](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/8fb1c915-2d2b-4259-a9a4-4ada8044ea33)
 
-![image](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/7557d16f-d226-4d4a-864f-1780b468d689)
+![6](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/50185c2e-0317-4f30-801d-662e721265f2)
 
-![image](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/ee592e12-878a-4562-b98b-5e84717cfeb7)
+![7](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/c5a18d81-9acb-4d7a-ab64-ea9f806a11bf)
 
-![image](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/f9d823ea-c169-4c45-98fd-cc3fae548e2a)
+![8](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/4abee20a-8cfa-477b-b239-f1b8733205a7)
 
-![image](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/5d5b0e94-d385-4df2-bb1c-1f1d619614be)
-
-![image](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/c1ec47ff-7ee8-4144-aa3e-9bf67d3441ff)
+![9](https://github.com/ProSkyGamer/U2D_Riddles_Are_Everywhere/assets/82523053/e8b32516-b857-427b-9666-a331b7db95d9)
