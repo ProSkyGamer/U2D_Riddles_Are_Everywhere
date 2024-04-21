@@ -13,7 +13,7 @@ public class LevelFinish : InteractableItem
 
         player.DisableMovement();
 
-        WinInterface.Instance.Show();
+        WinInterface.Instance.Show(PointsCollectedController.Instance.GetCollectedPoints() * pointsToCoinsMultiplayer);
 
         CoinsManager.AddCoins(PointsCollectedController.Instance.GetCollectedPoints() * pointsToCoinsMultiplayer);
     }

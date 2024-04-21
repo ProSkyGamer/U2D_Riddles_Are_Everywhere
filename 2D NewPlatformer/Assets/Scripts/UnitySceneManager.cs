@@ -11,6 +11,8 @@ public static class UnitySceneManager
         MainMenu,
         Level0,
         Level1,
+        Level2,
+        Level3,
     }
 
     public static void LoadScene(Scenes sceneToLoad)

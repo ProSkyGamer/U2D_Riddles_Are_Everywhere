@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8197227224302433825}
   - component: {fileID: 8408075679707966663}
   - component: {fileID: 1356517669446460777}
+  - component: {fileID: 3211481157229192499}
   m_Layer: 6
   m_Name: Fire
   m_TagString: Untagged
@@ -131,6 +132,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3211481157229192499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596055713494589958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e44d547e40f4a042b527bcf2ee194bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guideButtonSO: {fileID: 11400000, guid: 1764f0c25415f3d44b71c3cb501391c5, type: 2}
+  interactableDistance: 3
+  isInteractDistanceShow: 0
+  collision: {fileID: 1356517669446460777}
 --- !u!1 &7448315241754969011
 GameObject:
   m_ObjectHideFlags: 0

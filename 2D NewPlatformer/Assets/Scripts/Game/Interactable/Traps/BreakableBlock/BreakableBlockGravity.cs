@@ -62,8 +62,8 @@ public class BreakableBlockGravity : MonoBehaviour
 
     public bool IsGrounded()
     {
-        Vector2 castPosition = boxCollision.bounds.center;
-        Vector2 vectorCastSize = boxCollision.bounds.size;
+        Vector2 castPosition = transform.position + (Vector3)boxCollision.offset + new Vector3(0f, -boxCollision.bounds.size.y * 4.5f / 10, 0f); ;
+        Vector2 vectorCastSize = new Vector2(boxCollision.bounds.size.x * 0.5f, boxCollision.bounds.size.y / 10);
         float angleRotation = 0f;
         Vector2 castDirection = Vector2.down;
         float additionalCastRange = 0f;

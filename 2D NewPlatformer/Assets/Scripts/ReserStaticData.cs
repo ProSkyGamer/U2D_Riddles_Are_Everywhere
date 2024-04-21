@@ -8,5 +8,8 @@ public static class ReserStaticData
     {
         PlayerController.ResetStaticData();
         TextTranslationManager.ResetStaticData();
+        CoinsManager.ResetStaticData();
+        MovableHead.ResetStaticData();
+        BreakableBlock.ResetStaticData();
     }
 }

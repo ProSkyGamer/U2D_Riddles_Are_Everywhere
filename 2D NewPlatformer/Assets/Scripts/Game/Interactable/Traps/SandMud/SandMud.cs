@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class SandMud : MonoBehaviour
 {
+    public event EventHandler OnPlayerSlowDown;
+
     [SerializeField, Range(0,1)] private float sandMudSlowDown = 0.9f;
     [SerializeField] private PlayerSO[] notInteractablePlayersSOArray;
 
@@ -14,7 +17,10 @@ public class SandMud : MonoBehaviour
         {
             PlayerController player;
             if (collision.gameObject.TryGetComponent<PlayerController>(out player))
+            {
                 player.ChangeAllMoventSLowDown(1f - sandMudSlowDown);
+                OnPlayerSlowDown?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 
@@ -31,7 +37,10 @@ public class SandMud : MonoBehaviour
         { 
             PlayerController player;
             if (collision.gameObject.TryGetComponent<PlayerController>(out player))
+            {
                 player.ChangeAllMoventSLowDown(1f - sandMudSlowDown);
+                OnPlayerSlowDown?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 

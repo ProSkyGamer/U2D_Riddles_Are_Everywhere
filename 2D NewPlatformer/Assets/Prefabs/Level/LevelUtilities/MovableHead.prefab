@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5830418137938984144}
   - component: {fileID: 3958885683576234229}
   - component: {fileID: 1271467536586574460}
+  - component: {fileID: 3457665130471502116}
   m_Layer: 6
   m_Name: MovableHead
   m_TagString: Untagged
@@ -139,6 +140,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730c5bce06832f241970ab8bbcab6aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3457665130471502116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327733719291128234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e44d547e40f4a042b527bcf2ee194bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guideButtonSO: {fileID: 11400000, guid: 1c5ffc7562c28f144a938184de43d247, type: 2}
+  interactableDistance: 5
+  isInteractDistanceShow: 1
+  collision: {fileID: 606058571690514811}
 --- !u!1 &6421314973419836402
 GameObject:
   m_ObjectHideFlags: 0

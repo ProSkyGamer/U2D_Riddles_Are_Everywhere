@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Level0SO
   m_EditorClassIdentifier: 
   sceneToLoad: 1
+  resetGuides: 1

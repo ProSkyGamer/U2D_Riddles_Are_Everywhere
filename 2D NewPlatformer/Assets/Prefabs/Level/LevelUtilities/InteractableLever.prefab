@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 7394717364260673876}
   - component: {fileID: 2939425421536296685}
   - component: {fileID: 2317588526700329685}
+  - component: {fileID: 1094691456258270521}
   m_Layer: 0
   m_Name: InteractableLever
   m_TagString: Untagged
@@ -118,7 +119,7 @@ Transform:
   m_Children:
   - {fileID: 9003023065574293709}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &5434699341408517206
 BoxCollider2D:
@@ -220,3 +221,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32bc43c29d101f4a8d150f9c9c3015d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1094691456258270521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3614134800571566999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e44d547e40f4a042b527bcf2ee194bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guideButtonSO: {fileID: 11400000, guid: f91a3a279d3adeb4dbb06a0a93ea04f0, type: 2}
+  interactableDistance: 2.5
+  isInteractDistanceShow: 1
+  collision: {fileID: 5434699341408517206}

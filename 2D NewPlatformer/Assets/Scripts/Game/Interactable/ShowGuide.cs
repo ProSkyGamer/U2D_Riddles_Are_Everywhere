@@ -35,7 +35,7 @@ public class ShowGuide : MonoBehaviour
             if (raycastHit)
                 if (raycastHit.collider.gameObject.TryGetComponent<PlayerController>(out PlayerController interactedPlayer))
                 {
-                    GuideInterface.Instance.ChangeGuideInterface(guidesToShow);
+                    GuideInterface.Instance.ShowGuide(guidesToShow);
                     isGuidesWasShown = true;
                 }
         }

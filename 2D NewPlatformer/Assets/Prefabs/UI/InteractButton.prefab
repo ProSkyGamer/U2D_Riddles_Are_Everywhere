@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7070561393214796434}
   - component: {fileID: 8683748377485946573}
   - component: {fileID: 7952226600123797839}
+  - component: {fileID: 5140322291718625970}
   m_Layer: 5
   m_Name: ButtonText
   m_TagString: Untagged
@@ -135,6 +136,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5140322291718625970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018016494197084809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479a2dbf09922f144b208bed3cb9f6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textTranslationsSO: {fileID: 11400000, guid: 79a9503236b55ca4f88b712c01cb1530, type: 2}
 --- !u!1 &1651826202684798366
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +161,8 @@ GameObject:
   - component: {fileID: 2628630175511822753}
   - component: {fileID: 1566809732632688006}
   - component: {fileID: 6482659268004877072}
+  - component: {fileID: 4489889364128221392}
+  - component: {fileID: 1759053430440294832}
   m_Layer: 5
   m_Name: InteractButton
   m_TagString: Untagged
@@ -258,6 +274,36 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4489889364128221392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651826202684798366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.8470589, g: 0.85098046, b: 0.9294118, a: 1}
+  m_EffectDistance: {x: 2.5, y: 2.5}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1759053430440294832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651826202684798366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.84705883, g: 0.8509804, b: 0.92941177, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6017604047764904483
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +315,7 @@ GameObject:
   - component: {fileID: 4345880774283954451}
   - component: {fileID: 7539726451285198595}
   - component: {fileID: 8335931855416958000}
-  - component: {fileID: 685865685237433097}
+  - component: {fileID: 4652445692866831667}
   m_Layer: 5
   m_Name: PressButtonKeyText
   m_TagString: Untagged
@@ -394,7 +440,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &685865685237433097
+--- !u!114 &4652445692866831667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,7 +449,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6017604047764904483}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 479a2dbf09922f144b208bed3cb9f6a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 93cfcd9dcb900ce42ad11e440625c761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textTranslationsSO: {fileID: 11400000, guid: 79a9503236b55ca4f88b712c01cb1530, type: 2}
+  listeningBinding: 3

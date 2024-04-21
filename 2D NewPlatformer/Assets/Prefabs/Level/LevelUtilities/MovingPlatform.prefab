@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3392003804115883990}
   - component: {fileID: 7890849106524240338}
   - component: {fileID: 4119122394665527772}
-  - component: {fileID: 1804031879530020961}
+  - component: {fileID: 2720155582058720185}
+  - component: {fileID: 3574240163002400327}
   m_Layer: 6
   m_Name: PlatformScript
   m_TagString: Untagged
@@ -139,7 +140,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4434f18c070181c41b6404e3cd98a0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1804031879530020961
+--- !u!114 &2720155582058720185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135434467707063448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e44d547e40f4a042b527bcf2ee194bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guideButtonSO: {fileID: 11400000, guid: 64b33d8c62a114c40853e9a8c787ec34, type: 2}
+  interactableDistance: 2.5
+  isInteractDistanceShow: 1
+  collision: {fileID: 3392003804115883990}
+--- !u!114 &3574240163002400327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,7 +210,7 @@ Transform:
   - {fileID: 5617564188732830836}
   - {fileID: 5946642383328948681}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1995416341144429874
 GameObject:

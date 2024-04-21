@@ -32,7 +32,8 @@ public class ChooseLevelInterface : MonoBehaviour
         {
             var levelButton = Instantiate(levelButtonPrefab, levelButtonGrid);
             levelButton.GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
-            levelButton.GetComponent<LevelButton>().ChangeLevelScene(allLevelsSO.allLevelsSO[i].sceneToLoad);
+            levelButton.GetComponent<LevelButton>().ChangeLevelScene(allLevelsSO.allLevelsSO[i].
+                sceneToLoad, allLevelsSO.allLevelsSO[i].resetGuides);
         }
         levelButtonPrefab.gameObject.SetActive(false);
     }

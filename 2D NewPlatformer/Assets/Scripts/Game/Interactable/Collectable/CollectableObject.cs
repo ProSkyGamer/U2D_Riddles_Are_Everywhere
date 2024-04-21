@@ -16,10 +16,9 @@ public class CollectableObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     { 
-        PlayerController player;
         if (!isCollected)
         {
-            if (collision.gameObject.TryGetComponent<PlayerController>(out player))
+            if (collision.gameObject.TryGetComponent(out PlayerController player))
             {
                 isCollected = true;
 

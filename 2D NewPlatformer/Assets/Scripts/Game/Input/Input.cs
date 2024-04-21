@@ -20,7 +20,11 @@ public class Input : MonoBehaviour
     public event EventHandler OnNextGuideAction;
     public event EventHandler OnPreviousGuideAction;
 
-    public event EventHandler OnBindingRebing;
+    public event EventHandler<OnBindingRebingEventArgs> OnBindingRebing;
+    public class OnBindingRebingEventArgs : EventArgs
+    {
+        public Binding bingingChanged;
+    }
 
     private GameInput gameInput;
 
@@ -66,7 +70,7 @@ public class Input : MonoBehaviour
 
     private void PreviousGuide_performed(InputAction.CallbackContext obj)
     {
-        OnPreviousGuideAction?.Invoke(this, EventArgs.Empty); 
+        OnPreviousGuideAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void NextGuide_performed(InputAction.CallbackContext obj)
@@ -127,6 +131,33 @@ public class Input : MonoBehaviour
         Vector2 inputVector = gameInput.AllBindings.Movement.ReadValue<Vector2>();
 
         return inputVector;
+    }
+
+    public float GetButtonValue(Binding binding)
+    {
+        switch (binding)
+        {
+            default:
+                return 0;
+            case Binding.MoveLeft:
+                return gameInput.AllBindings.Movement.ReadValue<Vector2>().x  < 0 ?
+                    gameInput.AllBindings.Movement.ReadValue<Vector2>().x : 0;
+            case Binding.MoveRight:
+                return gameInput.AllBindings.Movement.ReadValue<Vector2>().x > 0 ?
+                    gameInput.AllBindings.Movement.ReadValue<Vector2>().x : 0;
+            case Binding.Jump:
+                return gameInput.AllBindings.Jump.ReadValue<float>();
+            case Binding.Interact:
+                return gameInput.AllBindings.Interact.ReadValue<float>();
+            case Binding.ReturnToCheckpoint:
+                return gameInput.AllBindings.ReturnToCheckpoint.ReadValue<float>();
+            case Binding.ChangePlayer:
+                return gameInput.AllBindings.ChangePlayer.ReadValue<float>();
+            case Binding.Pause:
+                return gameInput.AllBindings.PauseGame.ReadValue<float>();
+            case Binding.Sprint:
+                return gameInput.AllBindings.Sprint.ReadValue<float>();
+        }
     }
 
     public bool GetIsSprinting()
@@ -217,7 +248,10 @@ public class Input : MonoBehaviour
                 PlayerPrefs.SetString(PLAYER_PREFS_BINDINGS, gameInput.SaveBindingOverridesAsJson());
                 PlayerPrefs.Save();
 
-                OnBindingRebing?.Invoke(this, EventArgs.Empty);
+                OnBindingRebing?.Invoke(this, new OnBindingRebingEventArgs()
+                {
+                    bingingChanged = binding
+                });
             }).Start();
     }
 }

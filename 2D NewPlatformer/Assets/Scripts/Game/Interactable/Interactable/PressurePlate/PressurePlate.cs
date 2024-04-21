@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(PressurePlateVisual))]
 public class PressurePlate : MonoBehaviour
 {
+    public event EventHandler OnPressurePlateActivated;
+
     [Header("Base Settings")]
 
     protected MovableHead standingHead;
@@ -48,20 +51,23 @@ public class PressurePlate : MonoBehaviour
             MovableHead leftCollidedHead;
             RaycastHit2D[] leftRaycast = Physics2D.RaycastAll(leftCastPosition, Vector2.up, castDistance);
             RaycastHit2D[] rightRaycast = Physics2D.RaycastAll(rightCastPosition, Vector2.up, castDistance);
-            for(int i = 0; i < leftRaycast.Length && i < rightRaycast.Length; i++)
+            for (int i = 0; i < leftRaycast.Length; i++)
             {
-                if (leftRaycast[i] && rightRaycast[i] && leftRaycast[i].collider.gameObject.
-                TryGetComponent<MovableHead>(out leftCollidedHead) && rightRaycast[i].
-                collider.gameObject.TryGetComponent<MovableHead>(out rightCollidedHead))
+                for (int j = 0; j < rightRaycast.Length; j++)
                 {
-                    if (!isInteracted)
-                        if (rightCollidedHead == leftCollidedHead)
-                        {
-                            standingHead = leftCollidedHead;
-                            OnInteract();
-                            isInteracted = true;
-                        }
-                    return;
+                    if (leftRaycast[i] && rightRaycast[j] && leftRaycast[i].collider.gameObject.
+                        TryGetComponent<MovableHead>(out leftCollidedHead) && rightRaycast[j].
+                        collider.gameObject.TryGetComponent<MovableHead>(out rightCollidedHead))
+                    {
+                        if (!isInteracted)
+                            if (rightCollidedHead == leftCollidedHead)
+                            {
+                                standingHead = leftCollidedHead;
+                                OnInteract();
+                                isInteracted = true;
+                            }
+                        return;
+                    }
                 }
             }
             if (isInteracted)
@@ -74,6 +80,7 @@ public class PressurePlate : MonoBehaviour
 
     public virtual void OnInteract()
     {
+        OnPressurePlateActivated?.Invoke(this, EventArgs.Empty);
         onInteractVisual.OnInteractChangeAnimationState();
         for (int i = 0; i < interactableItems.Count; i++)
         {

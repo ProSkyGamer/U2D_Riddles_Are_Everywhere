@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 4747863482990757883}
   - component: {fileID: 1794427331126998594}
   - component: {fileID: 2098578590824049681}
+  - component: {fileID: 9111838166454031930}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -235,4 +236,20 @@ MonoBehaviour:
   interactableHeight: 1
   isInteractDistanceShow: 1
   notInteractablePlayers: []
+  collision: {fileID: 5224305755102622043}
+--- !u!114 &9111838166454031930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704806042980816309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e44d547e40f4a042b527bcf2ee194bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guideButtonSO: {fileID: 11400000, guid: 9d21119acecdd8d4ea1cea376a5c8096, type: 2}
+  interactableDistance: 2.5
+  isInteractDistanceShow: 1
   collision: {fileID: 5224305755102622043}

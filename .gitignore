@@ -1,0 +1,44 @@
+
+/2D NewPlatformer/[Ll]ibrary/
+/2D NewPlatformer/[Tt]emp/
+/2D NewPlatformer/[Oo]bj/
+/2D NewPlatformer/[Bb]uild/
+/2D NewPlatformer/[Bb]uilds/
+/2D NewPlatformer/[Ll]ogs/
+/2D NewPlatformer/[Uu]ser[Ss]ettings/
+/2D NewPlatformer/[Mm]emoryCaptures/
+/2D NewPlatformer/[Rr]ecordings/
+# /2D NewPlatformer/[Aa]ssets/AssetStoreTools*
+/2D NewPlatformer/[Aa]ssets/Plugins/Editor/JetBrains*
+.vs/
+.gradle/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+# Builds
+*.apk
+*.aab
+*.unitypackage
+*.app
+crashlytics-build.properties
+/2D NewPlatformer/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+/2D NewPlatformer/[Aa]ssets/[Ss]treamingAssets/aa.meta
+/2D NewPlatformer/[Aa]ssets/[Ss]treamingAssets/aa/*
+2D NewPlatformer/Library/ArtifactDB
+2D NewPlatformer/Library/ArtifactDB
+/2D NewPlatformer/Library

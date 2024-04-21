@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -12,16 +14,38 @@ public class GuideInterface : MonoBehaviour
     public enum GuideType
     {
         Default,
+        TextWithBackground,
+        TextWithoutBackground,
+        RequireButtonPress
     }
+
+    public event EventHandler OnGuideClose;
 
     [SerializeField] private Button closeGuideButton;
 
-    [SerializeField] private Image guideImage;
-    [SerializeField] private TextMeshProUGUI guideText;
-    [SerializeField] private Button nextGuide;
-    [SerializeField] private Button previousGuide;
+    [SerializeField] private Image defaultGuideImage;
+    [SerializeField] private TextMeshProUGUI defaultGuideText;
+    [SerializeField] private Button defaultGuideShowNextButton;
+    [SerializeField] private Button defaultGuideShowPreviousButton;
+    [SerializeField] private Transform defaultGuideTransform;
+
+    [SerializeField] private Transform textGuideWithBackgroundTransform;
+    [SerializeField] private TextMeshProUGUI textGuideWithBackgroundText;
+    [SerializeField] private OnSpikesDamage textGuideWithBackgroundNextButton;
+
+    [SerializeField] private Transform textGuideWithoutBackgroundTransform;
+    [SerializeField] private TextMeshProUGUI textGuideWithoutBackgroundText;
+
+    [SerializeField] private Transform requireButtonPressGuideTransform;
+    [SerializeField] private TextMeshProUGUI requireButtonPressGuideText;
+    [SerializeField] private Transform requireButtonPressGuideRequiredButtonPrefab;
+    [SerializeField] private Transform requireButtonPressGuideRequiredButtonGrid;
+    private List<Input.Binding> requiredBindingsToPress = new List<Input.Binding>();
+
     private List<GuidesSO> guidesToShow = new();
-    private int currentGuideIndex;
+    private int currentGuideIndex = -1;
+
+    private bool isFirstUpdate = true;
 
     private void Awake()
     {
@@ -35,7 +59,39 @@ public class GuideInterface : MonoBehaviour
             Hide();
         });
 
-        Hide();
+        requireButtonPressGuideRequiredButtonPrefab.gameObject.SetActive(false);
+
+        defaultGuideShowNextButton.onClick.AddListener(() =>
+        {
+            NextGuide();
+        });
+
+        defaultGuideShowPreviousButton.onClick.AddListener(() =>
+        {
+            PreviousGuide();
+        });
+    }
+
+    private void LateUpdate()
+    {
+        if (isFirstUpdate)
+        {
+            isFirstUpdate = false;
+            Hide();
+        }
+    }
+
+    private void Update()
+    {
+        if (requiredBindingsToPress.Count > 0)
+        {
+            foreach (var binding in requiredBindingsToPress)
+            {
+                if (Input.Instance.GetButtonValue(binding) == 0)
+                    return;
+            }
+            Hide();
+        }
     }
 
     private void Start()
@@ -46,22 +102,42 @@ public class GuideInterface : MonoBehaviour
 
     private void Input_OnPreviousGuideAction(object sender, System.EventArgs e)
     {
-        if (currentGuideIndex - 1 >= 0)
-            ShowPrevGuide();
+        PreviousGuide();
     }
 
     private void Input_OnNextGuideAction(object sender, System.EventArgs e)
     {
-        if (currentGuideIndex + 1 < guidesToShow.Count)
-            ShowNextGuide();
-        else
-            Hide();
+        NextGuide();
     }
 
     private void Show()
     {
         gameObject.SetActive(true);
-        Time.timeScale = 0f;
+    }
+
+    public void Hide()
+    {
+        HideAllGuides();
+        guidesToShow.Clear();
+        OnGuideClose?.Invoke(this, EventArgs.Empty);
+
+        Time.timeScale = 1f;
+    }
+
+    private void HideAllGuides()
+    {
+        textGuideWithBackgroundTransform.gameObject.SetActive(false);
+        defaultGuideTransform.gameObject.SetActive(false);
+        textGuideWithoutBackgroundTransform.gameObject.SetActive(false);
+
+        foreach (var binding in requireButtonPressGuideRequiredButtonGrid.GetComponentsInChildren<Transform>())
+        {
+            if (binding != requireButtonPressGuideRequiredButtonGrid && binding != requireButtonPressGuideRequiredButtonPrefab)
+                Destroy(binding.gameObject);
+        }
+        requiredBindingsToPress.Clear();
+        requireButtonPressGuideTransform.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public bool IsShown()
@@ -69,143 +145,135 @@ public class GuideInterface : MonoBehaviour
         return gameObject.activeSelf;
     }
 
-    private void Hide()
+    public void ShowGuide(GuidesSO guideToSet)
     {
-        gameObject.SetActive(false);
-        Time.timeScale = 1f;
-    }
-
-    public void ChangeGuideInterface(GuidesSO guideToSet)
-    {
-        Show();
-        previousGuide.interactable = false;
-        previousGuide.onClick.RemoveAllListeners();
-        nextGuide.onClick.RemoveAllListeners();
-
-        nextGuide.onClick.AddListener(() =>
+        if (guidesToShow.Count == 0)
         {
             Hide();
-        });
+            Show();
 
-        switch (guideToSet.guideType)
-        {
-            case GuideType.Default:
-                guideImage.sprite = guideToSet.guideImage;
-                guideText.text = TextTranslationManager.
-                    GetTextFromTextTranslationSOByLanguage(
-                    TextTranslationManager.GetCurrentLanguage(),
-                    guideToSet.guideTextTranslations);
-                break;
+            guidesToShow.Clear();
+            guidesToShow.Add(guideToSet);
+
+            currentGuideIndex = -1;
+            NextGuide();
         }
+
     }
 
-    public void ChangeGuideInterface(GuidesSO[] guideToSet)
+    public void ShowGuide(GuidesSO[] guideToSet)
     {
+        if (guidesToShow.Count == 0)
+        {
+            Hide();
         Show();
 
-        currentGuideIndex = 0;
-        previousGuide.interactable = false;
-        previousGuide.onClick.RemoveAllListeners();
-        nextGuide.onClick.RemoveAllListeners();
+        
+            guidesToShow.Clear();
+            guidesToShow.AddRange(guideToSet);
 
-        if (guideToSet.Length > 1)
-        {
-            nextGuide.onClick.AddListener(() =>
-            {
-                ShowNextGuide();
-            });
-        }
-        else
-        {
-            nextGuide.onClick.AddListener(() =>
-            {
-                Hide();
-            });
-        }
-
-        switch (guideToSet[0].guideType)
-        {
-            case GuideType.Default:
-                guideImage.sprite = guideToSet[0].guideImage;
-                guideText.text = TextTranslationManager.
-                    GetTextFromTextTranslationSOByLanguage(
-                    TextTranslationManager.GetCurrentLanguage(),
-                    guideToSet[0].guideTextTranslations);
-                break;
-        }
-        guidesToShow.Clear();
-        guidesToShow.AddRange(guideToSet);
-    }
-
-    private void ShowNextGuide()
-    {
-        currentGuideIndex++;
-
-        switch (guidesToShow[currentGuideIndex].guideType)
-        {
-            case GuideType.Default:
-                guideImage.sprite = guidesToShow[currentGuideIndex].guideImage;
-                guideText.text = TextTranslationManager.
-                    GetTextFromTextTranslationSOByLanguage(
-                    TextTranslationManager.GetCurrentLanguage(),
-                    guidesToShow[currentGuideIndex].guideTextTranslations);
-                break;
-        }
-
-        if (guidesToShow.Count > currentGuideIndex + 1)
-        {
-            previousGuide.onClick.RemoveAllListeners();
-            nextGuide.onClick.RemoveAllListeners();
-
-            previousGuide.interactable = true;
-            previousGuide.onClick.AddListener(() =>
-            {
-                ShowPrevGuide();
-            });
-            nextGuide.onClick.AddListener(() =>
-            {
-                ShowNextGuide();
-            });
-        }
-        else
-        {
-            previousGuide.onClick.RemoveAllListeners();
-            nextGuide.onClick.RemoveAllListeners();
-            previousGuide.interactable = true;
-            previousGuide.onClick.AddListener(() =>
-            {
-                ShowPrevGuide();
-            });
-            nextGuide.onClick.AddListener(() =>
-            {
-                Hide();
-            });
+            currentGuideIndex = -1;
+            NextGuide();
         }
     }
 
-    private void ShowPrevGuide()
+    private void NextGuide()
     {
-        currentGuideIndex--;
-        switch (guidesToShow[0].guideType)
+        if (guidesToShow.Count > 0)
+        {
+            if (currentGuideIndex >= guidesToShow.Count - 1)
+            {
+                if (guidesToShow[guidesToShow.Count - 1].guideType == GuideType.Default)
+                    Hide();
+                else if (guidesToShow[guidesToShow.Count - 1].guideType == GuideType.TextWithBackground)
+                    textGuideWithBackgroundNextButton.OnClick();
+
+                return;
+            }
+            else
+                currentGuideIndex++;
+        }
+        else
+            return;
+
+        DisplayThisGuide(guidesToShow[currentGuideIndex]);
+    }
+
+    private void PreviousGuide()
+    {
+        if (guidesToShow.Count > 0)
+        {
+            if (currentGuideIndex != 0)
+                currentGuideIndex--;
+            else
+                return;
+        }
+        else
+            return;
+
+        DisplayThisGuide(guidesToShow[currentGuideIndex]);
+    }
+
+    private void DisplayThisGuide(GuidesSO guideToDiplay)
+    {
+        switch (guideToDiplay.guideType)
         {
             case GuideType.Default:
-                guideImage.sprite = guidesToShow[0].guideImage;
-                guideText.text = TextTranslationManager.
+                Time.timeScale = 0f;
+                defaultGuideTransform.gameObject.SetActive(true);
+
+                if (currentGuideIndex == 0)
+                    defaultGuideShowPreviousButton.interactable = false;
+                else
+                    defaultGuideShowPreviousButton.interactable = true;
+
+                defaultGuideImage.sprite = guideToDiplay.guideImage;
+                defaultGuideText.text = TextTranslationManager.
                     GetTextFromTextTranslationSOByLanguage(
                     TextTranslationManager.GetCurrentLanguage(),
-                    guidesToShow[0].guideTextTranslations);
-                break;
-        }
+                    guideToDiplay.guideTextTranslations);
 
-        if (currentGuideIndex < 1)
-        {
-            previousGuide.onClick.RemoveAllListeners();
-            nextGuide.onClick.RemoveAllListeners();
-            previousGuide.interactable = false;
-            nextGuide.onClick.AddListener(() =>
-            {
-                ShowNextGuide();
-            });
+                break;
+            case GuideType.TextWithBackground:
+                Time.timeScale = 0f;
+                textGuideWithBackgroundTransform.gameObject.SetActive(true);
+
+                textGuideWithBackgroundText.text = TextTranslationManager.
+                    GetTextFromTextTranslationSOByLanguage(
+                    TextTranslationManager.GetCurrentLanguage(),
+                    guideToDiplay.guideTextTranslations);
+
+                break;
+            case GuideType.TextWithoutBackground:
+                Time.timeScale = 1f;
+                textGuideWithoutBackgroundTransform.gameObject.SetActive(true);
+
+                textGuideWithoutBackgroundText.text = TextTranslationManager.
+                    GetTextFromTextTranslationSOByLanguage(
+                    TextTranslationManager.GetCurrentLanguage(),
+                    guideToDiplay.guideTextTranslations);
+
+                break;
+            case GuideType.RequireButtonPress:
+                Time.timeScale = 0f;
+
+                if (guideToDiplay.requiredButtonToPress.Count > 0)
+                {
+                    requireButtonPressGuideTransform.gameObject.SetActive(true);
+                    requireButtonPressGuideText.text = TextTranslationManager.
+                        GetTextFromTextTranslationSOByLanguage(
+                        TextTranslationManager.GetCurrentLanguage(),
+                        guideToDiplay.guideTextTranslations);
+                    foreach (Input.Binding binding in guideToDiplay.requiredButtonToPress)
+                    {
+                        var currentBinding = Instantiate(requireButtonPressGuideRequiredButtonPrefab, requireButtonPressGuideRequiredButtonGrid);
+                        currentBinding.gameObject.SetActive(true);
+                        currentBinding.GetComponentInChildren<TextMeshProUGUI>().text = Input.Instance.GetBindingText(binding);
+                        requiredBindingsToPress.Add(binding);
+                    }
+                }
+
+                break;
         }
     }
 }

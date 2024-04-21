@@ -30,6 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8010646493503986580}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -37,7 +38,6 @@ Transform:
   m_Children:
   - {fileID: 7813364516516477981}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &944882809533880138
 BoxCollider2D:
@@ -82,7 +82,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.1}
+  m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
 --- !u!114 &7128050329591827361
 MonoBehaviour:
@@ -97,13 +97,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHearts: 5
-  deathYLocation: -16
+  immuneHits: 0
+  deathYLocation: -24
   runSpeed: 4
   isCanSprint: 0
   sprintSpeed: 4.75
   jumpForce: 7
   additionalJumps: 1
-  timeBetwenBacksToCheckpoint: 5
+  timeBetwenBacksToCheckpoint: 0.25
 --- !u!114 &8931216079217854068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityScale: 1
+  playerCollision: {fileID: 944882809533880138}
   terrainLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -222,13 +224,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8134942173433110936}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5537620728963062580}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &619244378687090196
 SpriteRenderer:

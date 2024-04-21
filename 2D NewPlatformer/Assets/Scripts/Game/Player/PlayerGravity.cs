@@ -54,7 +54,7 @@ public class PlayerGravity : MonoBehaviour
 
     public bool IsGrounded()
     {
-        Vector2 castPosition = transform.position + (Vector3)playerCollision.offset + new Vector3(0f, -playerCollision.bounds.size.y * 4.5f / 10, 0f) ;
+        Vector2 castPosition = transform.position + (Vector3)playerCollision.offset + new Vector3(0f, -playerCollision.bounds.size.y * 4.5f / 10, 0f);
         Vector2 vectorCastSize =  new Vector2(playerCollision.bounds.size.x * 0.5f, playerCollision.bounds.size.y / 10);   
         float angleRotation = 0f;
         Vector2 castDirection = Vector2.down;

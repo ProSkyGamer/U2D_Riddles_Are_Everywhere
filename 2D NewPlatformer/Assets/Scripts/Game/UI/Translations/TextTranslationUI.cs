@@ -27,5 +27,7 @@ public class TextTranslationUI : MonoBehaviour
     public void ChangeTextTranslationSO(TextTranslationsSO textTranslationsSO)
     {
         this.textTranslationsSO = textTranslationsSO;
+        currentLabelText.text = TextTranslationManager.GetTextFromTextTranslationSOByLanguage(
+            TextTranslationManager.GetCurrentLanguage(), textTranslationsSO);
     }
 }

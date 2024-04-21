@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 8853413110136775568}
   - component: {fileID: 5256523950002866715}
   - component: {fileID: 4684542616404342030}
+  - component: {fileID: 8708953842663213544}
   - component: {fileID: 6249709523214541929}
   m_Layer: 6
   m_Name: BreakableBlock
@@ -329,6 +330,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8708953842663213544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8355451104956294401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e44d547e40f4a042b527bcf2ee194bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guideButtonSO: {fileID: 11400000, guid: 367f229a4a3e87f45b1c5ae4b30e2c9c, type: 2}
+  interactableDistance: 5
+  isInteractDistanceShow: 0
+  collision: {fileID: 6972314817767142316}
 --- !u!114 &6249709523214541929
 MonoBehaviour:
   m_ObjectHideFlags: 0

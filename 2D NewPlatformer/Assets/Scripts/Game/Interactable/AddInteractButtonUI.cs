@@ -114,13 +114,13 @@ public class AddInteractButtonUI : MonoBehaviour
         }
     }
 
-    protected void AddInteractButtonToInterafce()
+    protected virtual void AddInteractButtonToInterafce()
     {
         InteractInterface.Instance.AddButtonInteractToScreen(this, buttonTextTranslationsSO);
         isHasButtonOnInterface = true;
     }
 
-    public void RemoveInteractButtonFromInterafce()
+    public virtual void RemoveInteractButtonFromInterafce()
     {
         InteractInterface.Instance.RemoveButtonInteractToScreen(this);
         isHasButtonOnInterface = false;

@@ -92,5 +92,6 @@ public class ChangeTrapLocation : InteractableItem
     protected override void ChangeFollowingObject(Transform toChange)
     {
         base.ChangeFollowingObject(toChange);
+        CameraFollowing.Instance.TemporaryChangeFollowingObjectTo(toChange, cameraChangeDuration, interactedPlayer);
     }
 }

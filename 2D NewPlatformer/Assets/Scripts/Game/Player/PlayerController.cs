@@ -1,8 +1,5 @@
-using JetBrains.Annotations;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -11,37 +8,51 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 {
     [Header("Live")]
     [SerializeField] private int maxHearts = 3;
+
     private int currentHearts;
-    [SerializeField] private int immuneHits = 0;
-    private float timeNotToHitBeforeTeleport = 1.5f;
+    [SerializeField] private int immuneHits;
+    private readonly float timeNotToHitBeforeTeleport = 1.5f;
     private float timerNotToHitBeforeTeleport;
     [SerializeField] private float deathYLocation = -16f;
 
     [Header("Movement")]
     [SerializeField] private float runSpeed = 4f;
-    [SerializeField] private bool isCanSprint = false;
+
+    [SerializeField] private bool isCanSprint;
     [SerializeField] private float sprintSpeed = 4.75f;
     private float currentSpeed;
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private int additionalJumps = 1;
 
     [Header("Checkpoints")]
-    [SerializeField] private float timeBetwenBacksToCheckpoint = 5f;
+    [SerializeField] private float timeBetwenBacksToCheckpoint = 0.25f;
+
     private float timerBetwenBacksToCheckpoints;
     private int additionalJumpsLeft;
     private bool isMovementEnabled = true;
 
     public static event EventHandler OnPlayerDie;
     public static event EventHandler<OnPlayerHealthChangeEventArgs> OnPlayerHealthChange;
+
     public class OnPlayerHealthChangeEventArgs : EventArgs
     {
         public int currentHealth;
         public int maxHealth;
     }
+
     public static event EventHandler<OnPlayerImmnuneHitEventArgs> OnPlayerImmuneHit;
+
     public class OnPlayerImmnuneHitEventArgs : EventArgs
     {
         public int currentImmuneHits;
+    }
+
+    private readonly List<Input.Binding> lockedBindings = new();
+    public static event EventHandler<OnLockedBindingChangeEventArgs> OnLockedBindingChange;
+
+    public class OnLockedBindingChangeEventArgs : EventArgs
+    {
+        public List<Input.Binding> lockedBinding;
     }
 
     private PlayerMovement playerMovement;
@@ -69,10 +80,7 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 
         Input.Instance.OnTestingKeyAction += Instance_OnTestingKeyAction;
 
-        if(isCanSprint)
-        {
-            Input.Instance.OnSprintAction += Input_OnSprintAction;
-        }
+        if (isCanSprint) Input.Instance.OnSprintAction += Input_OnSprintAction;
     }
 
     private void Instance_OnTestingKeyAction(object sender, EventArgs e)
@@ -82,6 +90,9 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 
     private void Input_OnSprintAction(object sender, EventArgs e)
     {
+        if (lockedBindings.Contains(Input.Binding.Sprint))
+            return;
+
         currentSpeed = sprintSpeed;
     }
 
@@ -93,16 +104,26 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 
     private void Input_OnReturnToCheckpointKeyAction(object sender, EventArgs e)
     {
-        if(IsCanTeleportToCheckpoint())
-        {
-            TeleportToCurrentCheckpoint();
-        }
+        if (lockedBindings.Contains(Input.Binding.ReturnToCheckpoint))
+            return;
+
+        if (IsCanTeleportToCheckpoint()) TeleportToCurrentCheckpoint();
     }
 
     public void TeleportToCurrentCheckpoint()
     {
-        transform.position = CheckpointsController.Instance.GetCurrentCheckpoint().transform.position;
-        timerBetwenBacksToCheckpoints = timeBetwenBacksToCheckpoint;
+        LockAllBindings();
+        TransitionsInterface.Instance.MakeTransition(TransitionsInterface.TransitionsTypes.Default, () =>
+        {
+            transform.position = CheckpointsController.Instance.GetCurrentCheckpoint().transform.position;
+            timerBetwenBacksToCheckpoints = timeBetwenBacksToCheckpoint;
+        });
+        TransitionsInterface.Instance.OnTransitionFinished += TransitionsInterface_OnTransitionFinished;
+    }
+
+    private void TransitionsInterface_OnTransitionFinished(object sender, EventArgs e)
+    {
+        UnlockAllBindings();
     }
 
     public bool IsCanTeleportToCheckpoint()
@@ -110,8 +131,11 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
         return playerMovement.IsGrounded() && timerNotToHitBeforeTeleport <= 0 && timerBetwenBacksToCheckpoints <= 0;
     }
 
-    private void Input_OnJumpAction(object sender, System.EventArgs e)
+    private void Input_OnJumpAction(object sender, EventArgs e)
     {
+        if (lockedBindings.Contains(Input.Binding.Jump))
+            return;
+
         if (isMovementEnabled)
         {
             if (playerMovement.IsGrounded())
@@ -131,11 +155,27 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
         }
     }
 
+    public void ForcedJump()
+    {
+        playerMovement.Jump(jumpForce);
+        if (playerMovement.IsGrounded())
+            playerAnimations.ChangeAnimation(PlayerAnimations.Animations.Jump);
+        else
+            playerAnimations.ChangeAnimation(PlayerAnimations.Animations.DoubleJump);
+    }
+
+    public void ForcedMoveLeft()
+    {
+        Vector3 toMoveVector = new Vector2(-1, 0) * currentSpeed * Time.deltaTime;
+        playerMovement.Move(toMoveVector);
+        playerAnimations.FlipPlayerSprite(true);
+    }
+
     private void Update()
     {
-        if(isFirstUpdate)
+        if (isFirstUpdate)
         {
-            if(CheckpointsController.Instance != null)
+            if (CheckpointsController.Instance != null)
                 transform.position = CheckpointsController.Instance.GetCurrentCheckpoint().transform.position;
             isFirstUpdate = false;
         }
@@ -150,22 +190,26 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
                     currentSpeed = sprintSpeed;
             }
 
-            bool isMoving = false;
+            var isMoving = false;
 
-            Vector2 inputVector = Input.Instance.GetMovementVector();
+            var inputVector = Input.Instance.GetMovementVector();
             if (inputVector != Vector2.zero)
-            {
-                Vector3 toMoveVector = inputVector * currentSpeed * Time.deltaTime;
-                playerMovement.Move(toMoveVector);
-                isMoving = true;
-                playerAnimations.FlipPlayerSprite(inputVector.x < 0);
-            }
+                if (!(lockedBindings.Contains(Input.Binding.MoveLeft) && inputVector.x < 0) &&
+                    !(lockedBindings.Contains(Input.Binding.MoveRight) && inputVector.x > 0))
+                {
+                    Vector3 toMoveVector = inputVector * currentSpeed * Time.deltaTime;
+                    playerMovement.Move(toMoveVector);
+                    isMoving = true;
+                    playerAnimations.FlipPlayerSprite(inputVector.x < 0);
+                }
+
             if (playerMovement.IsGrounded())
                 if (additionalJumpsLeft != additionalJumps)
                     additionalJumpsLeft = additionalJumps;
 
             ChangeAnimationState(isMoving);
         }
+
         if (timerBetwenBacksToCheckpoints > 0)
             timerBetwenBacksToCheckpoints -= Time.deltaTime;
         if (timerNotToHitBeforeTeleport > 0)
@@ -177,16 +221,13 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 
     private void ChangeAnimationState(bool isMoving)
     {
-        PlayerAnimations.Animations animationState = PlayerAnimations.Animations.Iddle;
+        var animationState = PlayerAnimations.Animations.Iddle;
 
         if (playerAnimations.GetCurrentAnimationState() == PlayerAnimations.Animations.Hit ||
             playerAnimations.GetCurrentAnimationState() == PlayerAnimations.Animations.Die)
             return;
 
-        if (isMoving)
-        {
-            animationState = PlayerAnimations.Animations.Run;
-        }
+        if (isMoving) animationState = PlayerAnimations.Animations.Run;
         if (!playerMovement.IsGrounded() || playerMovement.IsAscending())
         {
             if (playerMovement.IsDescending())
@@ -200,26 +241,26 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 
     public void TakeDamage(int damage)
     {
-        if(immuneHits > 0)
+        if (immuneHits > 0)
         {
             immuneHits--;
-            OnPlayerImmuneHit?.Invoke(this, new OnPlayerImmnuneHitEventArgs()
+            OnPlayerImmuneHit?.Invoke(this, new OnPlayerImmnuneHitEventArgs
             {
                 currentImmuneHits = immuneHits
             });
             return;
         }
-        
+
         timerNotToHitBeforeTeleport = timeNotToHitBeforeTeleport;
 
-        int minimumHearts = 0;
+        var minimumHearts = 0;
         currentHearts = Mathf.Clamp(currentHearts - damage, minimumHearts, maxHearts);
 
         OnPlayerHealthChange?.Invoke(this, new OnPlayerHealthChangeEventArgs
         {
             currentHealth = currentHearts,
             maxHealth = maxHearts
-        }) ;
+        });
 
         if (currentHearts > minimumHearts)
             playerAnimations.ChangeAnimation(PlayerAnimations.Animations.Hit);
@@ -229,14 +270,19 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 
     public void RegenerateHearts(int toRegenerate)
     {
-        int minimumHearts = 0;
-        currentHearts =  Mathf.Clamp(currentHearts + toRegenerate, minimumHearts, maxHearts);
+        var minimumHearts = 0;
+        currentHearts = Mathf.Clamp(currentHearts + toRegenerate, minimumHearts, maxHearts);
 
         OnPlayerHealthChange?.Invoke(this, new OnPlayerHealthChangeEventArgs
         {
             currentHealth = currentHearts,
             maxHealth = maxHearts
         });
+    }
+
+    public void SetImmuneHits(int newImmuneHitsValue)
+    {
+        immuneHits = newImmuneHitsValue;
     }
 
     public int GetImmuneHits()
@@ -286,10 +332,48 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
     {
         OnPlayerDie = null;
         OnPlayerHealthChange = null;
+        OnPlayerImmuneHit = null;
+        OnLockedBindingChange = null;
     }
 
     public void ChangeCurrentHearts(int toChange)
     {
         currentHearts = toChange;
+    }
+
+    public void LockAllBindings()
+    {
+        lockedBindings.Add(Input.Binding.Jump);
+        lockedBindings.Add(Input.Binding.ReturnToCheckpoint);
+        lockedBindings.Add(Input.Binding.Sprint);
+        lockedBindings.Add(Input.Binding.MoveLeft);
+        lockedBindings.Add(Input.Binding.MoveRight);
+
+        OnLockedBindingChange?.Invoke(this, new OnLockedBindingChangeEventArgs
+        {
+            lockedBinding = lockedBindings
+        });
+    }
+
+    public void UnlockBinding(Input.Binding bindingToUnlock)
+    {
+        if (lockedBindings.Contains(bindingToUnlock))
+        {
+            lockedBindings.Remove(bindingToUnlock);
+            OnLockedBindingChange?.Invoke(this, new OnLockedBindingChangeEventArgs
+            {
+                lockedBinding = lockedBindings
+            });
+        }
+    }
+
+    public void UnlockAllBindings()
+    {
+        lockedBindings.Clear();
+
+        OnLockedBindingChange?.Invoke(this, new OnLockedBindingChangeEventArgs
+        {
+            lockedBinding = lockedBindings
+        });
     }
 }

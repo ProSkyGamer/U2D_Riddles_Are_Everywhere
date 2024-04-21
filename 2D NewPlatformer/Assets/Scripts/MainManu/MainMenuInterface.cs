@@ -11,6 +11,7 @@ public class MainMenuInterface : MonoBehaviour
     [SerializeField] private Button shopButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private Button developerButton;
 
     private void Awake()
     {
@@ -40,6 +41,12 @@ public class MainMenuInterface : MonoBehaviour
         exitButton.onClick.AddListener(() =>
         {
             Application.Quit();
+        });
+
+        developerButton.onClick.AddListener(() =>
+        {
+            DeveloperInterface.Instance.Show();
+            Hide();
         });
     }
 

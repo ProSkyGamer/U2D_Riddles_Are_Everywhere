@@ -1,33 +1,33 @@
 m_ProjectFiles:
   m_ManifestFileStatus:
-    m_FilePath: C:/Users/User/Desktop/DSTU/Unity/GU_2D-Platfromer-Puzzle/2D NewPlatformer/Packages/manifest.json
+    m_FilePath: D:/Unity/GU_2D-Platfromer-Puzzle/2D NewPlatformer/Packages/manifest.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638213938443337289
-    m_Hash: 2063004180
+      ticks: 638491534490100522
+    m_Hash: 2153377388
   m_LockFileStatus:
-    m_FilePath: C:/Users/User/Desktop/DSTU/Unity/GU_2D-Platfromer-Puzzle/2D NewPlatformer/Packages/packages-lock.json
+    m_FilePath: D:/Unity/GU_2D-Platfromer-Puzzle/2D NewPlatformer/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638213938443597342
-    m_Hash: 3217421727
+      ticks: 638491534490205881
+    m_Hash: 2070768378
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
-m_ProjectPath: C:/Users/User/Desktop/DSTU/Unity/GU_2D-Platfromer-Puzzle/2D NewPlatformer/Packages
-m_EditorVersion: 2022.2.11f1 (621cd60d08fd)
+m_ProjectPath: D:/Unity/GU_2D-Platfromer-Puzzle/2D NewPlatformer/Packages
+m_EditorVersion: 2022.3.12f1 (4fe6e059c7ef)
 m_ResolvedPackages:
-- packageId: com.unity.collab-proxy@2.0.0
+- packageId: com.unity.collab-proxy@2.2.0
   testable: 0
   isDirectDependency: 1
-  version: 2.0.0
+  version: 2.2.0
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.collab-proxy@2.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.collab-proxy@2.2.0
   assetPath: Packages/com.unity.collab-proxy
   name: com.unity.collab-proxy
   displayName: Version Control
@@ -36,11 +36,10 @@ m_ResolvedPackages:
     email: 
     url: 
   category: Editor
-  type: asset
-  description: The Version Control package gives you the ability to use either Collaborate
-    or Plastic SCM for Unity (beta) in the Unity editor. To use Plastic SCM for Unity
-    (beta), a Plastic SCM subscription is required. Learn more about how you can
-    get started for free by visiting plasticscm.com.
+  type: assets
+  description: The package gives you the ability to use Unity Version Control in
+    the Unity editor. To use Unity Version Control, a subscription is required. Learn
+    more about how you can get started for free by visiting https://unity.com/solutions/version-control
   status: 0
   errors: []
   versions:
@@ -109,19 +108,17 @@ m_ResolvedPackages:
     - 2.0.3
     - 2.0.4
     - 2.0.5
+    - 2.0.7
     - 2.1.0-preview.3
     - 2.1.0-preview.5
     - 2.1.0-preview.6
+    - 2.1.0
+    - 2.2.0
+    - 2.3.1
     compatible:
-    - 2.0.0
-    - 2.0.1
-    - 2.0.3
-    - 2.0.4
-    - 2.0.5
-    - 2.1.0-preview.3
-    - 2.1.0-preview.5
-    - 2.1.0-preview.6
-    recommended: 2.0.5
+    - 2.2.0
+    - 2.3.1
+    recommended: 2.2.0
     deprecated: []
   dependencies: []
   resolvedDependencies: []
@@ -132,6 +129,7 @@ m_ResolvedPackages:
   - collaborate
   - collaboration
   - control
+  - devops
   - plastic
   - plasticscm
   - source
@@ -147,30 +145,30 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638095491550000000
-  documentationUrl: https://docs.unity3d.com/Packages/com.unity.collab-proxy@2.0/manual/index.html
+  datePublishedTicks: 638326189440000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.collab-proxy@2.2/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.cloud.collaborate.git
-    revision: a1b1151e0c90bc327ea95678473c1f3a935b2c9e
+    revision: 33c8fba1793946be3c73f738edf70db0b5546afd
     path: 
   unityLifecycle:
-    version: 2.0.0
+    version: 2.2.0
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.feature.2d@1.0.0
+- packageId: com.unity.feature.2d@2.0.0
   testable: 0
   isDirectDependency: 1
-  version: 1.0.0
+  version: 2.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.feature.2d@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.feature.2d@2.0.0
   assetPath: Packages/com.unity.feature.2d
   name: com.unity.feature.2d
   displayName: 2D
@@ -189,10 +187,10 @@ m_ResolvedPackages:
   errors: []
   versions:
     all:
-    - 1.0.0
+    - 2.0.0
     compatible:
-    - 1.0.0
-    recommended: 1.0.0
+    - 2.0.0
+    recommended: 2.0.0
     deprecated: []
   dependencies:
   - name: com.unity.2d.animation
@@ -209,9 +207,11 @@ m_ResolvedPackages:
     version: default
   - name: com.unity.2d.tilemap.extras
     version: default
+  - name: com.unity.2d.aseprite
+    version: default
   resolvedDependencies:
   - name: com.unity.2d.animation
-    version: 9.0.1
+    version: 9.0.4
   - name: com.unity.2d.common
     version: 8.0.1
   - name: com.unity.2d.sprite
@@ -229,7 +229,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.animation
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.8.3
+    version: 1.8.9
   - name: com.unity.collections
     version: 1.2.4
   - name: com.unity.test-framework
@@ -241,7 +241,7 @@ m_ResolvedPackages:
   - name: com.unity.2d.psdimporter
     version: 8.0.2
   - name: com.unity.2d.spriteshape
-    version: 9.0.1
+    version: 9.0.2
   - name: com.unity.modules.physics2d
     version: 1.0.0
   - name: com.unity.2d.tilemap
@@ -249,9 +249,11 @@ m_ResolvedPackages:
   - name: com.unity.modules.tilemap
     version: 1.0.0
   - name: com.unity.2d.tilemap.extras
-    version: 3.0.3
+    version: 3.1.2
   - name: com.unity.ugui
     version: 1.0.0
+  - name: com.unity.2d.aseprite
+    version: 1.0.1
   keywords: []
   registry:
     id: main
@@ -261,7 +263,7 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
   datePublishedTicks: 0
   documentationUrl: 
@@ -272,19 +274,19 @@ m_ResolvedPackages:
     revision: 
     path: 
   unityLifecycle:
-    version: 1.0.0
+    version: 2.0.0
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.ide.rider@3.0.22
+- packageId: com.unity.ide.rider@3.0.28
   testable: 0
   isDirectDependency: 1
-  version: 3.0.22
+  version: 3.0.28
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.ide.rider@3.0.22
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.ide.rider@3.0.28
   assetPath: Packages/com.unity.ide.rider
   name: com.unity.ide.rider
   displayName: JetBrains Rider Editor
@@ -293,7 +295,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: asset
+  type: assets
   description: The JetBrains Rider Editor package provides an integration for using
     the JetBrains Rider IDE as a code editor for Unity. It adds support for generating
     .csproj files for code completion and auto-discovery of installations.
@@ -339,13 +341,16 @@ m_ResolvedPackages:
     - 3.0.21
     - 3.0.22
     - 3.0.24
+    - 3.0.25
+    - 3.0.26
+    - 3.0.27
+    - 3.0.28
     compatible:
-    - 3.0.18
-    - 3.0.20
-    - 3.0.21
-    - 3.0.22
-    - 3.0.24
-    recommended: 3.0.24
+    - 3.0.25
+    - 3.0.26
+    - 3.0.27
+    - 3.0.28
+    recommended: 3.0.28
     deprecated: []
   dependencies:
   - name: com.unity.ext.nunit
@@ -362,30 +367,30 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638211305930000000
+  datePublishedTicks: 638447139880000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.ide.rider@3.0/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.rider.git
-    revision: 1f4f2178384a8da373435c9912afcca7d6bb823a
+    revision: f4880c72477e9bbd7321c0dbda4428fa10d916df
     path: 
   unityLifecycle:
-    version: 3.0.18
+    version: 3.0.25
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.ide.visualstudio@2.0.17
+- packageId: com.unity.ide.visualstudio@2.0.21
   testable: 0
   isDirectDependency: 1
-  version: 2.0.17
+  version: 2.0.21
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.ide.visualstudio@2.0.17
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.ide.visualstudio@2.0.21
   assetPath: Packages/com.unity.ide.visualstudio
   name: com.unity.ide.visualstudio
   displayName: Visual Studio Editor
@@ -394,7 +399,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: asset
+  type: assets
   description: Code editor integration for supporting Visual Studio as code editor
     for unity. Adds support for generating csproj files for intellisense purposes,
     auto discovery of installations, etc.
@@ -423,10 +428,13 @@ m_ResolvedPackages:
     - 2.0.16
     - 2.0.17
     - 2.0.18
+    - 2.0.20
+    - 2.0.21
+    - 2.0.22
     compatible:
-    - 2.0.17
-    - 2.0.18
-    recommended: 2.0.18
+    - 2.0.21
+    - 2.0.22
+    recommended: 2.0.22
     deprecated: []
   dependencies:
   - name: com.unity.test-framework
@@ -449,30 +457,30 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638059987360000000
+  datePublishedTicks: 638300315250000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.ide.visualstudio@2.0/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.visualstudio.git
-    revision: 1f126893bfb18ea9661fb15771613e841467073c
+    revision: eb2b500b99f6429d3d9dcb8acbcbd366dfbb42be
     path: 
   unityLifecycle:
-    version: 2.0.17
+    version: 2.0.21
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.inputsystem@1.5.1
+- packageId: com.unity.inputsystem@1.7.0
   testable: 0
   isDirectDependency: 1
-  version: 1.5.1
+  version: 1.7.0
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.inputsystem@1.5.1
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.inputsystem@1.7.0
   assetPath: Packages/com.unity.inputsystem
   name: com.unity.inputsystem
   displayName: Input System
@@ -481,7 +489,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: asset
+  type: assets
   description: A new input system which can be used as a more extensible and customizable
     alternative to Unity's classic input system in UnityEngine.Input.
   status: 0
@@ -527,11 +535,19 @@ m_ResolvedPackages:
     - 1.5.0
     - 1.5.1
     - 1.6.1
+    - 1.6.3
+    - 1.7.0
+    - 1.8.0-pre.1
+    - 1.8.0-pre.2
+    - 1.8.0
+    - 1.8.1
     compatible:
-    - 1.5.0
-    - 1.5.1
-    - 1.6.1
-    recommended: 1.5.1
+    - 1.7.0
+    - 1.8.0-pre.1
+    - 1.8.0-pre.2
+    - 1.8.0
+    - 1.8.1
+    recommended: 1.7.0
     deprecated: []
   dependencies:
   - name: com.unity.modules.uielements
@@ -562,30 +578,30 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638152610980000000
-  documentationUrl: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.5/manual/index.html
+  datePublishedTicks: 638277060810000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.com/Unity-Technologies/InputSystem.git
-    revision: 3062b2c3402b5f7f435d79acbd6011a621bfeb3e
+    revision: e29989176f3a8473ba30854e4bfae953083eba28
     path: 
   unityLifecycle:
-    version: 1.5.0
+    version: 1.7.0
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.render-pipelines.universal@14.0.6
+- packageId: com.unity.render-pipelines.universal@14.0.9
   testable: 0
   isDirectDependency: 1
-  version: 14.0.6
+  version: 14.0.9
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.render-pipelines.universal@14.0.6
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.render-pipelines.universal@14.0.9
   assetPath: Packages/com.unity.render-pipelines.universal
   name: com.unity.render-pipelines.universal
   displayName: Universal RP
@@ -648,27 +664,27 @@ m_ResolvedPackages:
     - 10.9.0
     - 10.10.0
     - 10.10.1
-    - 14.0.6
+    - 14.0.9
     compatible:
-    - 14.0.6
-    recommended: 14.0.6
+    - 14.0.9
+    recommended: 14.0.9
     deprecated: []
   dependencies:
   - name: com.unity.mathematics
     version: 1.2.1
   - name: com.unity.burst
-    version: 1.8.2
+    version: 1.8.9
   - name: com.unity.render-pipelines.core
-    version: 14.0.6
+    version: 14.0.9
   - name: com.unity.shadergraph
-    version: 14.0.6
+    version: 14.0.9
   resolvedDependencies:
   - name: com.unity.mathematics
     version: 1.2.6
   - name: com.unity.burst
-    version: 1.8.3
+    version: 1.8.9
   - name: com.unity.render-pipelines.core
-    version: 14.0.6
+    version: 14.0.9
   - name: com.unity.ugui
     version: 1.0.0
   - name: com.unity.modules.ui
@@ -682,7 +698,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.jsonserialize
     version: 1.0.0
   - name: com.unity.shadergraph
-    version: 14.0.6
+    version: 14.0.9
   - name: com.unity.searcher
     version: 4.9.2
   keywords:
@@ -711,7 +727,7 @@ m_ResolvedPackages:
     revision: 
     path: 
   unityLifecycle:
-    version: 14.0.6
+    version: 14.0.9
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -723,7 +739,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.1.33
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.test-framework@1.1.33
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.test-framework@1.1.33
   assetPath: Packages/com.unity.test-framework
   name: com.unity.test-framework
   displayName: Test Framework
@@ -780,6 +796,12 @@ m_ResolvedPackages:
     - 1.3.5
     - 1.3.7
     - 1.3.8
+    - 1.3.9
+    - 1.4.0
+    - 1.4.1
+    - 1.4.2
+    - 1.4.3
+    - 1.4.4
     - 2.0.1-exp.1
     - 2.0.1-exp.2
     - 2.0.1-pre.12
@@ -794,6 +816,12 @@ m_ResolvedPackages:
     - 1.3.5
     - 1.3.7
     - 1.3.8
+    - 1.3.9
+    - 1.4.0
+    - 1.4.1
+    - 1.4.2
+    - 1.4.3
+    - 1.4.4
     - 2.0.1-exp.1
     - 2.0.1-exp.2
     - 2.0.1-pre.12
@@ -825,7 +853,7 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
   datePublishedTicks: 637938212700000000
   documentationUrl: 
@@ -848,7 +876,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 3.0.6
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.textmeshpro@3.0.6
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.textmeshpro@3.0.6
   assetPath: Packages/com.unity.textmeshpro
   name: com.unity.textmeshpro
   displayName: TextMeshPro
@@ -962,21 +990,35 @@ m_ResolvedPackages:
     - 3.0.4
     - 3.0.5
     - 3.0.6
+    - 3.0.7
+    - 3.0.8
     - 3.2.0-pre.1
     - 3.2.0-pre.2
     - 3.2.0-pre.3
     - 3.2.0-pre.4
+    - 3.2.0-pre.5
+    - 3.2.0-pre.6
+    - 3.2.0-pre.7
+    - 3.2.0-pre.8
+    - 3.2.0-pre.9
     - 4.0.0-pre.1
     - 4.0.0-pre.2
     compatible:
     - 3.0.6
+    - 3.0.7
+    - 3.0.8
     - 3.2.0-pre.1
     - 3.2.0-pre.2
     - 3.2.0-pre.3
     - 3.2.0-pre.4
+    - 3.2.0-pre.5
+    - 3.2.0-pre.6
+    - 3.2.0-pre.7
+    - 3.2.0-pre.8
+    - 3.2.0-pre.9
     - 4.0.0-pre.1
     - 4.0.0-pre.2
-    recommended: 3.0.6
+    recommended: 3.0.8
     deprecated: []
   dependencies:
   - name: com.unity.ugui
@@ -1002,7 +1044,7 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
   datePublishedTicks: 637547111200000000
   documentationUrl: 
@@ -1020,12 +1062,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.timeline@1.7.3
+- packageId: com.unity.timeline@1.7.6
   testable: 0
   isDirectDependency: 1
-  version: 1.7.3
+  version: 1.7.6
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.timeline@1.7.3
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.timeline@1.7.6
   assetPath: Packages/com.unity.timeline
   name: com.unity.timeline
   displayName: Timeline
@@ -1034,7 +1076,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: asset
+  type: assets
   description: Use Unity Timeline to create cinematic content, game-play sequences,
     audio sequences, and complex particle effects.
   status: 0
@@ -1118,21 +1160,24 @@ m_ResolvedPackages:
     - 1.7.3
     - 1.7.4
     - 1.7.5
+    - 1.7.6
     - 1.8.0
     - 1.8.1
     - 1.8.2
     - 1.8.3
     - 1.8.4
+    - 1.8.5
+    - 1.8.6
     compatible:
-    - 1.7.3
-    - 1.7.4
-    - 1.7.5
+    - 1.7.6
     - 1.8.0
     - 1.8.1
     - 1.8.2
     - 1.8.3
     - 1.8.4
-    recommended: 1.7.5
+    - 1.8.5
+    - 1.8.6
+    recommended: 1.7.6
     deprecated: []
   dependencies:
   - name: com.unity.modules.director
@@ -1166,18 +1211,18 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638119854890000000
+  datePublishedTicks: 638326112840000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.timeline@1.7/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.timeline.git
-    revision: f7767cd40a861592dca709fc360e85920c06705c
+    revision: 02f49ada64a9f88044207cf42ba407dc634ef8e6
     path: 
   unityLifecycle:
-    version: 1.7.3
+    version: 1.7.6
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -1189,7 +1234,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.ugui@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.ugui@1.0.0
   assetPath: Packages/com.unity.ugui
   name: com.unity.ugui
   displayName: Unity UI
@@ -1209,6 +1254,8 @@ m_ResolvedPackages:
     all:
     - 1.0.0
     - 3.0.0-exp.1
+    - 3.0.0-exp.3
+    - 3.0.0-exp.4
     compatible:
     - 1.0.0
     recommended: 1.0.0
@@ -1254,12 +1301,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.visualscripting@1.8.0
+- packageId: com.unity.visualscripting@1.9.1
   testable: 0
   isDirectDependency: 1
-  version: 1.8.0
+  version: 1.9.1
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.visualscripting@1.8.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.visualscripting@1.9.1
   assetPath: Packages/com.unity.visualscripting
   name: com.unity.visualscripting
   displayName: Visual Scripting
@@ -1302,9 +1349,15 @@ m_ResolvedPackages:
     - 1.7.8
     - 1.8.0-pre.1
     - 1.8.0
+    - 1.9.0
+    - 1.9.1
+    - 1.9.2
+    - 1.9.4
     compatible:
-    - 1.8.0
-    recommended: 1.8.0
+    - 1.9.1
+    - 1.9.2
+    - 1.9.4
+    recommended: 1.9.4
     deprecated:
     - 1.8.0-pre.1
   dependencies:
@@ -1332,16 +1385,16 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638060044680000000
+  datePublishedTicks: 638284821510000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.visualscripting.git
-    revision: 0de66378b19e990494d98f39ecc2b6aa5ac65351
+    revision: 5e78e9c354ed1567dbcea08e2bd9992e4a473cfb
     path: 
   unityLifecycle:
-    version: 1.8.0
+    version: 1.9.1
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -1353,7 +1406,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.ai@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.ai@1.0.0
   assetPath: Packages/com.unity.modules.ai
   name: com.unity.modules.ai
   displayName: AI
@@ -1408,7 +1461,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.androidjni@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.androidjni@1.0.0
   assetPath: Packages/com.unity.modules.androidjni
   name: com.unity.modules.androidjni
   displayName: Android JNI
@@ -1462,7 +1515,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.animation@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.animation@1.0.0
   assetPath: Packages/com.unity.modules.animation
   name: com.unity.modules.animation
   displayName: Animation
@@ -1517,7 +1570,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.assetbundle@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.assetbundle@1.0.0
   assetPath: Packages/com.unity.modules.assetbundle
   name: com.unity.modules.assetbundle
   displayName: Asset Bundle
@@ -1572,7 +1625,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.audio@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.audio@1.0.0
   assetPath: Packages/com.unity.modules.audio
   name: com.unity.modules.audio
   displayName: Audio
@@ -1627,7 +1680,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.cloth@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.cloth@1.0.0
   assetPath: Packages/com.unity.modules.cloth
   name: com.unity.modules.cloth
   displayName: Cloth
@@ -1686,7 +1739,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.director@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.director@1.0.0
   assetPath: Packages/com.unity.modules.director
   name: com.unity.modules.director
   displayName: Director
@@ -1749,7 +1802,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.imageconversion@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.imageconversion@1.0.0
   assetPath: Packages/com.unity.modules.imageconversion
   name: com.unity.modules.imageconversion
   displayName: Image Conversion
@@ -1805,7 +1858,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.imgui@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.imgui@1.0.0
   assetPath: Packages/com.unity.modules.imgui
   name: com.unity.modules.imgui
   displayName: IMGUI
@@ -1860,7 +1913,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.jsonserialize@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.jsonserialize@1.0.0
   assetPath: Packages/com.unity.modules.jsonserialize
   name: com.unity.modules.jsonserialize
   displayName: JSONSerialize
@@ -1915,7 +1968,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.particlesystem@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.particlesystem@1.0.0
   assetPath: Packages/com.unity.modules.particlesystem
   name: com.unity.modules.particlesystem
   displayName: Particle System
@@ -1970,7 +2023,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.physics@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.physics@1.0.0
   assetPath: Packages/com.unity.modules.physics
   name: com.unity.modules.physics
   displayName: Physics
@@ -2025,7 +2078,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.physics2d@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.physics2d@1.0.0
   assetPath: Packages/com.unity.modules.physics2d
   name: com.unity.modules.physics2d
   displayName: Physics 2D
@@ -2080,7 +2133,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.screencapture@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.screencapture@1.0.0
   assetPath: Packages/com.unity.modules.screencapture
   name: com.unity.modules.screencapture
   displayName: Screen Capture
@@ -2139,7 +2192,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.terrain@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.terrain@1.0.0
   assetPath: Packages/com.unity.modules.terrain
   name: com.unity.modules.terrain
   displayName: Terrain
@@ -2194,7 +2247,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.terrainphysics@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.terrainphysics@1.0.0
   assetPath: Packages/com.unity.modules.terrainphysics
   name: com.unity.modules.terrainphysics
   displayName: Terrain Physics
@@ -2257,7 +2310,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.tilemap@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.tilemap@1.0.0
   assetPath: Packages/com.unity.modules.tilemap
   name: com.unity.modules.tilemap
   displayName: Tilemap
@@ -2315,7 +2368,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.ui@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.ui@1.0.0
   assetPath: Packages/com.unity.modules.ui
   name: com.unity.modules.ui
   displayName: UI
@@ -2370,7 +2423,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.uielements@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.uielements@1.0.0
   assetPath: Packages/com.unity.modules.uielements
   name: com.unity.modules.uielements
   displayName: UIElements
@@ -2437,7 +2490,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.umbra@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.umbra@1.0.0
   assetPath: Packages/com.unity.modules.umbra
   name: com.unity.modules.umbra
   displayName: Umbra
@@ -2492,7 +2545,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unityanalytics@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unityanalytics@1.0.0
   assetPath: Packages/com.unity.modules.unityanalytics
   name: com.unity.modules.unityanalytics
   displayName: Unity Analytics
@@ -2555,7 +2608,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequest
   name: com.unity.modules.unitywebrequest
   displayName: Unity Web Request
@@ -2610,7 +2663,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequestassetbundle
   name: com.unity.modules.unitywebrequestassetbundle
   displayName: Unity Web Request Asset Bundle
@@ -2673,7 +2726,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequestaudio
   name: com.unity.modules.unitywebrequestaudio
   displayName: Unity Web Request Audio
@@ -2736,7 +2789,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequesttexture
   name: com.unity.modules.unitywebrequesttexture
   displayName: Unity Web Request Texture
@@ -2799,7 +2852,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0
   assetPath: Packages/com.unity.modules.unitywebrequestwww
   name: com.unity.modules.unitywebrequestwww
   displayName: Unity Web Request WWW
@@ -2878,7 +2931,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.vehicles@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.vehicles@1.0.0
   assetPath: Packages/com.unity.modules.vehicles
   name: com.unity.modules.vehicles
   displayName: Vehicles
@@ -2937,7 +2990,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.video@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.video@1.0.0
   assetPath: Packages/com.unity.modules.video
   name: com.unity.modules.video
   displayName: Video
@@ -3004,7 +3057,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.vr@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.vr@1.0.0
   assetPath: Packages/com.unity.modules.vr
   name: com.unity.modules.vr
   displayName: VR
@@ -3073,7 +3126,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.wind@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.wind@1.0.0
   assetPath: Packages/com.unity.modules.wind
   name: com.unity.modules.wind
   displayName: Wind
@@ -3128,7 +3181,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.xr@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.xr@1.0.0
   assetPath: Packages/com.unity.modules.xr
   name: com.unity.modules.xr
   displayName: XR
@@ -3195,7 +3248,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.subsystems@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.modules.subsystems@1.0.0
   assetPath: Packages/com.unity.modules.subsystems
   name: com.unity.modules.subsystems
   displayName: Subsystems
@@ -3254,7 +3307,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.6
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.ext.nunit@1.0.6
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.ext.nunit@1.0.6
   assetPath: Packages/com.unity.ext.nunit
   name: com.unity.ext.nunit
   displayName: Custom NUnit
@@ -3302,7 +3355,7 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
   datePublishedTicks: 637429759280000000
   documentationUrl: 
@@ -3325,7 +3378,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.2.6
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.mathematics@1.2.6
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.mathematics@1.2.6
   assetPath: Packages/com.unity.mathematics
   name: com.unity.mathematics
   displayName: Mathematics
@@ -3334,7 +3387,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: 
+  type: asset
   description: Unity's C# SIMD math library providing vector types and math functions
     with a shader like syntax.
   status: 0
@@ -3358,8 +3411,12 @@ m_ResolvedPackages:
     - 1.2.4
     - 1.2.5
     - 1.2.6
+    - 1.3.1
+    - 1.3.2
     compatible:
     - 1.2.6
+    - 1.3.1
+    - 1.3.2
     recommended: 1.2.6
     deprecated: []
   dependencies: []
@@ -3392,12 +3449,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.burst@1.8.3
+- packageId: com.unity.burst@1.8.9
   testable: 0
   isDirectDependency: 0
-  version: 1.8.3
+  version: 1.8.9
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.burst@1.8.3
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.burst@1.8.9
   assetPath: Packages/com.unity.burst
   name: com.unity.burst
   displayName: Burst
@@ -3406,7 +3463,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: asset
+  type: assets
   description: Burst is a compiler that translates from IL/.NET bytecode to highly
     optimized native code using LLVM.
   status: 0
@@ -3535,11 +3592,21 @@ m_ResolvedPackages:
     - 1.8.3
     - 1.8.4
     - 1.8.7
+    - 1.8.8
+    - 1.8.9
+    - 1.8.10
+    - 1.8.11
+    - 1.8.12
+    - 1.8.13
+    - 1.8.14
     compatible:
-    - 1.8.3
-    - 1.8.4
-    - 1.8.7
-    recommended: 1.8.7
+    - 1.8.9
+    - 1.8.10
+    - 1.8.11
+    - 1.8.12
+    - 1.8.13
+    - 1.8.14
+    recommended: 1.8.14
     deprecated: []
   dependencies:
   - name: com.unity.mathematics
@@ -3556,30 +3623,30 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638112786110000000
+  datePublishedTicks: 638314141790000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: git@github.cds.internal.unity3d.com:unity/burst
-    revision: fd494a093a254696a2158a7b231d6b5b80549261
+    revision: 1aa8f2db606554f28aa01007e92600cd24643852
     path: 
   unityLifecycle:
-    version: 1.8.3
+    version: 1.8.9
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.render-pipelines.core@14.0.6
+- packageId: com.unity.render-pipelines.core@14.0.9
   testable: 0
   isDirectDependency: 0
-  version: 14.0.6
+  version: 14.0.9
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.render-pipelines.core@14.0.6
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.render-pipelines.core@14.0.9
   assetPath: Packages/com.unity.render-pipelines.core
   name: com.unity.render-pipelines.core
   displayName: Core RP Library
@@ -3698,10 +3765,10 @@ m_ResolvedPackages:
     - 10.9.0
     - 10.10.0
     - 10.10.1
-    - 14.0.6
+    - 14.0.9
     compatible:
-    - 14.0.6
-    recommended: 14.0.6
+    - 14.0.9
+    recommended: 14.0.9
     deprecated: []
   dependencies:
   - name: com.unity.ugui
@@ -3745,19 +3812,19 @@ m_ResolvedPackages:
     revision: 
     path: 
   unityLifecycle:
-    version: 14.0.6
+    version: 14.0.9
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.shadergraph@14.0.6
+- packageId: com.unity.shadergraph@14.0.9
   testable: 0
   isDirectDependency: 0
-  version: 14.0.6
+  version: 14.0.9
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.shadergraph@14.0.6
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.shadergraph@14.0.9
   assetPath: Packages/com.unity.shadergraph
   name: com.unity.shadergraph
   displayName: Shader Graph
@@ -3873,19 +3940,19 @@ m_ResolvedPackages:
     - 10.9.0
     - 10.10.0
     - 10.10.1
-    - 14.0.6
+    - 14.0.9
     compatible:
-    - 14.0.6
-    recommended: 14.0.6
+    - 14.0.9
+    recommended: 14.0.9
     deprecated: []
   dependencies:
   - name: com.unity.render-pipelines.core
-    version: 14.0.6
+    version: 14.0.9
   - name: com.unity.searcher
     version: 4.9.2
   resolvedDependencies:
   - name: com.unity.render-pipelines.core
-    version: 14.0.6
+    version: 14.0.9
   - name: com.unity.ugui
     version: 1.0.0
   - name: com.unity.modules.ui
@@ -3920,19 +3987,19 @@ m_ResolvedPackages:
     revision: 
     path: 
   unityLifecycle:
-    version: 14.0.6
+    version: 14.0.9
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.2d.animation@9.0.1
+- packageId: com.unity.2d.animation@9.0.4
   testable: 0
   isDirectDependency: 0
-  version: 9.0.1
+  version: 9.0.4
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.animation@9.0.1
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.animation@9.0.4
   assetPath: Packages/com.unity.2d.animation
   name: com.unity.2d.animation
   displayName: 2D Animation
@@ -3941,7 +4008,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 2D
-  type: asset
+  type: assets
   description: 2D Animation provides all the necessary tooling and runtime components
     for skeletal animation using Sprites.
   status: 0
@@ -4043,6 +4110,9 @@ m_ResolvedPackages:
     - 7.0.9
     - 7.0.10
     - 7.0.11
+    - 7.0.12
+    - 7.0.13
+    - 7.1.0
     - 8.0.0-pre.3
     - 8.0.0-pre.4
     - 8.0.0
@@ -4057,16 +4127,20 @@ m_ResolvedPackages:
     - 9.0.1
     - 9.0.2
     - 9.0.3
+    - 9.0.4
+    - 9.1.0
     - 10.0.0-pre.1
     - 10.0.0-pre.2
     - 10.0.0
     - 10.0.1
     - 10.0.2
+    - 10.0.3
+    - 10.1.0
+    - 10.1.1
     compatible:
-    - 9.0.1
-    - 9.0.2
-    - 9.0.3
-    recommended: 9.0.3
+    - 9.0.4
+    - 9.1.0
+    recommended: 9.0.4
     deprecated: []
   dependencies:
   - name: com.unity.2d.common
@@ -4097,7 +4171,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.animation
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.8.3
+    version: 1.8.9
   - name: com.unity.collections
     version: 1.2.4
   - name: com.unity.test-framework
@@ -4115,18 +4189,18 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638029769620000000
-  documentationUrl: 
+  datePublishedTicks: 638320873940000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.2d.animation@9.0/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/2d.git
-    revision: 6fc635d83d4bb0b2640893b8d4a0f3934044aeb5
+    revision: be60dd1716d39b00d03d87668a09a4fc1d4102b6
     path: 
   unityLifecycle:
-    version: 9.0.1
+    version: 9.0.4
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -4138,7 +4212,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 5.0.3
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.pixel-perfect@5.0.3
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.pixel-perfect@5.0.3
   assetPath: Packages/com.unity.2d.pixel-perfect
   name: com.unity.2d.pixel-perfect
   displayName: 2D Pixel Perfect
@@ -4221,7 +4295,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 8.0.2
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.psdimporter@8.0.2
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.psdimporter@8.0.2
   assetPath: Packages/com.unity.2d.psdimporter
   name: com.unity.2d.psdimporter
   displayName: 2D PSD Importer
@@ -4295,6 +4369,8 @@ m_ResolvedPackages:
     - 6.0.5
     - 6.0.6
     - 6.0.7
+    - 6.0.8
+    - 6.0.9
     - 7.0.0-pre.3
     - 7.0.0-pre.4
     - 7.0.0
@@ -4306,12 +4382,19 @@ m_ResolvedPackages:
     - 8.0.0
     - 8.0.1
     - 8.0.2
+    - 8.0.3
+    - 8.0.4
     - 9.0.0-pre.1
     - 9.0.0-pre.2
     - 9.0.0
+    - 9.0.1
+    - 9.0.2
+    - 9.0.3
     compatible:
     - 8.0.2
-    recommended: 8.0.2
+    - 8.0.3
+    - 8.0.4
+    recommended: 8.0.4
     deprecated: []
   dependencies:
   - name: com.unity.2d.animation
@@ -4322,7 +4405,7 @@ m_ResolvedPackages:
     version: 1.0.0
   resolvedDependencies:
   - name: com.unity.2d.animation
-    version: 9.0.1
+    version: 9.0.4
   - name: com.unity.2d.common
     version: 8.0.1
   - name: com.unity.2d.sprite
@@ -4340,7 +4423,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.animation
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.8.3
+    version: 1.8.9
   - name: com.unity.collections
     version: 1.2.4
   - name: com.unity.test-framework
@@ -4359,7 +4442,7 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
   datePublishedTicks: 638067518780000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.2d.psdimporter@8.0/manual/index.html
@@ -4382,7 +4465,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.sprite@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.sprite@1.0.0
   assetPath: Packages/com.unity.2d.sprite
   name: com.unity.2d.sprite
   displayName: 2D Sprite
@@ -4435,12 +4518,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.2d.spriteshape@9.0.1
+- packageId: com.unity.2d.spriteshape@9.0.2
   testable: 0
   isDirectDependency: 0
-  version: 9.0.1
+  version: 9.0.2
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.spriteshape@9.0.1
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.spriteshape@9.0.2
   assetPath: Packages/com.unity.2d.spriteshape
   name: com.unity.2d.spriteshape
   displayName: 2D SpriteShape
@@ -4538,8 +4621,10 @@ m_ResolvedPackages:
     - 10.0.0-pre.2
     - 10.0.0
     - 10.0.1
+    - 10.0.2
+    - 10.0.3
+    - 10.0.4
     compatible:
-    - 9.0.1
     - 9.0.2
     recommended: 9.0.2
     deprecated: []
@@ -4568,7 +4653,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.animation
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.8.3
+    version: 1.8.9
   - name: com.unity.modules.physics2d
     version: 1.0.0
   keywords:
@@ -4586,18 +4671,18 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638029769690000000
-  documentationUrl: 
+  datePublishedTicks: 638150103540000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.2d.spriteshape@9.0/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/2d.git
-    revision: 6fc635d83d4bb0b2640893b8d4a0f3934044aeb5
+    revision: ff926a6d093212af31bc3c835f61abfbb1b3f163
     path: 
   unityLifecycle:
-    version: 9.0.1
+    version: 9.0.2
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -4609,7 +4694,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.tilemap@1.0.0
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.tilemap@1.0.0
   assetPath: Packages/com.unity.2d.tilemap
   name: com.unity.2d.tilemap
   displayName: 2D Tilemap Editor
@@ -4677,12 +4762,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.2d.tilemap.extras@3.0.3
+- packageId: com.unity.2d.tilemap.extras@3.1.2
   testable: 0
   isDirectDependency: 0
-  version: 3.0.3
+  version: 3.1.2
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.tilemap.extras@3.0.3
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.tilemap.extras@3.1.2
   assetPath: Packages/com.unity.2d.tilemap.extras
   name: com.unity.2d.tilemap.extras
   displayName: 2D Tilemap Extras
@@ -4691,7 +4776,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 2D
-  type: asset
+  type: assets
   description: '2D Tilemap Extras is a package that contains extra scripts for use
     with 2D Tilemap features in Unity. These include custom Tiles and Brushes for
     the Tilemap feature.
@@ -4733,22 +4818,23 @@ m_ResolvedPackages:
     - 2.2.4
     - 2.2.5
     - 2.2.6
+    - 2.2.7
     - 3.0.0
     - 3.0.1
     - 3.0.2
     - 3.0.3
     - 3.1.0
     - 3.1.1
+    - 3.1.2
     - 4.0.0-pre.1
     - 4.0.0-pre.2
     - 4.0.0-pre.3
     - 4.0.0
     - 4.0.1
+    - 4.0.2
     compatible:
-    - 3.0.3
-    - 3.1.0
-    - 3.1.1
-    recommended: 3.0.3
+    - 3.1.2
+    recommended: 3.1.2
     deprecated: []
   dependencies:
   - name: com.unity.modules.tilemap
@@ -4786,18 +4872,117 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638067518790000000
-  documentationUrl: https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@3.0/manual/index.html
+  datePublishedTicks: 638320873890000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@3.1/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.com/Unity-Technologies/2d-extras.git
-    revision: 78bbbfd9a60bd0618c0d4f3b105d861211da2f22
+    revision: 741b52ca8bcd71b4e016208dbfe792374ca334c8
     path: 
   unityLifecycle:
-    version: 3.0.3
+    version: 3.1.2
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+- packageId: com.unity.2d.aseprite@1.0.1
+  testable: 0
+  isDirectDependency: 0
+  version: 1.0.1
+  source: 1
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.aseprite@1.0.1
+  assetPath: Packages/com.unity.2d.aseprite
+  name: com.unity.2d.aseprite
+  displayName: 2D Aseprite Importer
+  author:
+    name: 
+    email: 
+    url: 
+  category: 2D
+  type: assets
+  description: 2D Aseprite Importer is a package which enables the import of .aseprite
+    files from the Pixel Art tool Aseprite.
+  status: 0
+  errors: []
+  versions:
+    all:
+    - 1.0.0-pre.1
+    - 1.0.0-pre.2
+    - 1.0.0-pre.3
+    - 1.0.0-pre.4
+    - 1.0.0
+    - 1.0.1
+    - 1.1.0
+    - 1.1.1
+    - 1.1.2
+    - 1.1.3
+    compatible:
+    - 1.0.1
+    - 1.1.0
+    - 1.1.1
+    - 1.1.2
+    - 1.1.3
+    recommended: 1.0.1
+    deprecated: []
+  dependencies:
+  - name: com.unity.2d.sprite
+    version: 1.0.0
+  - name: com.unity.2d.common
+    version: 6.0.6
+  - name: com.unity.mathematics
+    version: 1.2.6
+  - name: com.unity.modules.animation
+    version: 1.0.0
+  resolvedDependencies:
+  - name: com.unity.2d.sprite
+    version: 1.0.0
+  - name: com.unity.2d.common
+    version: 8.0.1
+  - name: com.unity.mathematics
+    version: 1.2.6
+  - name: com.unity.modules.uielements
+    version: 1.0.0
+  - name: com.unity.modules.ui
+    version: 1.0.0
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.animation
+    version: 1.0.0
+  - name: com.unity.burst
+    version: 1.8.9
+  keywords:
+  - 2d
+  - Aseprite
+  - Pixel
+  - Art
+  - assetimporter
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 638285549780000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.2d.aseprite@1.0/manual/index.html
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/AsepriteImporter.git
+    revision: f35a0fd1f63d861882dcf1ab563fa2e23f8566ae
+    path: 
+  unityLifecycle:
+    version: 1.0.1
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -4809,7 +4994,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 4.9.2
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.searcher@4.9.2
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.searcher@4.9.2
   assetPath: Packages/com.unity.searcher
   name: com.unity.searcher
   displayName: Searcher
@@ -4858,7 +5043,7 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
   datePublishedTicks: 637831252240000000
   documentationUrl: 
@@ -4881,7 +5066,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 8.0.1
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.common@8.0.1
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.2d.common@8.0.1
   assetPath: Packages/com.unity.2d.common
   name: com.unity.2d.common
   displayName: 2D Common
@@ -4932,6 +5117,7 @@ m_ResolvedPackages:
     - 6.0.4
     - 6.0.5
     - 6.0.6
+    - 6.0.7
     - 7.0.0-pre.3
     - 7.0.0-pre.4
     - 7.0.0
@@ -4942,13 +5128,18 @@ m_ResolvedPackages:
     - 8.0.0-pre.2
     - 8.0.0
     - 8.0.1
+    - 8.0.2
     - 9.0.0-pre.1
     - 9.0.0-pre.2
     - 9.0.0
     - 9.0.1
+    - 9.0.2
+    - 9.0.3
+    - 9.0.4
     compatible:
     - 8.0.1
-    recommended: 8.0.1
+    - 8.0.2
+    recommended: 8.0.2
     deprecated: []
   dependencies:
   - name: com.unity.2d.sprite
@@ -4977,7 +5168,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.animation
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.8.3
+    version: 1.8.9
   keywords:
   - 2d
   registry:
@@ -4988,7 +5179,7 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
   datePublishedTicks: 638029769550000000
   documentationUrl: 
@@ -5011,7 +5202,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.2.4
   source: 1
-  resolvedPath: C:\Users\User\Desktop\DSTU\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.collections@1.2.4
+  resolvedPath: D:\Unity\GU_2D-Platfromer-Puzzle\2D NewPlatformer\Library\PackageCache\com.unity.collections@1.2.4
   assetPath: Packages/com.unity.collections
   name: com.unity.collections
   displayName: Collections
@@ -5075,6 +5266,7 @@ m_ResolvedPackages:
     - 1.2.4
     - 1.3.1
     - 1.4.0
+    - 1.5.1
     - 2.1.0-exp.4
     - 2.1.0-pre.2
     - 2.1.0-pre.6
@@ -5083,15 +5275,33 @@ m_ResolvedPackages:
     - 2.1.1
     - 2.1.4
     - 2.2.0
+    - 2.2.1
+    - 2.3.0-exp.1
+    - 2.3.0-pre.3
+    - 2.4.0-exp.2
+    - 2.4.0-pre.2
+    - 2.4.0-pre.5
+    - 2.4.0
     compatible:
     - 1.2.4
     - 1.3.1
     - 1.4.0
+    - 1.5.1
     - 2.1.0-exp.4
     - 2.1.0-pre.2
     - 2.1.0-pre.6
     - 2.1.0-pre.11
     - 2.1.0-pre.18
+    - 2.1.1
+    - 2.1.4
+    - 2.2.0
+    - 2.2.1
+    - 2.3.0-exp.1
+    - 2.3.0-pre.3
+    - 2.4.0-exp.2
+    - 2.4.0-pre.2
+    - 2.4.0-pre.5
+    - 2.4.0
     recommended: 1.2.4
     deprecated: []
   dependencies:
@@ -5101,7 +5311,7 @@ m_ResolvedPackages:
     version: 1.1.31
   resolvedDependencies:
   - name: com.unity.burst
-    version: 1.8.3
+    version: 1.8.9
   - name: com.unity.mathematics
     version: 1.2.6
   - name: com.unity.test-framework
@@ -5124,7 +5334,7 @@ m_ResolvedPackages:
     isDefault: 1
     capabilities: 7
     configSource: 0
-  hideInEditor: 0
+  hideInEditor: 1
   isAssetStorePackage: 0
   datePublishedTicks: 637908244640000000
   documentationUrl: 
@@ -5136,7 +5346,7 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 1.2.4
-    nextVersion: 2.1.0-pre.6
+    nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
     deprecationMessage: 

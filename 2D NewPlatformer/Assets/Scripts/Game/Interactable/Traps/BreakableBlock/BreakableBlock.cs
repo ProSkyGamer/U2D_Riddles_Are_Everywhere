@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,13 @@ using UnityEngine;
 [RequireComponent(typeof(BreakableBlockGravity))]
 public class BreakableBlock : InteractableItem
 {
+    public static event EventHandler<OnTimerChangeEventArgs> OnTimerChange;
+    public class OnTimerChangeEventArgs : EventArgs
+    {
+        public float currentTime;
+        public float maxTime;
+    }
+
     [SerializeField] private float distanceToMoveForHit = 1f;
     [SerializeField] private float standingTimeForStartMoving = 0.5f;
     private float standingTimerForStartMoving;
@@ -17,6 +25,8 @@ public class BreakableBlock : InteractableItem
     [SerializeField] private float timeToDissapersAfterBreak = 2f;
     private bool isBroken = false;
     [SerializeField] private Transform itemAppearedAfterBreak;
+    private bool isCanBeMoved = true;
+    private bool isCanBeStored = true;
 
     public enum Directions
     {
@@ -38,8 +48,6 @@ public class BreakableBlock : InteractableItem
         standingTimerForStartMoving = standingTimeForStartMoving;
         breakableBlockVisual = GetComponent<BreakableBlockVisual>();
         breakableBlockGravity = GetComponent<BreakableBlockGravity>();
-
-        StartCoroutine(CheckAvailibleDirections());
     }
 
     private void Start()
@@ -59,7 +67,6 @@ public class BreakableBlock : InteractableItem
     private void BreakableBlockGravity_OnBreakableBlockDeathGroundHit(object sender, System.EventArgs e)
     {
         isMoving = true;
-        breakableBlockGravity.OnBreakableBlockGroundHit -= BreakableBlockGravity_OnBreakableBlockGroundHit;
         collision.isTrigger = true;
         breakableBlockVisual.ChangeAnimationState(BreakableBlockVisual.AnimationStates.DestroyBreakableBlock);
         breakableBlockGravity.OnBreakableBlockDeathGroundHit -= BreakableBlockGravity_OnBreakableBlockDeathGroundHit;
@@ -83,8 +90,10 @@ public class BreakableBlock : InteractableItem
             return;
         }
 
-        if (!isMoving && breakableBlockGravity.IsGrounded() && !isStoredInMovingPlatform)
+        if (!isMoving && breakableBlockGravity.IsGrounded() && !isStoredInMovingPlatform && isCanBeMoved)
         {
+            CheckAvailibleDirections();
+
             float cubeRotation = 0f;
             Vector2 cubeDirection = Vector2.up;
             float interactableHeight = 0f;
@@ -92,42 +101,61 @@ public class BreakableBlock : InteractableItem
             Vector3 baseCastPosition = transform.position + (Vector3)collision.offset;
             Vector2 leftRightCastCubeLenght = new(collision.size.x / 2, collision.size.y);
 
-            Vector3 leftCastPosition = baseCastPosition + new Vector3(-collision.size.x / 2 - leftRightCastCubeLenght.x / 2, 0f, 0f);
-
-            RaycastHit2D leftRaycastHit = Physics2D.BoxCast(leftCastPosition, leftRightCastCubeLenght,
-                cubeRotation, cubeDirection, interactableHeight, playerLayer);
-
-            PlayerController currentInteractedPlayer;
-            if (leftRaycastHit)
+            if (availibleDirections.Contains(Directions.right))
             {
-                if (leftRaycastHit.rigidbody.gameObject.TryGetComponent<PlayerController>(out currentInteractedPlayer))
+                Vector3 leftCastPosition = baseCastPosition + new Vector3(-collision.size.x / 2 - leftRightCastCubeLenght.x / 2, 0f, 0f);
+
+                RaycastHit2D leftRaycastHit = Physics2D.BoxCast(leftCastPosition, leftRightCastCubeLenght,
+                    cubeRotation, cubeDirection, interactableHeight, playerLayer);
+
+                if (leftRaycastHit)
                 {
-                    if(isNowStadingOnMovingPlatform)
-                        standingTimerForStartMoving -= Time.deltaTime / 5;
-                    else
-                        standingTimerForStartMoving -= Time.deltaTime;
-                    if (standingTimerForStartMoving <= 0)
-                        StartCubeMove(Vector2.right);
+                    if (leftRaycastHit.rigidbody.gameObject.TryGetComponent(out PlayerController currentInteractedPlayer))
+                    {
+                        if (isNowStadingOnMovingPlatform)
+                            standingTimerForStartMoving -= Time.deltaTime / 5;
+                        else
+                            standingTimerForStartMoving -= Time.deltaTime;
+
+                        OnTimerChange?.Invoke(this, new OnTimerChangeEventArgs()
+                        {
+                            currentTime = standingTimeForStartMoving - standingTimerForStartMoving,
+                            maxTime = standingTimeForStartMoving
+                        });
+
+                        if (standingTimerForStartMoving <= 0)
+                            StartCubeMove(Vector2.right);
+                    }
+                    return;
                 }
-                return;
             }
 
-            Vector3 rightCastPosition = baseCastPosition + new Vector3(collision.size.x / 2 + leftRightCastCubeLenght.x / 2, 0f, 0f);
-
-            RaycastHit2D rightRaycastHit = Physics2D.BoxCast(rightCastPosition, leftRightCastCubeLenght,
-                cubeRotation, cubeDirection, interactableHeight, playerLayer);
-            if (rightRaycastHit)
+            if (availibleDirections.Contains(Directions.left))
             {
-                if (rightRaycastHit.rigidbody.gameObject.TryGetComponent<PlayerController>(out currentInteractedPlayer))
+                Vector3 rightCastPosition = baseCastPosition + new Vector3(collision.size.x / 2 + leftRightCastCubeLenght.x / 2, 0f, 0f);
+
+                RaycastHit2D rightRaycastHit = Physics2D.BoxCast(rightCastPosition, leftRightCastCubeLenght,
+                    cubeRotation, cubeDirection, interactableHeight, playerLayer);
+                if (rightRaycastHit)
                 {
-                    if (isNowStadingOnMovingPlatform)
-                        standingTimerForStartMoving -= Time.deltaTime / 5;
-                    else
-                        standingTimerForStartMoving -= Time.deltaTime;
-                    if (standingTimerForStartMoving <= 0)
-                        StartCubeMove(Vector2.left);
+                    if (rightRaycastHit.rigidbody.gameObject.TryGetComponent(out PlayerController currentInteractedPlayer))
+                    {
+                        if (isNowStadingOnMovingPlatform)
+                            standingTimerForStartMoving -= Time.deltaTime / 5;
+                        else
+                            standingTimerForStartMoving -= Time.deltaTime;
+
+                        OnTimerChange?.Invoke(this, new OnTimerChangeEventArgs()
+                        {
+                            currentTime = standingTimeForStartMoving - standingTimerForStartMoving,
+                            maxTime = standingTimeForStartMoving
+                        });
+
+                        if (standingTimerForStartMoving <= 0)
+                            StartCubeMove(Vector2.left);
+                    }
+                    return;
                 }
-                return;
             }
 
             standingTimerForStartMoving = standingTimeForStartMoving;
@@ -157,10 +185,9 @@ public class BreakableBlock : InteractableItem
         Gizmos.DrawCube(rightCastPosition, leftRightCastCubeLenght);
     }
 
-    private IEnumerator CheckAvailibleDirections()
+    private void CheckAvailibleDirections()
     {
         availibleDirections.Clear();
-        yield return new WaitForSeconds(0.1f);
 
         if (breakableBlockGravity.IsGrounded())
         {
@@ -203,17 +230,6 @@ public class BreakableBlock : InteractableItem
             if (!isFound)
                 availibleDirections.Add(Directions.right);
         }
-        else
-        {
-            breakableBlockGravity.OnBreakableBlockGroundHit += BreakableBlockGravity_OnBreakableBlockGroundHit;
-        }
-    }
-
-    private void BreakableBlockGravity_OnBreakableBlockGroundHit(object sender, System.EventArgs e)
-    {
-        StartCoroutine(CheckAvailibleDirections());
-
-        breakableBlockGravity.OnBreakableBlockGroundHit -= BreakableBlockGravity_OnBreakableBlockGroundHit;
     }
 
     private void StartCubeMove(Vector2 direction)
@@ -257,8 +273,6 @@ public class BreakableBlock : InteractableItem
         breakableBlockVisual.ChangeAnimationState(BreakableBlockVisual.AnimationStates.Iddle);
 
         transform.position += (Vector3)direction * distanceToMoveForHit;
-
-        StartCoroutine(CheckAvailibleDirections());
     }
 
     private void ChangeBreakableBlockStoredState(bool isStored)
@@ -273,7 +287,6 @@ public class BreakableBlock : InteractableItem
         {
             collision.isTrigger = false;
             movingPlatformStandingOn.RemoveStoredBreakableBlock();
-            StartCoroutine(CheckAvailibleDirections());
         }
     }
 
@@ -299,7 +312,11 @@ public class BreakableBlock : InteractableItem
 
     public override bool IsCanInteract()
     {
-        return isNowStadingOnMovingPlatform || isStoredInMovingPlatform;
+        if (movingPlatformStandingOn == null)
+            return false;
+        else
+            return (isNowStadingOnMovingPlatform || isStoredInMovingPlatform) &&
+                isCanBeStored && !movingPlatformStandingOn.GetIsMoving();
     }
 
     public override void OnInteract(PlayerController player)
@@ -307,5 +324,20 @@ public class BreakableBlock : InteractableItem
         base.OnInteract(player);
 
         ChangeBreakableBlockStoredState(!isStoredInMovingPlatform);
+    }
+
+    public void ChangeIsCanBeMovedState(bool newState)
+    {
+        isCanBeMoved = newState;
+    }
+
+    public void ChangeIsCanBeStoredState(bool newState)
+    {
+        isCanBeStored = newState;
+    }
+
+    public static void ResetStaticData()
+    {
+        OnTimerChange = null;
     }
 }

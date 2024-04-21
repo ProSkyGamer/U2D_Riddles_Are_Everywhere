@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class PlayerChangeController : MonoBehaviour
 {
+    [SerializeField] private bool isPlayerChangeEnabled = true;
     [SerializeField] private AllPlayersSO allPlayersSO;
+    [SerializeField] private List<PlayerSO> alwaysAvailiblePlayers = new();
 
     public static PlayerChangeController Instance { get; private set; }
 
@@ -48,7 +50,7 @@ public class PlayerChangeController : MonoBehaviour
 
     public bool IsCanChangePlayer()
     {
-        return currentPlayerController.IsCanTeleportToCheckpoint();
+        return isPlayerChangeEnabled;
     }
 
     public void ChangePlayer(PlayerSO playerToChange)
@@ -89,5 +91,10 @@ public class PlayerChangeController : MonoBehaviour
     public PlayerController GetCurrentPlayerController()
     {
         return currentPlayerController;
+    }
+
+    public List<PlayerSO> GetAlwaysAvailiblePlayers()
+    {
+        return alwaysAvailiblePlayers;
     }
 }
