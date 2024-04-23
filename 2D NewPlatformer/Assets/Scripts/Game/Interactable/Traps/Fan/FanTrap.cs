@@ -11,15 +11,22 @@ public class FanTrap : MonoBehaviour
     [SerializeField] private float blowingSpeed = 5f;
     private List<PlayerMovement> blowingPlayersList = new List<PlayerMovement>();
     private FanTrapVisual fanTrapVisual;
+    private FanParticles fanParticles;
 
     private void Awake()
     {
         fanTrapVisual = GetComponent<FanTrapVisual>();
+        fanParticles = GetComponent<FanParticles>();
     }
 
     private void Start()
     {
         fanTrapVisual.ChangeAnimationState(isEnabled);
+        if (fanParticles != null)
+        {
+            fanParticles.ChangeDirection(blowingDirection);
+            fanParticles.ChangeParticlesState(isEnabled);
+        }
     }
 
     private void Update()
@@ -61,6 +68,7 @@ public class FanTrap : MonoBehaviour
     {
         isEnabled = newState;
         fanTrapVisual.ChangeAnimationState(newState);
+        fanParticles.ChangeParticlesState(isEnabled);
     }
 
     public bool GetFanTrapCurrentState()
@@ -76,6 +84,7 @@ public class FanTrap : MonoBehaviour
     public void ChangeCurrentBlowingDirection(Vector2 newBlowingDirection, Quaternion newFanRotation, Vector3 additionalMovement)
     {
         blowingDirection = newBlowingDirection;
+        fanParticles.ChangeDirection(blowingDirection);
         transform.rotation = newFanRotation;
         transform.position += additionalMovement;
     }

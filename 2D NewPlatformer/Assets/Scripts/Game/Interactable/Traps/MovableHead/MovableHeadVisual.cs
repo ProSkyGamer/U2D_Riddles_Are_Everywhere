@@ -9,18 +9,20 @@ public class MovableHeadVisual : MonoBehaviour
 
     public enum AnimationStates
     {
-        RockHeadIddle,
+        RockHeadIdle,
         RockHeadBlink,
         RockHeadBottomHit,
         RockHeadLeftHit,
         RockHeadRightHit,
         RockHeadTopHit,
-        SpikeHeadIddle,
+        SpikeHeadIdle,
         SpikeHeadBlink,
         SpikeHeadBottomHit,
         SpikeHeadLeftHit,
         SpikeHeadRightHit,
         SpikeHeadTopHit,
+        RockHeadMove,
+        SpikeHeadMove,
     }
 
     private Animator animator;

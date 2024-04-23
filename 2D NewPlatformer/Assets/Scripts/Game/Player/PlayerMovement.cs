@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerGravity))]
@@ -11,13 +9,17 @@ public class PlayerMovement : MonoBehaviour
 
     private float slowDownScale = 1f;
 
+    private bool isForcedMovement;
+
     private void Awake()
     {
         playerGravity = GetComponent<PlayerGravity>();
     }
 
-    public void Move(Vector3 toMoveVector)
+    public void Move(Vector3 toMoveVector, bool isForcedMovement = false)
     {
+        this.isForcedMovement = isForcedMovement;
+
         transform.position += toMoveVector * slowDownScale;
     }
 
@@ -49,5 +51,10 @@ public class PlayerMovement : MonoBehaviour
     public bool IsDescending()
     {
         return playerGravity.GetGravityVector().y < -.1f;
+    }
+
+    public bool IsMovementForced()
+    {
+        return isForcedMovement;
     }
 }

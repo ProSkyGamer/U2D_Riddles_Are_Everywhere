@@ -1,11 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(AddInteractButtonUI))]
 public class LevelFinish : InteractableItem
 {
-    [SerializeField] private int pointsToCoinsMultiplayer = 2;
+    [SerializeField] private float pointsToCoinsMultiplayer = 2;
+    [SerializeField] private UnitySceneManager.Scenes levelScene;
+    [SerializeField] private TextMeshProUGUI coinsMultiplierValueText;
+
+    private void Awake()
+    {
+        if (LevelsCompletionController.CheckLevelCompletion(levelScene))
+            pointsToCoinsMultiplayer = 1;
+
+        coinsMultiplierValueText.text = $"x{pointsToCoinsMultiplayer}";
+    }
 
     public override void OnInteract(PlayerController player)
     {
@@ -13,9 +25,13 @@ public class LevelFinish : InteractableItem
 
         player.DisableMovement();
 
-        WinInterface.Instance.Show(PointsCollectedController.Instance.GetCollectedPoints() * pointsToCoinsMultiplayer);
+        var earnedCoins = (int)(PointsCollectedController.Instance.GetCollectedPoints() * pointsToCoinsMultiplayer);
+        
+        WinInterface.Instance.Show(earnedCoins);
 
-        CoinsManager.AddCoins(PointsCollectedController.Instance.GetCollectedPoints() * pointsToCoinsMultiplayer);
+        CoinsManager.AddCoins(earnedCoins);
+        
+        LevelsCompletionController.SelectLevelAsCompleted(levelScene);
     }
 
     public override bool IsCanInteract()

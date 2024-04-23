@@ -255,7 +255,7 @@ public class BreakableBlock : InteractableItem
             }
         }
         else
-            Debug.Log("¬—® œ»«ƒ¿! MovableHead MoveCube without direction");
+            Debug.Log("–í–°–Å –ü–ò–ó–î–ê! MovableHead MoveCube without direction");
 
         isMoving = false;
     }

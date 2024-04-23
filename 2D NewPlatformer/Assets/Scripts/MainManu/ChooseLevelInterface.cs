@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,13 +25,12 @@ public class ChooseLevelInterface : MonoBehaviour
             Hide();
         });
 
-        for(int i = 0; i < allLevelsSO.allLevelsSO.Length; i++)
+        foreach (var levelSO in allLevelsSO.allLevelsSO)
         {
             var levelButton = Instantiate(levelButtonPrefab, levelButtonGrid);
-            levelButton.GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
-            levelButton.GetComponent<LevelButton>().ChangeLevelScene(allLevelsSO.allLevelsSO[i].
-                sceneToLoad, allLevelsSO.allLevelsSO[i].resetGuides);
+            levelButton.GetComponent<LevelButton>().InitializedLevelButton(levelSO);
         }
+
         levelButtonPrefab.gameObject.SetActive(false);
     }
 

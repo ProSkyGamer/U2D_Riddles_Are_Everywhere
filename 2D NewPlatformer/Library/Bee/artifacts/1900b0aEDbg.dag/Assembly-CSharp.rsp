@@ -431,6 +431,7 @@
 "Assets/Scripts/Game/Interactable/Traps/BreakableBlock/BreakableBlockVisual.cs"
 "Assets/Scripts/Game/Interactable/Traps/FallingPlatform/FallingPlatform.cs"
 "Assets/Scripts/Game/Interactable/Traps/FallingPlatform/FallingPlatformVisual.cs"
+"Assets/Scripts/Game/Interactable/Traps/Fan/FanParticles.cs"
 "Assets/Scripts/Game/Interactable/Traps/Fan/FanTrap.cs"
 "Assets/Scripts/Game/Interactable/Traps/Fan/FanTrapVisual.cs"
 "Assets/Scripts/Game/Interactable/Traps/Fire/FireTrap.cs"
@@ -485,6 +486,7 @@
 "Assets/Scripts/MainManu/DeveloperInterface.cs"
 "Assets/Scripts/MainManu/GuidesReset.cs"
 "Assets/Scripts/MainManu/LevelButton.cs"
+"Assets/Scripts/MainManu/LevelsCompletionController.cs"
 "Assets/Scripts/MainManu/Links/ClickableLinkText.cs"
 "Assets/Scripts/MainManu/MainMenuInterface.cs"
 "Assets/Scripts/MainManu/SelectedShopItemUI.cs"
@@ -504,6 +506,9 @@
 "Assets/Scripts/ScriptableObjects/TextTranslationsSO/TextTranslationsSO.cs"
 "Assets/Scripts/Sounds/MusicVolumeScrollbar.cs"
 "Assets/Scripts/Sounds/SceneMusicController.cs"
+"Assets/Scripts/Sounds/SFXVolume.cs"
+"Assets/Scripts/Sounds/SFXVolumeSceneController.cs"
+"Assets/Scripts/Sounds/SFXVolumeScrollbar.cs"
 "Assets/Scripts/UnitySceneManager.cs"
 -langversion:9.0
 

@@ -15,10 +15,18 @@ public class InteractableItem : MonoBehaviour
     [SerializeField] protected bool isChangeCameraFollowingObjectOnInteract = false;
     [SerializeField] protected float cameraChangeDuration = 1.5f;
 
+    protected AudioSource audioOnInteract;
+
     protected PlayerController interactedPlayer;
 
     public virtual void OnInteract(PlayerController player)
     {
+        if (audioOnInteract == null)
+            TryGetComponent(out audioOnInteract);
+        
+        if(audioOnInteract != null)
+            audioOnInteract.Play();
+        
         interactedPlayer = player;
         isInteractable = false;
     }

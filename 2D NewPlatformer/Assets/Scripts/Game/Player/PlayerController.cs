@@ -27,9 +27,14 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
     [Header("Checkpoints")]
     [SerializeField] private float timeBetwenBacksToCheckpoint = 0.25f;
 
-    private float timerBetwenBacksToCheckpoints;
+    [SerializeField] private AudioSource playerHitSFX;
+    [SerializeField] private AudioSource playerRunSFX;
+    [SerializeField] private AudioSource playerJumpSFX;
+
+    private float timerBetweenBacksToCheckpoints;
     private int additionalJumpsLeft;
     private bool isMovementEnabled = true;
+    private bool isBeingMovedByObject;
 
     public static event EventHandler OnPlayerDie;
     public static event EventHandler<OnPlayerHealthChangeEventArgs> OnPlayerHealthChange;
@@ -40,9 +45,9 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
         public int maxHealth;
     }
 
-    public static event EventHandler<OnPlayerImmnuneHitEventArgs> OnPlayerImmuneHit;
+    public static event EventHandler<OnPlayerImmuneHitEventArgs> OnPlayerImmuneHit;
 
-    public class OnPlayerImmnuneHitEventArgs : EventArgs
+    public class OnPlayerImmuneHitEventArgs : EventArgs
     {
         public int currentImmuneHits;
     }
@@ -67,7 +72,7 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 
         additionalJumpsLeft = additionalJumps;
         currentHearts = maxHearts;
-        timerBetwenBacksToCheckpoints = timeBetwenBacksToCheckpoint;
+        timerBetweenBacksToCheckpoints = timeBetwenBacksToCheckpoint;
         timerNotToHitBeforeTeleport = timeNotToHitBeforeTeleport;
 
         currentSpeed = runSpeed;
@@ -116,7 +121,7 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
         TransitionsInterface.Instance.MakeTransition(TransitionsInterface.TransitionsTypes.Default, () =>
         {
             transform.position = CheckpointsController.Instance.GetCurrentCheckpoint().transform.position;
-            timerBetwenBacksToCheckpoints = timeBetwenBacksToCheckpoint;
+            timerBetweenBacksToCheckpoints = timeBetwenBacksToCheckpoint;
         });
         TransitionsInterface.Instance.OnTransitionFinished += TransitionsInterface_OnTransitionFinished;
     }
@@ -128,7 +133,7 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 
     public bool IsCanTeleportToCheckpoint()
     {
-        return playerMovement.IsGrounded() && timerNotToHitBeforeTeleport <= 0 && timerBetwenBacksToCheckpoints <= 0;
+        return playerMovement.IsGrounded() && timerNotToHitBeforeTeleport <= 0 && timerBetweenBacksToCheckpoints <= 0;
     }
 
     private void Input_OnJumpAction(object sender, EventArgs e)
@@ -152,6 +157,8 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 
                 playerAnimations.ChangeAnimation(PlayerAnimations.Animations.DoubleJump);
             }
+
+            playerJumpSFX.Play();
         }
     }
 
@@ -199,9 +206,13 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
                 {
                     Vector3 toMoveVector = inputVector * currentSpeed * Time.deltaTime;
                     playerMovement.Move(toMoveVector);
+                    playerRunSFX.Play();
                     isMoving = true;
                     playerAnimations.FlipPlayerSprite(inputVector.x < 0);
                 }
+
+            if (!isMoving)
+                playerRunSFX.Stop();
 
             if (playerMovement.IsGrounded())
                 if (additionalJumpsLeft != additionalJumps)
@@ -210,8 +221,8 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
             ChangeAnimationState(isMoving);
         }
 
-        if (timerBetwenBacksToCheckpoints > 0)
-            timerBetwenBacksToCheckpoints -= Time.deltaTime;
+        if (timerBetweenBacksToCheckpoints > 0)
+            timerBetweenBacksToCheckpoints -= Time.deltaTime;
         if (timerNotToHitBeforeTeleport > 0)
             timerNotToHitBeforeTeleport -= Time.deltaTime;
 
@@ -228,7 +239,7 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
             return;
 
         if (isMoving) animationState = PlayerAnimations.Animations.Run;
-        if (!playerMovement.IsGrounded() || playerMovement.IsAscending())
+        if ((!playerMovement.IsGrounded() && !playerMovement.IsMovementForced()) || playerMovement.IsAscending())
         {
             if (playerMovement.IsDescending())
                 animationState = PlayerAnimations.Animations.Fall;
@@ -241,10 +252,12 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
 
     public void TakeDamage(int damage)
     {
+        playerHitSFX.Play();
+
         if (immuneHits > 0)
         {
             immuneHits--;
-            OnPlayerImmuneHit?.Invoke(this, new OnPlayerImmnuneHitEventArgs
+            OnPlayerImmuneHit?.Invoke(this, new OnPlayerImmuneHitEventArgs
             {
                 currentImmuneHits = immuneHits
             });

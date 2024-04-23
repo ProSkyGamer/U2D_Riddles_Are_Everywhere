@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -16,12 +15,12 @@ public class ImmuneHitsBar : MonoBehaviour
         ChangeImmuneHits(PlayerChangeController.Instance.GetCurrentPlayerController().GetImmuneHits());
     }
 
-    private void PlayerChangeController_OnPlayerChange(object sender, System.EventArgs e)
+    private void PlayerChangeController_OnPlayerChange(object sender, EventArgs e)
     {
         ChangeImmuneHits(PlayerChangeController.Instance.GetCurrentPlayerController().GetImmuneHits());
     }
 
-    private void PlayerController_OnPlayerImmuneHit(object sender, PlayerController.OnPlayerImmnuneHitEventArgs e)
+    private void PlayerController_OnPlayerImmuneHit(object sender, PlayerController.OnPlayerImmuneHitEventArgs e)
     {
         ChangeImmuneHits(e.currentImmuneHits);
     }
@@ -34,7 +33,9 @@ public class ImmuneHitsBar : MonoBehaviour
             immnuneHitsText.text = immuneHits.ToString();
         }
         else
+        {
             Hide();
+        }
     }
 
     private void Show()

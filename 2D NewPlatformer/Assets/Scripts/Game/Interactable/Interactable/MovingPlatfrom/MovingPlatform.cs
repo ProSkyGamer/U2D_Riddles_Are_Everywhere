@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(MovingPlatformVisual))]
@@ -14,23 +13,24 @@ public class MovingPlatform : InteractableItem
 
     public event EventHandler OnPlatformArrivalToDestination;
 
-    [Header("Moving Platfrom Settings")]
+    [Header("Moving Platform Settings")]
     [SerializeField] private MovingPlatformDestinationPoint[] allMovingPlatformDestinations;
+
     [SerializeField] private float timeToMoveBetwenDestinations = 3f;
     private float movingTimer;
 
-    [SerializeField] private bool isInteractionLocked = false;
+    [SerializeField] private bool isInteractionLocked;
 
-    private bool isMoving = false;
-    private int currentMovingDestination = 0;
+    private bool isMoving;
+    private int currentMovingDestination;
     private PlayerMovement movingPlayer;
     private BreakableBlock storedBreakableBlock;
     private MovingPlatformVisual movingPlatformVisual;
     private BoxCollider2D collision;
     private BreakableBlock standingBreakableBlock;
 
-    private float timeBetwenChecks = 0.1f;
-    private float timerBetwenChecks;
+    private readonly float timeBetweenChecks = 0.1f;
+    private float timerBetweenChecks;
 
     private Vector3 startLocation;
     private Vector3 destinationLocation;
@@ -39,13 +39,14 @@ public class MovingPlatform : InteractableItem
     {
         movingPlatformVisual = GetComponent<MovingPlatformVisual>();
         collision = GetComponent<BoxCollider2D>();
-        timerBetwenChecks = timeBetwenChecks;
+        timerBetweenChecks = timeBetweenChecks;
     }
 
     private void Start()
     {
         if (isInteractionLocked)
-            movingPlatformVisual.ChangeMovingPlatformAnimationState(MovingPlatformVisual.AnimationStates.NotInteractable);
+            movingPlatformVisual.ChangeMovingPlatformAnimationState(
+                MovingPlatformVisual.AnimationStates.NotInteractable);
     }
 
     public override void OnInteract(PlayerController player)
@@ -63,11 +64,11 @@ public class MovingPlatform : InteractableItem
     {
         if (isMoving)
         {
-            Vector3 deltaTransform = (destinationLocation - startLocation) *
+            var deltaTransform = (destinationLocation - startLocation) *
                 Time.deltaTime / timeToMoveBetwenDestinations;
 
             transform.position += deltaTransform;
-            movingPlayer?.Move(deltaTransform);
+            movingPlayer?.Move(deltaTransform, true);
             storedBreakableBlock?.Move(deltaTransform);
 
             movingTimer -= Time.deltaTime;
@@ -78,62 +79,61 @@ public class MovingPlatform : InteractableItem
                 isInteractable = true;
 
                 transform.position = destinationLocation;
-                movingPlatformVisual.ChangeMovingPlatformAnimationState(MovingPlatformVisual.AnimationStates.InteractableStanding);
+                movingPlatformVisual.ChangeMovingPlatformAnimationState(MovingPlatformVisual.AnimationStates
+                    .InteractableStanding);
 
                 OnPlatformArrivalToDestination?.Invoke(this, EventArgs.Empty);
+                audioOnInteract.Stop();
             }
         }
-        else if(!IsHasStoredBreakableBlock())
+        else if (!IsHasStoredBreakableBlock())
         {
-            timerBetwenChecks -= Time.deltaTime;
-            if(timerBetwenChecks <= 0)
+            timerBetweenChecks -= Time.deltaTime;
+            if (timerBetweenChecks <= 0)
             {
-                timerBetwenChecks = timeBetwenChecks;
-                float additionalHeight = 0.5f;
-                Vector3 castPosition = transform.position + new Vector3(0f, additionalHeight / 2, 0f);
-                Vector2 castCubeLenght = new Vector2(collision.size.x, additionalHeight);
-                float cubeRotation = 0f;
-                Vector2 cubeDirection = Vector2.up;
-                float additionCubeLength = 0f;
+                timerBetweenChecks = timeBetweenChecks;
+                var additionalHeight = 0.5f;
+                var castPosition = transform.position + new Vector3(0f, additionalHeight / 2, 0f);
+                var castCubeLenght = new Vector2(collision.size.x, additionalHeight);
+                var cubeRotation = 0f;
+                var cubeDirection = Vector2.up;
+                var additionCubeLength = 0f;
 
-                RaycastHit2D[] raycastHit = Physics2D.BoxCastAll(castPosition, castCubeLenght,
+                var raycastHit = Physics2D.BoxCastAll(castPosition, castCubeLenght,
                     cubeRotation, cubeDirection, additionCubeLength);
 
-                bool isFound = false;
-                foreach(var hit in raycastHit)
-                {
-                    if(hit.collider.gameObject.TryGetComponent<BreakableBlock>(out BreakableBlock block))
+                var isFound = false;
+                foreach (var hit in raycastHit)
+                    if (hit.collider.gameObject.TryGetComponent(out BreakableBlock block))
                     {
                         isFound = true;
-                        if(!block.GetIsStandingOnMovingPlatform())
+                        if (!block.GetIsStandingOnMovingPlatform())
                         {
                             standingBreakableBlock = block;
                             standingBreakableBlock.ChangeIsNowStandingOnMovingPlatform(true, this);
                         }
+
                         break;
                     }
-                }
 
-                if(!isFound)
-                {
-                    if(standingBreakableBlock != null)
+                if (!isFound)
+                    if (standingBreakableBlock != null)
                     {
                         standingBreakableBlock.ChangeIsNowStandingOnMovingPlatform(false, null);
                         standingBreakableBlock = null;
                     }
-                }
             }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.gameObject.TryGetComponent<PlayerMovement>(out movingPlayer);
+        collision.gameObject.TryGetComponent(out movingPlayer);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<PlayerMovement>(out movingPlayer))
+        if (collision.gameObject.TryGetComponent(out movingPlayer))
             movingPlayer = null;
     }
 
@@ -141,11 +141,9 @@ public class MovingPlatform : InteractableItem
     {
         if (!isMoving)
         {
-            for (int i = 0; i < allMovingPlatformDestinations.Length; i++)
-            {
+            for (var i = 0; i < allMovingPlatformDestinations.Length; i++)
                 if (destinationPoint == allMovingPlatformDestinations[i].movingPlatformDestinationPoint.position)
                     currentMovingDestination = i;
-            }
 
             startLocation = transform.position;
             destinationLocation = destinationPoint;
@@ -169,16 +167,18 @@ public class MovingPlatform : InteractableItem
     {
         isInteractionLocked = newState;
         if (isInteractionLocked)
-            movingPlatformVisual.ChangeMovingPlatformAnimationState(MovingPlatformVisual.AnimationStates.NotInteractable);
+            movingPlatformVisual.ChangeMovingPlatformAnimationState(
+                MovingPlatformVisual.AnimationStates.NotInteractable);
         else
-            movingPlatformVisual.ChangeMovingPlatformAnimationState(MovingPlatformVisual.AnimationStates.InteractableStanding);
+            movingPlatformVisual.ChangeMovingPlatformAnimationState(MovingPlatformVisual.AnimationStates
+                .InteractableStanding);
     }
 
     public void AddStoredBreakableBlock(BreakableBlock breakableBlock)
     {
         storedBreakableBlock = breakableBlock;
     }
-    
+
     public void RemoveStoredBreakableBlock()
     {
         storedBreakableBlock.gameObject.transform.position = allMovingPlatformDestinations

@@ -1,21 +1,43 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ReSharper disable CompareOfFloatsByEqualityOperator
+
 [RequireComponent(typeof(MovableHeadVisual))]
-public class MovableHead : BaseTrap
+public class MovableHead : InteractableItem
 {
+    #region Events
+
     public static event EventHandler<OnTimerChangeEventArgs> OnTimerChange;
+
     public class OnTimerChangeEventArgs : EventArgs
     {
         public float currentTime;
         public float maxTime;
     }
 
+    #endregion
+
+    #region Enums
+
+    private enum Directions
+    {
+        Right,
+        Left,
+        Up,
+        Down
+    }
+
+    #endregion
+
+    #region Variables & References
+
+    [SerializeField] private List<Transform> movableHeadDestinationPoints;
+    private int currentDestinationPointIndex;
     [SerializeField] private float distanceToMoveForHit = 1f;
     [SerializeField] private float standingTimeForStartMoving = 0.5f;
-    [SerializeField] private bool isCanDamage = false;
+    [SerializeField] private bool isCanDamage;
     private bool isCanBeMoved = true;
     private float standingTimerForStartMoving;
     [SerializeField] private LayerMask playerLayer;
@@ -23,28 +45,27 @@ public class MovableHead : BaseTrap
 
     [SerializeField] private BoxCollider2D collision;
 
-    public enum Directions
-    {
-        right,
-        left,
-        up,
-        down,
-    }
-
-    private List<Directions> availibleDirections = new();
-    private float timeBetwenBlink = 3f;
-    private float timerBetwenBlink;
-    private bool isMoving = false;
+    private readonly List<Directions> availableDirections = new();
+    private readonly float timeBetweenBlink = 3f;
+    private float timerBetweenBlink;
+    private bool isMoving;
     private PlayerController lastInteractedPlayer;
 
     private MovableHeadVisual movableHeadVisual;
 
-    protected override void Awake()
-    {
-        base.Awake();
+    [SerializeField] protected int trapDamage = 1;
+    [SerializeField] protected float dealDamageCooldown = 1.5f;
+    private float dealDamageTimer;
+    private readonly List<PlayerController> playerToDamageList = new();
 
+    #endregion
+
+    #region Initialization
+
+    protected void Awake()
+    {
         standingTimerForStartMoving = standingTimeForStartMoving;
-        timerBetwenBlink = timeBetwenBlink;
+        timerBetweenBlink = timeBetweenBlink;
         movableHeadVisual = GetComponent<MovableHeadVisual>();
     }
 
@@ -53,28 +74,28 @@ public class MovableHead : BaseTrap
         Input.Instance.OnTestingKeyAction += Instance_OnTestingKeyAction;
     }
 
-    private void Instance_OnTestingKeyAction(object sender, System.EventArgs e)
+    private void Instance_OnTestingKeyAction(object sender, EventArgs e)
     {
-        foreach(var direction in availibleDirections)
-        {
-            print(direction);
-        }
+        foreach (var direction in availableDirections) print(direction);
     }
 
-    protected override void Update()
+    #endregion
+
+    #region Update & Connected
+
+    protected void Update()
     {
         if (isCanDamage)
         {
             if (dealDamageTimer > 0)
+            {
                 dealDamageTimer -= Time.deltaTime;
+            }
             else
             {
                 if (playerToDamageList.Count > 0)
                 {
-                    foreach (PlayerController playerToDamage in playerToDamageList)
-                    {
-                        playerToDamage.TakeDamage(trapDamage);
-                    }
+                    foreach (var playerToDamage in playerToDamageList) playerToDamage.TakeDamage(trapDamage);
                     dealDamageTimer = dealDamageCooldown;
                 }
             }
@@ -82,148 +103,220 @@ public class MovableHead : BaseTrap
 
         if (!isMoving && isCanBeMoved)
         {
-            timerBetwenBlink -= Time.deltaTime;
-            if (timerBetwenBlink <= 0)
+            timerBetweenBlink -= Time.deltaTime;
+            if (timerBetweenBlink <= 0)
             {
-                if (!isCanDamage)
-                    movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.RockHeadBlink);
-                else
-                    movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.SpikeHeadBlink);
+                movableHeadVisual.ChangeAnimationState(!isCanDamage
+                    ? MovableHeadVisual.AnimationStates.RockHeadBlink
+                    : MovableHeadVisual.AnimationStates.SpikeHeadBlink);
 
-                timerBetwenBlink = timeBetwenBlink;
+                timerBetweenBlink = timeBetweenBlink;
             }
 
-            CheckAvailibleDirections();
+            //CheckAvailableDirections();
 
-            PlayerController interactedPlayer;
-            float cubeRotation = 0f;
-            Vector2 cubeDirection = Vector2.up;
-            float interactableHeight = 0f;
-
-            Vector3 baseCastPosition = transform.position + (Vector3)collision.offset;
-            Vector2 leftRightCastCubeLenght = new(collision.size.x / 4, collision.size.y * 0.75f);
-
-            if (availibleDirections.Contains(Directions.right))
-            {
-                Vector3 leftCastPosition = baseCastPosition + new Vector3(-collision.size.x / 2 - leftRightCastCubeLenght.x / 2, 0f, 0f);
-
-                RaycastHit2D leftRaycastHit = Physics2D.BoxCast(leftCastPosition, leftRightCastCubeLenght,
-                    cubeRotation, cubeDirection, interactableHeight, playerLayer);
-
-                if (leftRaycastHit)
-                {
-                    if (leftRaycastHit.rigidbody.gameObject.TryGetComponent<PlayerController>(out interactedPlayer))
-                    {
-                        lastInteractedPlayer = interactedPlayer;
-                        standingTimerForStartMoving -= Time.deltaTime;
-                        OnTimerChange?.Invoke(this, new OnTimerChangeEventArgs()
-                        {
-                            currentTime = standingTimeForStartMoving - standingTimerForStartMoving,
-                            maxTime = standingTimeForStartMoving
-                        });
-                        if (standingTimerForStartMoving <= 0)
-                            StartCubeMove(Vector2.right);
-                    }
-                    return;
-                }
-            }
-
-            if (availibleDirections.Contains(Directions.left))
-            {
-                Vector3 rightCastPosition = baseCastPosition + new Vector3(collision.size.x / 2 + leftRightCastCubeLenght.x / 2, 0f, 0f);
-
-                RaycastHit2D rightRaycastHit = Physics2D.BoxCast(rightCastPosition, leftRightCastCubeLenght,
-                    cubeRotation, cubeDirection, interactableHeight, playerLayer);
-                if (rightRaycastHit)
-                {
-                    if (rightRaycastHit.rigidbody.gameObject.TryGetComponent<PlayerController>(out interactedPlayer))
-                    {
-                        lastInteractedPlayer = interactedPlayer;
-                        standingTimerForStartMoving -= Time.deltaTime;
-                        OnTimerChange?.Invoke(this, new OnTimerChangeEventArgs()
-                        {
-                            currentTime = standingTimeForStartMoving - standingTimerForStartMoving,
-                            maxTime = standingTimeForStartMoving
-                        });
-                        if (standingTimerForStartMoving <= 0)
-                            StartCubeMove(Vector2.left);
-                    }
-                    return;
-                }
-            }
-
-            Vector2 topBottomCastCubeLenght = new(collision.size.x * 0.75f, collision.size.y / 2);
-
-            if (availibleDirections.Contains(Directions.down))
-            {
-                Vector3 topCastPosition = baseCastPosition + new Vector3(0f, collision.size.y / 2 + topBottomCastCubeLenght.y / 2, 0f);
-
-                RaycastHit2D topRaycastHit = Physics2D.BoxCast(topCastPosition, topBottomCastCubeLenght,
-                    cubeRotation, cubeDirection, interactableHeight, playerLayer);
-                if (topRaycastHit)
-                {
-                    if (topRaycastHit.rigidbody.gameObject.TryGetComponent<PlayerController>(out interactedPlayer))
-                    {
-                        lastInteractedPlayer = interactedPlayer;
-                        standingTimerForStartMoving -= Time.deltaTime;
-                        OnTimerChange?.Invoke(this, new OnTimerChangeEventArgs()
-                        {
-                            currentTime = standingTimeForStartMoving - standingTimerForStartMoving,
-                            maxTime = standingTimeForStartMoving
-                        });
-                        if (standingTimerForStartMoving <= 0)
-                            StartCubeMove(Vector2.down);
-                    }
-                    return;
-                }
-            }
-
-            if (availibleDirections.Contains(Directions.up))
-            {
-                Vector3 bottomCastPosition = baseCastPosition + new Vector3(0f, -collision.size.y / 2 - topBottomCastCubeLenght.y / 2, 0f);
-
-                RaycastHit2D bottomRaycastHit = Physics2D.BoxCast(bottomCastPosition, topBottomCastCubeLenght,
-                    cubeRotation, cubeDirection, interactableHeight, playerLayer);
-                if (bottomRaycastHit)
-                {
-                    if (bottomRaycastHit.rigidbody.gameObject.TryGetComponent<PlayerController>(out interactedPlayer))
-                    {
-                        lastInteractedPlayer = interactedPlayer;
-                        standingTimerForStartMoving -= Time.deltaTime;
-                        OnTimerChange?.Invoke(this, new OnTimerChangeEventArgs()
-                        {
-                            currentTime = standingTimeForStartMoving - standingTimerForStartMoving,
-                            maxTime = standingTimeForStartMoving
-                        });
-                        if (standingTimerForStartMoving <= 0)
-                            StartCubeMove(Vector2.up);
-                    }
-                    return;
-                }
-            }
-
-            standingTimerForStartMoving = standingTimeForStartMoving;
+            //TryMoveHead(); //Moving by touching from side
         }
     }
+
+    public override void OnInteract(PlayerController player)
+    {
+        base.OnInteract(player);
+
+        lastInteractedPlayer = player;
+        StartCubeMove(Vector2.zero);
+        if (!isMoving)
+            isInteractable = true;
+    }
+
+    private void TryMoveHead()
+    {
+        var cubeRotation = 0f;
+        var cubeDirection = Vector2.up;
+        var interactableHeight = 0f;
+        var collisionSize = collision.size;
+
+        var baseCastPosition = transform.position + (Vector3)collision.offset;
+        Vector2 leftRightCastCubeLenght = new(collisionSize.x / 4, collisionSize.y * 0.75f);
+
+        if (availableDirections.Contains(Directions.Right))
+        {
+            var leftCastPosition = baseCastPosition +
+                                   new Vector3(-collision.size.x / 2 - leftRightCastCubeLenght.x / 2, 0f, 0f);
+
+            var leftRaycastHit = Physics2D.BoxCast(leftCastPosition, leftRightCastCubeLenght,
+                cubeRotation, cubeDirection, interactableHeight, playerLayer);
+
+            if (leftRaycastHit)
+            {
+                if (leftRaycastHit.rigidbody.gameObject.TryGetComponent(out PlayerController interactedPlayer))
+                {
+                    lastInteractedPlayer = interactedPlayer;
+                    standingTimerForStartMoving -= Time.deltaTime;
+                    OnTimerChange?.Invoke(this, new OnTimerChangeEventArgs
+                    {
+                        currentTime = standingTimeForStartMoving - standingTimerForStartMoving,
+                        maxTime = standingTimeForStartMoving
+                    });
+                    if (standingTimerForStartMoving <= 0)
+                        StartCubeMove(Vector2.right);
+                }
+
+                return;
+            }
+        }
+
+        if (availableDirections.Contains(Directions.Left))
+        {
+            var rightCastPosition = baseCastPosition +
+                                    new Vector3(collision.size.x / 2 + leftRightCastCubeLenght.x / 2, 0f, 0f);
+
+            var rightRaycastHit = Physics2D.BoxCast(rightCastPosition, leftRightCastCubeLenght,
+                cubeRotation, cubeDirection, interactableHeight, playerLayer);
+            if (rightRaycastHit)
+            {
+                if (rightRaycastHit.rigidbody.gameObject.TryGetComponent(out interactedPlayer))
+                {
+                    lastInteractedPlayer = interactedPlayer;
+                    standingTimerForStartMoving -= Time.deltaTime;
+                    OnTimerChange?.Invoke(this, new OnTimerChangeEventArgs
+                    {
+                        currentTime = standingTimeForStartMoving - standingTimerForStartMoving,
+                        maxTime = standingTimeForStartMoving
+                    });
+                    if (standingTimerForStartMoving <= 0)
+                        StartCubeMove(Vector2.left);
+                }
+
+                return;
+            }
+        }
+
+        Vector2 topBottomCastCubeLenght = new(collisionSize.x * 0.75f, collisionSize.y / 2);
+
+        if (availableDirections.Contains(Directions.Down))
+        {
+            var topCastPosition = baseCastPosition +
+                                  new Vector3(0f, collision.size.y / 2 + topBottomCastCubeLenght.y / 2, 0f);
+
+            var topRaycastHit = Physics2D.BoxCast(topCastPosition, topBottomCastCubeLenght,
+                cubeRotation, cubeDirection, interactableHeight, playerLayer);
+            if (topRaycastHit)
+            {
+                if (topRaycastHit.rigidbody.gameObject.TryGetComponent(out interactedPlayer))
+                {
+                    lastInteractedPlayer = interactedPlayer;
+                    standingTimerForStartMoving -= Time.deltaTime;
+                    OnTimerChange?.Invoke(this, new OnTimerChangeEventArgs
+                    {
+                        currentTime = standingTimeForStartMoving - standingTimerForStartMoving,
+                        maxTime = standingTimeForStartMoving
+                    });
+                    if (standingTimerForStartMoving <= 0)
+                        StartCubeMove(Vector2.down);
+                }
+
+                return;
+            }
+        }
+
+        if (availableDirections.Contains(Directions.Up))
+        {
+            var bottomCastPosition = baseCastPosition +
+                                     new Vector3(0f, -collision.size.y / 2 - topBottomCastCubeLenght.y / 2, 0f);
+
+            var bottomRaycastHit = Physics2D.BoxCast(bottomCastPosition, topBottomCastCubeLenght,
+                cubeRotation, cubeDirection, interactableHeight, playerLayer);
+            if (bottomRaycastHit)
+            {
+                if (bottomRaycastHit.rigidbody.gameObject.TryGetComponent(out interactedPlayer))
+                {
+                    lastInteractedPlayer = interactedPlayer;
+                    standingTimerForStartMoving -= Time.deltaTime;
+                    OnTimerChange?.Invoke(this, new OnTimerChangeEventArgs
+                    {
+                        currentTime = standingTimeForStartMoving - standingTimerForStartMoving,
+                        maxTime = standingTimeForStartMoving
+                    });
+                    if (standingTimerForStartMoving <= 0)
+                        StartCubeMove(Vector2.up);
+                }
+
+                return;
+            }
+        }
+
+        standingTimerForStartMoving = standingTimeForStartMoving;
+    }
+
+    private void CheckAvailableDirections()
+    {
+        if (movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.RockHeadIdle ||
+            movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.SpikeHeadIdle)
+            isMoving = false;
+
+        availableDirections.Clear();
+
+        var cubeRotation = 0f;
+        var interactableHeight = 0f;
+
+        var baseCastPosition = transform.position;
+        var castCubeLenght = collision.size * 0.99f;
+
+        var leftCastPosition = baseCastPosition + new Vector3(-distanceToMoveForHit, 0f, 0f);
+        var leftRaycastHit = Physics2D.BoxCastAll(leftCastPosition, castCubeLenght,
+            cubeRotation, Vector2.left, interactableHeight, terrainLayer);
+        if (leftRaycastHit.Length == 1)
+            availableDirections.Add(Directions.Left);
+
+        var rightCastPosition = baseCastPosition + new Vector3(distanceToMoveForHit, 0f, 0f);
+        var rightRaycastHit = Physics2D.BoxCastAll(rightCastPosition, castCubeLenght,
+            cubeRotation, Vector2.right, interactableHeight, terrainLayer);
+        if (rightRaycastHit.Length == 1)
+            availableDirections.Add(Directions.Right);
+
+        var topCastPosition = baseCastPosition + new Vector3(0f, distanceToMoveForHit, 0f);
+
+        var topRaycastHit = Physics2D.BoxCastAll(topCastPosition, castCubeLenght,
+            cubeRotation, Vector2.up, interactableHeight, terrainLayer);
+
+        if (topRaycastHit.Length == 1)
+            availableDirections.Add(Directions.Up);
+
+        var bottomCastPosition = baseCastPosition + new Vector3(0f, -distanceToMoveForHit, 0f);
+
+        var bottomRaycastHit = Physics2D.BoxCastAll(bottomCastPosition, castCubeLenght,
+            cubeRotation, Vector2.down, interactableHeight, terrainLayer);
+
+        if (bottomRaycastHit.Length == 1)
+            availableDirections.Add(Directions.Down);
+    }
+
+    #endregion
 
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
 
-        Vector3 baseCastPosition = transform.position + (Vector3)collision.offset;
-        Vector2 leftRightCastCubeLenght = new(collision.size.x / 4, collision.size.y * 0.75f);
-        Vector2 topBottomCastCubeLenght = new(collision.size.x * 0.75f, collision.size.y / 4);
+        var collisionSize = collision.size;
+        var baseCastPosition = transform.position + (Vector3)collision.offset;
+        Vector2 leftRightCastCubeLenght = new(collisionSize.x / 4, collisionSize.y * 0.75f);
+        Vector2 topBottomCastCubeLenght = new(collisionSize.x * 0.75f, collisionSize.y / 4);
 
-        Vector3 leftCastPosition = baseCastPosition + new Vector3(-collision.size.x / 2 - leftRightCastCubeLenght.x / 2, 0f, 0f);
+        var leftCastPosition =
+            baseCastPosition + new Vector3(-collisionSize.x / 2 - leftRightCastCubeLenght.x / 2, 0f, 0f);
         Gizmos.DrawCube(leftCastPosition, leftRightCastCubeLenght);
 
-        Vector3 rightCastPosition = baseCastPosition + new Vector3(collision.size.x / 2 + leftRightCastCubeLenght.x / 2, 0f, 0f);
+        var rightCastPosition =
+            baseCastPosition + new Vector3(collision.size.x / 2 + leftRightCastCubeLenght.x / 2, 0f, 0f);
         Gizmos.DrawCube(rightCastPosition, leftRightCastCubeLenght);
 
-        Vector3 topCastPosition = baseCastPosition + new Vector3(0f, collision.size.y / 2 + topBottomCastCubeLenght.y / 2, 0f);
+        var topCastPosition =
+            baseCastPosition + new Vector3(0f, collision.size.y / 2 + topBottomCastCubeLenght.y / 2, 0f);
         Gizmos.DrawCube(topCastPosition, topBottomCastCubeLenght);
 
-        Vector3 bottomCastPosition = baseCastPosition + new Vector3(0f, -collision.size.y / 2 - topBottomCastCubeLenght.y / 2, 0f);
+        var bottomCastPosition =
+            baseCastPosition + new Vector3(0f, -collision.size.y / 2 - topBottomCastCubeLenght.y / 2, 0f);
         Gizmos.DrawCube(bottomCastPosition, topBottomCastCubeLenght);
 
         /*Gizmos.color = Color.green;
@@ -244,59 +337,35 @@ public class MovableHead : BaseTrap
         Gizmos.DrawCube(bottomCastPosition, castCubeLenght);*/
     }
 
-    private void CheckAvailibleDirections()
-    {
-        if (movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.RockHeadIddle ||
-            movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.SpikeHeadIddle)
-            isMoving = false;
-
-        availibleDirections.Clear();
-
-        float cubeRotation = 0f;
-        float interactableHeight = 0f;
-
-        Vector3 baseCastPosition = transform.position;
-        Vector2 castCubeLenght = collision.size * 0.99f;
-
-        Vector3 leftCastPosition = baseCastPosition + new Vector3(-distanceToMoveForHit, 0f, 0f);
-        RaycastHit2D[] leftRaycastHit = Physics2D.BoxCastAll(leftCastPosition, castCubeLenght,
-            cubeRotation, Vector2.left, interactableHeight, terrainLayer);
-        if (leftRaycastHit.Length == 1)
-            availibleDirections.Add(Directions.left);
-
-        Vector3 rightCastPosition = baseCastPosition + new Vector3(distanceToMoveForHit, 0f, 0f);
-        RaycastHit2D[] rightRaycastHit = Physics2D.BoxCastAll(rightCastPosition, castCubeLenght,
-            cubeRotation, Vector2.right, interactableHeight, terrainLayer);
-        if (rightRaycastHit.Length == 1)
-            availibleDirections.Add(Directions.right);
-
-        Vector3 topCastPosition = baseCastPosition + new Vector3(0f, distanceToMoveForHit, 0f);
-
-        RaycastHit2D[] topRaycastHit = Physics2D.BoxCastAll(topCastPosition, castCubeLenght,
-            cubeRotation, Vector2.up, interactableHeight, terrainLayer);
-
-        if (topRaycastHit.Length == 1)
-            availibleDirections.Add(Directions.up);
-
-        Vector3 bottomCastPosition = baseCastPosition + new Vector3(0f, -distanceToMoveForHit, 0f);
-
-        RaycastHit2D[] bottomRaycastHit = Physics2D.BoxCastAll(bottomCastPosition, castCubeLenght,
-            cubeRotation, Vector2.down, interactableHeight, terrainLayer);
-
-        if (bottomRaycastHit.Length == 1)
-            availibleDirections.Add(Directions.down);
-    }
+    #region Movement
 
     private void StartCubeMove(Vector2 direction)
     {
-        standingTimerForStartMoving = standingTimeForStartMoving;
+        if (movableHeadDestinationPoints.Count <= 1) return;
+        if (!isCanBeMoved) return;
+
+        var nextDestinationPointIndex = GetNextDestinationPointIndex();
+        var nextDestinationPoint = movableHeadDestinationPoints[nextDestinationPointIndex];
+        var nextDestinationPointAvailability = CheckNextDestinationPointAvailability(nextDestinationPoint);
+
+        if (nextDestinationPointAvailability)
+        {
+            currentDestinationPointIndex = nextDestinationPointIndex;
+            isMoving = true;
+            movableHeadVisual.ChangeAnimationState(isCanDamage
+                ? MovableHeadVisual.AnimationStates.SpikeHeadMove
+                : MovableHeadVisual.AnimationStates.RockHeadMove);
+        }
+
+
+        /*standingTimerForStartMoving = standingTimeForStartMoving;
         isMoving = true;
 
         if (!isCanDamage)
         {
             if (direction.x == 1f)
             {
-                if (availibleDirections.Contains(Directions.right))
+                if (availableDirections.Contains(Directions.Right))
                 {
                     movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.RockHeadRightHit);
                     return;
@@ -304,7 +373,7 @@ public class MovableHead : BaseTrap
             }
             else if (direction.x == -1f)
             {
-                if (availibleDirections.Contains(Directions.left))
+                if (availableDirections.Contains(Directions.Left))
                 {
                     movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.RockHeadLeftHit);
                     return;
@@ -312,7 +381,7 @@ public class MovableHead : BaseTrap
             }
             else if (direction.y == 1f)
             {
-                if (availibleDirections.Contains(Directions.up))
+                if (availableDirections.Contains(Directions.Up))
                 {
                     movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.RockHeadTopHit);
                     return;
@@ -320,20 +389,22 @@ public class MovableHead : BaseTrap
             }
             else if (direction.y == -1f)
             {
-                if (availibleDirections.Contains(Directions.down))
+                if (availableDirections.Contains(Directions.Down))
                 {
                     movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.RockHeadBottomHit);
                     return;
                 }
             }
             else
-                Debug.Log("ÂÑ¨ ÏÈÇÄÀ! MovableHead MoveCube without direction");
+            {
+                Debug.Log("ï¿½Ñ¨ ï¿½ï¿½ï¿½ï¿½ï¿½! MovableHead MoveCube without direction");
+            }
         }
         else
         {
             if (direction.x == 1f)
             {
-                if (availibleDirections.Contains(Directions.right))
+                if (availableDirections.Contains(Directions.Right))
                 {
                     movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.SpikeHeadRightHit);
                     return;
@@ -341,7 +412,7 @@ public class MovableHead : BaseTrap
             }
             else if (direction.x == -1f)
             {
-                if (availibleDirections.Contains(Directions.left))
+                if (availableDirections.Contains(Directions.Left))
                 {
                     movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.SpikeHeadLeftHit);
                     return;
@@ -349,7 +420,7 @@ public class MovableHead : BaseTrap
             }
             else if (direction.y == 1f)
             {
-                if (availibleDirections.Contains(Directions.up))
+                if (availableDirections.Contains(Directions.Up))
                 {
                     movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.SpikeHeadTopHit);
                     return;
@@ -357,59 +428,111 @@ public class MovableHead : BaseTrap
             }
             else if (direction.y == -1f)
             {
-                if (availibleDirections.Contains(Directions.down))
+                if (availableDirections.Contains(Directions.Down))
                 {
                     movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.SpikeHeadBottomHit);
                     return;
                 }
             }
             else
-                Debug.Log("ÂÑ¨ ÏÈÇÄÀ! MovableHead MoveCube without direction");
+            {
+                Debug.Log("ï¿½Ñ¨ ï¿½ï¿½ï¿½ï¿½ï¿½! MovableHead MoveCube without direction");
+            }
         }
-        isMoving = false;
+
+        isMoving = false;*/
     }
 
-    public void OnAnimationHitStop()
+    private int GetNextDestinationPointIndex()
     {
-        isMoving = false;
-        Debug.Log($"{isMoving}");
+        return currentDestinationPointIndex >= movableHeadDestinationPoints.Count - 1
+            ? 0
+            : currentDestinationPointIndex + 1;
+    }
 
-        Vector2 direction = Vector2.zero;
+    private bool CheckNextDestinationPointAvailability(Transform destinationPoint)
+    {
+        var cubeRotation = 0f;
+        var interactableHeight = 0f;
+
+        var castPosition = destinationPoint.position;
+        var castCubeLenght = collision.size * 0.99f;
+
+        var raycastHits = Physics2D.BoxCastAll(castPosition, castCubeLenght,
+            cubeRotation, Vector2.left, interactableHeight, terrainLayer);
+
+        return raycastHits.Length <= 1;
+    }
+
+    public void OnAnimationMoveMiddle()
+    {
+        /*var direction = Vector2.zero;
         if (movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.RockHeadLeftHit ||
             movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.SpikeHeadLeftHit)
             direction = Vector2.left;
         else if (movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.RockHeadRightHit ||
-            movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.SpikeHeadRightHit)
+                 movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.SpikeHeadRightHit)
             direction = Vector2.right;
         else if (movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.RockHeadTopHit ||
-            movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.SpikeHeadTopHit)
+                 movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.SpikeHeadTopHit)
             direction = Vector2.up;
         else if (movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.RockHeadBottomHit ||
-            movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.SpikeHeadBottomHit)
-            direction = Vector2.down;
+                 movableHeadVisual.GetCurrentAnimationState() == MovableHeadVisual.AnimationStates.SpikeHeadBottomHit)
+            direction = Vector2.down;*/
 
-        if(!isCanDamage)
-            movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.RockHeadIddle);
-        else
-            movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.SpikeHeadIddle);
-
-        transform.position += (Vector3)direction * distanceToMoveForHit;
+        transform.position = movableHeadDestinationPoints[currentDestinationPointIndex].position;
     }
+
+    public void OnAnimationMoveStop()
+    {
+        movableHeadVisual.ChangeAnimationState(!isCanDamage
+            ? MovableHeadVisual.AnimationStates.RockHeadIdle
+            : MovableHeadVisual.AnimationStates.SpikeHeadIdle);
+
+        isInteractable = true;
+        isMoving = false;
+    }
+
+    #endregion
+
+    #region Head States
 
     public void ChangeHeadState(bool isDamageble)
     {
         isCanDamage = isDamageble;
 
-        if (!isDamageble)
-            movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.RockHeadIddle);
-        else
-            movableHeadVisual.ChangeAnimationState(MovableHeadVisual.AnimationStates.SpikeHeadIddle);
+        movableHeadVisual.ChangeAnimationState(!isDamageble
+            ? MovableHeadVisual.AnimationStates.RockHeadIdle
+            : MovableHeadVisual.AnimationStates.SpikeHeadIdle);
     }
 
     public void ChangeIsCanBeMovedState(bool newState)
     {
         isCanBeMoved = newState;
     }
+
+    #endregion
+
+    #region Damage
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<PlayerController>(out var playerController))
+        {
+            playerToDamageList.Add(playerController);
+            dealDamageTimer = 0;
+        }
+    }
+
+    protected virtual void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<PlayerController>(out var playerController))
+            playerToDamageList.Remove(playerController);
+    }
+
+    #endregion
+
+    #region Get Head Data
 
     public bool GetIsCanDamage()
     {
@@ -425,4 +548,11 @@ public class MovableHead : BaseTrap
     {
         OnTimerChange = null;
     }
+
+    public override bool IsCanInteract()
+    {
+        return isInteractable && isCanBeMoved;
+    }
+
+    #endregion
 }

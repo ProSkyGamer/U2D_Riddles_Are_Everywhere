@@ -8,6 +8,8 @@ public class CollectableObject : MonoBehaviour
     private bool isCollected = false;
 
     private CollectableObjectVisual objectVisual;
+    
+    protected AudioSource audioOnInteract;
 
     private void Awake()
     {
@@ -25,6 +27,12 @@ public class CollectableObject : MonoBehaviour
                 PointsCollectedController.Instance.AddPoints(pointsPerCollection);
 
                 objectVisual.ChangeAnimationState(CollectableObjectVisual.CollectableObjectAnimations.Collected);
+                
+                if (audioOnInteract == null)
+                    TryGetComponent(out audioOnInteract);
+        
+                if(audioOnInteract != null)
+                    audioOnInteract.Play();
             }
         }
     }

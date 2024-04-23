@@ -10,6 +10,9 @@ public class FirstCollectableObject : MonoBehaviour
     public event EventHandler OnCollect;
 
     private CollectableObjectVisual objectVisual;
+    
+    protected AudioSource audioOnInteract;
+
 
     private void Awake()
     {
@@ -28,6 +31,12 @@ public class FirstCollectableObject : MonoBehaviour
                 PointsCollectedController.Instance.AddPoints(pointsPerCollection);
 
                 objectVisual.ChangeAnimationState(CollectableObjectVisual.CollectableObjectAnimations.Collected);
+                
+                if (audioOnInteract == null)
+                    TryGetComponent(out audioOnInteract);
+        
+                if(audioOnInteract != null)
+                    audioOnInteract.Play();
             }
         }
     }

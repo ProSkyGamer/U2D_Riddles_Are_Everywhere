@@ -133,7 +133,8 @@ public class AddInteractButtonUI : MonoBehaviour
         {
             isAllInteractionsFinished = false;
 
-            onInteractVisual.OnInteractChangeAnimationState();
+            if(onInteractVisual != null)
+                onInteractVisual.OnInteractChangeAnimationState();
             for (int i = 0; i < interactableItems.Count; i++)
             {
                 if (interactableItems[i].IsCanInteract())
@@ -155,7 +156,7 @@ public class AddInteractButtonUI : MonoBehaviour
             if (TextTranslationManager.GetCurrentLanguage() == TextTranslationManager.Languages.English)
                 NottificationsUI.Instance.AddNotification("This player can't interact!");
             else
-                NottificationsUI.Instance.AddNotification("Этот игрок не может взаимодейстовать!");
+                NottificationsUI.Instance.AddNotification("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
         }
     }
 

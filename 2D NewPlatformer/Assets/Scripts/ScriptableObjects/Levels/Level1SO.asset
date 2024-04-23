@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Level1SO
   m_EditorClassIdentifier: 
   sceneToLoad: 2
+  levelNameTextTranslationsSO: {fileID: 11400000, guid: 1a3743c404730314ba1013c5e8bd0188, type: 2}
+  resetGuides: 0
+  isLevelNew: 0

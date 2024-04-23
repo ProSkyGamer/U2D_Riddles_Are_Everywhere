@@ -8,13 +8,12 @@ public class BaseTrap : MonoBehaviour
     [SerializeField] protected int trapDamage = 1;
     [SerializeField] protected float dealDamageCooldown = 1.5f;
     protected float dealDamageTimer;
-    protected List<PlayerController> playerToDamageList = new List<PlayerController>();
+    protected readonly List<PlayerController> playerToDamageList = new List<PlayerController>();
     [SerializeField] protected PlayerSO[] notInteractablePlayerSOArray;
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        PlayerController playerController;
-        if (collision.gameObject.TryGetComponent<PlayerController>(out playerController))
+        if (collision.gameObject.TryGetComponent<PlayerController>(out var playerController))
         {
             playerToDamageList.Add(playerController);
             dealDamageTimer = 0;
@@ -23,8 +22,7 @@ public class BaseTrap : MonoBehaviour
 
     protected virtual void OnCollisionExit2D(Collision2D collision)
     {
-        PlayerController playerController;
-        if (collision.gameObject.TryGetComponent<PlayerController>(out playerController))
+        if (collision.gameObject.TryGetComponent<PlayerController>(out var playerController))
         {
             playerToDamageList.Remove(playerController);
         }

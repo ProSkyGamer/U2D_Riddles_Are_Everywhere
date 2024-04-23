@@ -54,6 +54,8 @@
     <Compile Include="Assets\Scripts\Game\UI\SingleNottification.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\ShopItems\AllShopItemsSO.cs" />
     <Compile Include="Assets\Scripts\Game\Interactable\Interactable\Lever\ChangeTrapLocation.cs" />
+    <Compile Include="Assets\Scripts\MainManu\LevelsCompletionController.cs" />
+    <Compile Include="Assets\Scripts\Sounds\SFXVolume.cs" />
     <Compile Include="Assets\Scripts\Game\Interactable\Traps\BreakableBlock\BreakableBlockGravity.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PointsCounter.cs" />
     <Compile Include="Assets\Scripts\Game\UI\TransitionsInterface.cs" />
@@ -94,6 +96,8 @@
     <Compile Include="Assets\Scripts\Game\UI\Inrerfaces\PauseInterafce.cs" />
     <Compile Include="Assets\Scripts\Game\Interactable\Interactable\InteractableArrow\FanChangeDirection.cs" />
     <Compile Include="Assets\Scripts\Game\Interactable\Interactable\PressurePlate\PressurePlateVisual.cs" />
+    <Compile Include="Assets\Scripts\Game\Interactable\Traps\Fan\FanParticles.cs" />
+    <Compile Include="Assets\Scripts\Sounds\SFXVolumeScrollbar.cs" />
     <Compile Include="Assets\Scripts\Game\TutorialLevel\FirstCollectableObject.cs" />
     <Compile Include="Assets\Scripts\MainManu\Links\ClickableLinkText.cs" />
     <Compile Include="Assets\Scripts\Game\Interactable\Interactable\ArrowToChangeDirection\ArrowToChangeDirectionVisual.cs" />
@@ -157,6 +161,7 @@
     <Compile Include="Assets\Scripts\MainManu\ShopInterface.cs" />
     <Compile Include="Assets\Scripts\Game\Interfaces\ICanTakeDamage.cs" />
     <Compile Include="Assets\Scripts\Game\Interactable\Interactable\Lever\ChangeLeverStateVisual.cs" />
+    <Compile Include="Assets\Scripts\Sounds\SFXVolumeSceneController.cs" />
     <Compile Include="Assets\Scripts\Game\Interactable\Checkpoints\Checkpoint.cs" />
     <None Include="Library\PackageCache\com.unity.modules.subsystems@1.0.0\package.json" />
     <None Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.9\package.json" />
