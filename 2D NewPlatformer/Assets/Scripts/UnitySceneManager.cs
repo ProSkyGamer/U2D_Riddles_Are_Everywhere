@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class UnitySceneManager
@@ -13,6 +9,7 @@ public static class UnitySceneManager
         Level1,
         Level2,
         Level3,
+        Level4
     }
 
     public static void LoadScene(Scenes sceneToLoad)
