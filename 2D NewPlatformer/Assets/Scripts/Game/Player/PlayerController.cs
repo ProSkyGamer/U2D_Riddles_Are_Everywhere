@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
         currentSpeed = runSpeed;
     }
 
-    private void Start()
+    private void Start()    
     {
         Input.Instance.OnJumpAction += Input_OnJumpAction;
         Input.Instance.OnReturnToCheckpointKeyAction += Input_OnReturnToCheckpointKeyAction;
@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour, ICanTakeDamage
         return maxHearts;
     }
 
-    public void ChangeAllMoventSLowDown(float slowDownScale)
+    public void ChangeAllMovementSLowDown(float slowDownScale)
     {
         playerMovement.ChangeSlowDownMovement(slowDownScale);
         playerMovement.ChangeSlowDownGravity(slowDownScale);

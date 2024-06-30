@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerGravity : MonoBehaviour
 {
     [SerializeField] private float gravityScale = 1f;
-    private float gravityConst = -9.8f;
+    private readonly float gravityConst = -9.8f;
     private float slowDownScale = 1f;
 
     private Vector3 gravityVector;
@@ -28,7 +28,7 @@ public class PlayerGravity : MonoBehaviour
     {
         if (!IsGrounded() || gravityVector.y > 0)
         {
-            if(gravityVector.y > 0)
+            if (gravityVector.y > 0)
                 transform.position += gravityVector * Time.deltaTime * slowDownScale;
             else
                 transform.position += gravityVector * gravityScale * Time.deltaTime * slowDownScale;
@@ -55,7 +55,7 @@ public class PlayerGravity : MonoBehaviour
     public bool IsGrounded()
     {
         Vector2 castPosition = transform.position + (Vector3)playerCollision.offset + new Vector3(0f, -playerCollision.bounds.size.y * 4.5f / 10, 0f);
-        Vector2 vectorCastSize =  new Vector2(playerCollision.bounds.size.x * 0.5f, playerCollision.bounds.size.y / 10);   
+        Vector2 vectorCastSize = new Vector2(playerCollision.bounds.size.x * 0.5f, playerCollision.bounds.size.y / 10);
         float angleRotation = 0f;
         Vector2 castDirection = Vector2.down;
         float additionalCastRange = .02f;

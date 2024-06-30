@@ -18,7 +18,7 @@ public class SandMud : MonoBehaviour
             PlayerController player;
             if (collision.gameObject.TryGetComponent<PlayerController>(out player))
             {
-                player.ChangeAllMoventSLowDown(1f - sandMudSlowDown);
+                player.ChangeAllMovementSLowDown(1f - sandMudSlowDown);
                 OnPlayerSlowDown?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -28,7 +28,7 @@ public class SandMud : MonoBehaviour
     {
         PlayerController player;
         if (collision.gameObject.TryGetComponent<PlayerController>(out player))
-            player.ChangeAllMoventSLowDown(1f);
+            player.ChangeAllMovementSLowDown(1f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,7 +38,7 @@ public class SandMud : MonoBehaviour
             PlayerController player;
             if (collision.gameObject.TryGetComponent<PlayerController>(out player))
             {
-                player.ChangeAllMoventSLowDown(1f - sandMudSlowDown);
+                player.ChangeAllMovementSLowDown(1f - sandMudSlowDown);
                 OnPlayerSlowDown?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -48,7 +48,7 @@ public class SandMud : MonoBehaviour
     {
         PlayerController player;
         if (collision.gameObject.TryGetComponent<PlayerController>(out player))
-            player.ChangeAllMoventSLowDown(1f);
+            player.ChangeAllMovementSLowDown(1f);
     }
 
     private bool IsCurrentPlayerInteractable(PlayerSO player)
